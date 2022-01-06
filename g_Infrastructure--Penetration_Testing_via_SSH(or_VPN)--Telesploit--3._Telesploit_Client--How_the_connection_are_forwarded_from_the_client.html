@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>How the connection are forwarded from the client</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>How the connection are forwarded from the client</h1><br /><br /><strong>Configuration of the
+      client</strong><br />These are the connection in the configuration file of the Client
+    (telesploit-client/linux/client-configs/client.cfg)<br /> <a href=""><img src="images/1005-1.png"
+        alt="images/1005-1.png" /></a><br /> all these settings are saved by setup_client.sh in
+    ./client-configs/config<br /> <span style="color:#a5452a;">example:</span> LocalForward SSH connection will
+    forwarded the connections for the port of the Client(attacker machine) <span style="color:#1e90ff;">14000</span> to
+    port 127.0.0.1:<span style="color:#ff8700;">14000</span> of the Server<br /> <span
+      style="text-decoration:underline;">configure softwares</span>:<br /> this mean that when we want to use the
+    softwares Mattermost and IRC we have to to configure like this the connections<br /> ◇ <strong>IRC</strong> → from a
+    IRC software(like Hexchat) add Network with server 127.0.0.1/14008, connect to it and then join to a channel. We can
+    also create also multiple channels each one with different arguments<br /> ◇ <strong>Mattermost</strong> → to use it
+    we have to configure a HTTP proxy (like FoxyProxy) to use proxy 127.0.0.1 on port 14003, so Firefox will send all
+    HTTP information on port 14003 and then they will be tunnelled to the relay. Now we can access on Mattermost on page
+    127.0.0.1:14009<br /> ◇ <span style="text-decoration:underline;">Run via a GUI</span>: we can use the software <a
+      href="https://remmina.org/" target="_blank">https://remmina.org/</a> to connect via RDP, VNC, SSH and SFTP <br /> Also each one in
+    a different tab contemporaneously <br /> <a href=""><img src="images/1005-2.png"
+        alt="images/1005-2.png" /></a><br /> ◇ Connect from the smartphone(android) → we can use “Mobile SSH” +
+    “AndroIRC” <br /> <br /><br /><strong>Configuration of the server</strong>(dropbox raspberrypi)<br />These are the
+    connection in the configuration file of the server (telesploit-server/server.cfg)<br /> <a href=""><img
+        src="images/1005-3.png" alt="images/1005-3.png" /></a><br /> <span style="color:#a5452a;">example:</span>
+    RemoteForward SSH connection for port <span style="color:#1e90ff;">14000</span> of the relay will be forwarded to
+    port 127.0.0.1:<span style="color:#ff8700;">22</span> of the Client<br /> <br /><br />
+  </div>
+</body>
+
+</html>

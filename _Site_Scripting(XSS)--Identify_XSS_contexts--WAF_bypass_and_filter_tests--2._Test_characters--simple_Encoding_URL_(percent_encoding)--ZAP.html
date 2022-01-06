@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>ZAP</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>ZAP</h1><br/><br />ZAP-&gt;Tools-&gt;Encode/Decode/Hash<br />    <a href=""><img src="images/1576-1.png" alt="images/1576-1.png" /></a><br />    <br />Encode: <span style="color:#ff0000;">&lt;script&gt;alert(&quot;xss vulnerable&quot;)&lt;/script&gt;</span><br />    <a href=""><img src="images/1576-2.png" alt="images/1576-2.png" /></a><br />Payload: <span style="color:#ff0000;">&lt;script&gt;alert(&quot;xss vulnerable&quot;)&lt;/script&gt;</span><br />Result: <span style="color:#ff0000;">%3Cscript%3Ealert%28%22xss+vulnerable%22%29%3C%2Fscript%3E</span><br /><br />As can be seen from the payload, <a href="Scripting(XSS)--Identify_XSS_contexts--WAF_bypass_and_filter_tests--2._Test_characters--simple_Encoding_URL_(percent_encoding)--BurpSuite.html">unlike Burp</a>, which URL encoded every single character provided, ZAP only appears to URL encode the characters the tool considers to be unsafe.</div>
+</body>
+</html>

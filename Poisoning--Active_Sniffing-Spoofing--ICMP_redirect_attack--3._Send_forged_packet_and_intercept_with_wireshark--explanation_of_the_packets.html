@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>explanation of the packets</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>explanation of the packets</h1><br/><br /><br /><br />MAC addresses of the Hosts in the LAN<br />• Victim(10.100.13.126) → <span style="color:#1e90ff;">00:50:56:ba:7b:97</span><br />• Attacker(10.100.13.20) → <span style="color:#ff0000;">b6:f6:58:be:3b:83</span><br />• Original Gateway (10.100.13.1) → <span style="color:#00ff00;">00:50:56:ba:f9:65</span><br /><br /><br />After that the ICMP redirect are been sent to the victim, we are starting to see “duplicate” packets in the network. In reality they are not duplicate but replicate packets by the attacker.<br />    <a href=""><img src="images/2125-1.png" alt="images/2125-1.png" /></a><br />   ◇ packet 358 (victim → attacker)<br />    <a href=""><img src="images/2125-2.png" alt="images/2125-2.png" /></a><br />    We can observer that while the IP source/destination addresses reflect the correct source/dest IPs for victim/Web server<br />    The MAC address of the destination instead is not the one of the Web Server <span style="text-decoration:underline;">but of the Attacker</span><br />   ◇ packet 359 (attacker → Server)<br />    <a href=""><img src="images/2125-3.png" alt="images/2125-3.png" /></a><br />    The attacker essentially replicate the packet sent to him by the victim to the Server, changing the source IP from the one of the victim (10.100.13.126) to the one of the attacker(10.100.13.20)<br />   The real gateway never receives anything from the victim host, only from Kali.<br />       <br /><br /></div>
+</body>
+</html>

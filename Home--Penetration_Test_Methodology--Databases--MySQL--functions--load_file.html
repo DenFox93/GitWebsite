@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>load_file</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>load_file</h1><br />We can use the <strong>load_file</strong> function in the MySQL’s SQL
+    implementation to <span style="text-decoration:underline;">access files</span><br /><br />To do that:<br />1. we
+    have to create a new table in a new (or existing) database<br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;create&nbsp;database&nbsp;newDB;<br />mysql&gt;&nbsp;create&nbsp;table&nbsp;newDB.passwords&nbsp;(password&nbsp;text);
+      </div>
+    </div><br /> <a href=""><img src="images/1228-1.png" alt="images/1228-1.png" /></a><br /> <a href=""><img
+        src="images/1228-2.png" alt="images/1228-2.png" /></a><br />2. load and show file on screen<br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;load_file(&#39;/etc/passwd&#39;);</div>
+    </div><br /> We cannot do that with /etc/shadow because MySQL software is typically running as a lower-privileged
+    user on the host.<br /> A MySQL instance should never be run as the root user<br /> Remember that databases have
+    their own users and permission models, which are separate but still bound to the limitations of the host OS
+    permissions. <br /> <br />3. load file in table<br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;insert&nbsp;into&nbsp;newDB.passwords&nbsp;values&nbsp;(load_file(&#39;/etc/passwd&#39;));</div>
+    </div><br />4. show all the content of the table created<br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;select&nbsp;*&nbsp;from&nbsp;newDB.passwords;</div>
+    </div><br /> <a href=""><img src="images/1228-3.png" alt="images/1228-3.png" /></a><br /><br /><strong>What to do if
+      the command return NULL</strong><br />If return <span style="color:#ff0000;">NULL</span> could be a problem:<br />
+    ◇ <strong>secure-file-priv</strong> security feature is enabled, below command give us the path where files can be
+    loaded from<br />
+    <div class="codebox">
+      <div class="codebox">SELECT&nbsp;@@secure_file_priv</div>
+    </div><br /> <a href=""><img src="images/1228-4.png" alt="images/1228-4.png" /></a><br /> 1- Add the following
+    lines<br />
+    <div class="codebox">
+      <div class="codebox">[mysqld]<br />secure_file_priv=&quot;&quot;</div>
+    </div><br /> at the end of one of the following files depending on the version of MySQL:<br /> -
+    /etc/mysql/mysql.conf.d/mysqld.cnf<br /> - /etc/mysql/my.cnf” <br /> 2- Restart MySQL<br />
+    <div class="codebox">
+      <div class="codebox">root@linux:/#&nbsp;sudo&nbsp;/etc/init.d/mysql&nbsp;restart</div>
+    </div> <br /> ◇ caused by apparmour<br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;/etc/init.d/apparmor&nbsp;stop</div>
+    </div><br /> see here <a href="https://bugs.mysql.com/bug.php?id=38403" target="_blank">https://bugs.mysql.com/bug.php?id=38403</a>
+  </div>
+</body>
+
+</html>

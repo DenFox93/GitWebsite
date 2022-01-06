@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Stack Canary (or Stack cookie)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Stack Canary (or Stack cookie)</h1><br/>The term <span style="color:#ff8700;">canary</span> comes from the canary used in the coal mines.<br /> This is a security implementation that places a value next to the return address on the stack.<br />    The function <span style="color:#1e90ff;">prologue</span> loads a value into this location, while the <span style="color:#ff0000;">epilogue</span> makes sure that the value is intact. <br />    When the <span style="color:#ff0000;">epilogue</span> runs and checks that the value is incorrect a Buffer Overflow has probably taken place.<br />    This is because a buffer overflow usually overwrites data in the stack.<br />    <br /><a href=""><img src="images/521-1.png" alt="images/521-1.png" /></a><br /><br /></div>
+</body>
+</html>

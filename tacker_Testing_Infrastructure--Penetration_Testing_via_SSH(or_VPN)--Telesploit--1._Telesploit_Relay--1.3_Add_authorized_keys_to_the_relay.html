@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>1.3 Add authorized_keys to the relay</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>1.3 Add authorized_keys to the relay</h1><br/><br />Once the Telesploit server and client are setup, add their SSH public keys  to /home/telesploit-relay/.ssh/authorized_keys (default install) on the relay<br />During the configuration of the relay with relay_setup.sh we have created <code>/home/$relay_user/.ssh/authorized_keys</code> file where by default $relay_user is &quot;telesploit-relay&quot;<br /><a href=""><img src="images/1004-1.png" alt="images/1004-1.png" /></a><br /><a href=""><img src="images/1004-2.png" alt="images/1004-2.png" /></a><br /><br /><div class="codebox"><div class="codebox">daniele@TelesploitRelay:~$&nbsp;sudo&nbsp;-i<br />root@TelesploitRelay:~#&nbsp;cd&nbsp;/home/telesploit-relay/.ssh/<br />root@TelesploitRelay:~#&nbsp;nano&nbsp;authorized_keys</div></div><br />We have to add the same public key &lt;penTesterPublicKey&gt; used the <a href="Network_Pentest--Attacker_Testing_Infrastructure--Penetration_Testing_via_SSH(or_VPN)--Telesploit--2._Telesploit_Server--Configure_Server.html">Configuration of the Server</a> at point 5.2<br />    </div>
+</body>
+</html>

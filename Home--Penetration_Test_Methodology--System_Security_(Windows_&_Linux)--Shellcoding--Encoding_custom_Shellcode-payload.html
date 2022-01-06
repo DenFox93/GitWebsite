@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Encoding custom Shellcode/payload</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Encoding custom Shellcode/payload</h1><br /><strong>Shellcodes</strong> are generally <span
+      style="text-decoration:underline;">encoded</span> since most vulnerabilities have some form of restriction over
+    data that we want to overflow<br /><br /><br /><br /><strong>
+      <h3>Types of shellcode encoding</h3>
+    </strong><br />• <strong>Null-free Shellcode encoding </strong><br /> C language strings(e.g: char
+    string[]=&quot;AAA&quot;) are <span style="color:#ff8700;">NULL-terminated strings</span> meaning that they work
+    till a <span style="color:#ff0000;">NULL</span>, or 0 bytes is found.<br /><br /> If a shellcode is intended to be
+    injected into a target process <span style="text-decoration:underline;">through </span><span
+      style="color:#ff8700;text-decoration:underline;">null-terminated strings</span>, this <span
+      style="text-decoration:underline;">shellcode has to be written </span><strong><span
+        style="text-decoration:underline;">without the use</span></strong><span style="text-decoration:underline;"> of
+    </span><span style="color:#ff0000;text-decoration:underline;">NULL characters </span><strong><span
+        style="color:#ff0000;text-decoration:underline;">\x00</span></strong><span
+      style="color:#ff0000;text-decoration:underline;"> (zeroes)</span> to guarantee the execution. In fact when
+    shellcode that contains <span style="color:#ff0000;">NULLs</span> is injected , the subsequent bytes of the
+    shellcode after the NULL character will not be processed making it incapable of running successfully<br /> <br />
+    This mean that when we build a shellcode we have to avoid assembly instructions that when translated in machine code
+    have inside them <span style="color:#ff0000;">00</span> values. In fact is the machine code that we will pass as a
+    string and this string must not have <span style="color:#ff0000;">zeroes(NULL) </span>characters <span
+      style="color:#ff0000;">(\x00)</span>!<br /> <br /> <strong><span style="color:#a5452a;">How set EAX to
+        zero</span></strong><br /> <span style="color:#ff0000;">incorrect:</span><br /> <a href=""><img
+        src="images/527-1.png" alt="images/527-1.png" /></a><br /> <span style="color:#00ff2d;">correct:</span><br /> <a
+      href=""><img src="images/527-2.png" alt="images/527-2.png" /></a><br /> <span
+      style="color:#00ff2d;">correct:</span><br /> <a href=""><img src="images/527-3.png"
+        alt="images/527-3.png" /></a><br /> <br />• <strong>Alphanumeric and printable Shellcode encoding</strong><br />
+    If the target process filters out all non-alphanumeric bytes from the data, the range of instructions that can be
+    used to write a shellcode becomes very limited.<br /> A solution is to use a <strong>Self-Modifying Code
+      (SMC)</strong> decoder that expands the range of instructions that is possible to use and turn any code into
+    alphanumeric code.<br /> The shellcode then is prepended with a <strong>SMC</strong> decoder which on execution will
+    decode and execute the main body of the shellcode<br /><br /><br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://en.wikipedia.org/wiki/Shellcode" target="_blank">https://en.wikipedia.org/wiki/Shellcode</a><br />
+    <br /><br /><br /><br /><br />
+  </div>
+</body>
+
+</html>

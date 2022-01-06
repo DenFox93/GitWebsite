@@ -1,0 +1,813 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Fira Code' , monospace !important;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+.menu{
+  width: 100%;
+}
+
+.menu .item{
+  position: relative;
+  cursor: pointer;
+}
+#mySidebar{
+  width: 25%;
+  display: block;
+}
+.menu .item a{
+  width: auto;
+  color: #fff;
+  font-size: 14px;
+  /* font-size: 13.5px; */
+  font-weight: 500;
+  /* border-bottom: 1px solid red; */
+  text-decoration: none;
+  display: block;
+  padding: 5px 15px;
+  line-height: 25px;
+}
+/* Active class to change properties when click  */
+/* .act, .menu .item a:hover {
+ background-color: #040405;
+  color: rgb(255, 255, 255);
+}  */
+/* .menu .item .sub-menu>.active>.sub-btn {
+  background-color: #000000;
+  color: rgb(246, 252, 246);
+} */
+/* .menu .item .sub-menu .sub-menu .item>.activ>.sub-btn {
+  background-color: #df1f1f;
+  color: rgb(246, 252, 246);
+} */
+/* .menu .item .sub-menu a:hover{
+  background-color: #0000008a;
+  
+} */
+.menu .item .sub-menu a{
+  align-items: center;
+  justify-content: center;
+}
+/* onclick section END  */
+.menu .item i{
+  margin-right: 15px;
+  align-items: center;
+  text-align: center;
+  left: 0;
+}
+
+.menu .item a .dropdown{
+  transition: 0.3s ease;
+  justify-content: center;
+  padding: 5px;
+} 
+.sub-btn{
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+}
+/* main dropdown css  */
+.red{
+  color: #a80806;
+  font-size: 30px;
+}
+/* sub dropdown css  */
+.green{
+  margin-left: 10px;
+  text-align: center;
+  color: #2452be;
+  font-size: 25px;
+  
+}
+.S-bluea{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #f78039;
+}
+.C-reda{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #03F7FC;
+}
+.voileta{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #e50306;
+}
+.yellowa{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #e8de1c;
+}
+.C-greya{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #00FFA8;  
+}
+.C-greena{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #00C302;
+}
+.Silvera{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #473458;
+}
+.C-pinka{
+  margin-left: 10px;
+  font-size: 25px;
+  color: #473458;
+}
+
+/* Dot of the dropdown  */
+.blue{
+  color: #a80806;
+  font-size: 15px;
+}
+.Orange{
+  color: #2452be;
+}
+.S-blue{
+  color: #f78039;
+}
+.C-red{
+  color: #03F7FC;
+}
+.C-grey{
+  color: #00FFA8;  
+}
+.C-green{
+  /* color: #4c8e77;   */
+  color: #00C302;
+  
+}
+.voilet{
+  color: #e50306;
+}
+.yellow{
+  
+  /* color: #784e9d; */
+  color: #e8de1c;
+}
+.Silver{
+  color: #473458;
+}
+.C-pink{
+  color: #a80806;
+  /* color: pink; */
+}
+.C-gold{
+  color: #2452be;
+  /* color: gold; */
+}
+/* Sub nodes  */
+.sub-item{
+  margin-left: 70px;
+  font-size: 10px;
+  margin-bottom: 2.5px;
+  color: #304b53de;
+}
+.menu .item .sub-menu{
+  background-color: #23252e;
+  display: none;
+}
+.menu .item .p-main{
+  font-size: 16px;
+  font-weight: bold;
+}
+.menu .item .sub-menu a{
+  padding-left: 40px;
+  background-color: #23252ec9;
+}
+.rotate{
+  transform: rotate(90deg);
+}
+
+/* Side bar s */
+.sidebar {
+  border-right: 5px solid #1c1e1f;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #23252e;
+  overflow-x: hidden;
+  overflow: auto;
+  transition: 0.5s;
+  padding-top: 50px;
+   
+  /* Below Css For Text-Inline  */
+  text-overflow: ellipsis; 
+  white-space: nowrap;
+  margin-bottom: 50px;
+}
+
+
+.sidebar .closebtn {
+  display: none;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: white;
+  text-decoration: none;
+}
+.closebtn:hover{
+  color: #303030;
+  /* color: #23252e; */
+  transition: 0.5s ease;
+
+}
+.openbtn {
+  display: none;
+  font-size: 20px;
+  cursor: pointer;
+  /* background-color: #111; */
+  background-color: #23252e;
+  color: white;
+  /* padding: 10px 15px; */
+  border: none;
+}
+.openbtn:hover {
+  background-color: rgba(21, 23, 29, 0.747);
+  /* border-radius: 10px; */
+  transition: 0.5s ease;
+  color: white;
+}
+/* Horizontal scroll bar in hamburger menu  */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  /* border: 1px solid #d5d5d5; */
+}
+::-webkit-scrollbar-corner{
+  background: #23252e;
+}
+::-webkit-scrollbar-track {
+  background: #23252e;
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+     background: #a6a6a8;
+    border-radius: 8px;
+    width: 5px;
+}
+#main {
+  transition: margin-left .5s;
+  /* padding: 16px; */
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media (max-width: 1180px){ 
+  .menu{
+    width: 100%;
+    padding: 10px;
+    /* border: 2px solid green; */
+    /* margin-top: 80px; */
+  }
+  
+  .menu .item{
+    position: relative;
+    cursor: pointer;
+    
+  }
+  
+  .menu .item a{
+    color: #fff;
+    font-size: 10.5px;
+    /* font-size: 10px; */
+    font-weight: 400;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0px;
+    line-height: 15px;
+  }
+  .sidebar {
+    /* padding: 50px; */
+    padding-top: 50px;
+    font-size: 12px;
+}
+.menu .item .sub-menu a{
+  background-color: #23252ec9;
+}
+#mySidebar{
+  width: 0;
+  /* display: none; */
+}
+.sidebar .closebtn {
+  position: absolute;
+  display: block;
+  /* visibility: hidden; */
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: white;
+  text-decoration: none;
+}
+.closebtn:hover{
+  color: #303030;
+  /* color: #23252e; */
+  transition: 0.5s ease;
+
+}
+
+.openbtn {
+  display: block;
+  font-size: 20px;
+  cursor: pointer;
+  /* background-color: #111; */
+  background-color: #23252e;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: rgba(21, 23, 29, 0.747);
+  transition: 0.5s ease;
+  color: white;
+}
+#page_frame{
+  /* margin-top: 20px; */
+  /* width: 73%; */
+  /* margin-right: -5px; */
+  /* width: 100%; */
+  /* height: 100%; */
+
+  width: 100%;
+  right: 0;
+  margin-right: 13.5px;
+  height: 100%;
+}
+
+.sidebar  .sub-menu{
+  margin-left: -15px;
+}
+.menu .item .p-main{
+  font-size: 16px;
+  font-weight: bold;
+}
+/* main dropdown css  */
+.red{
+  /* text-align: center; */
+  color: #a80806;
+  font-size: 20px;
+}
+/* sub dropdown css  */
+.green{
+  margin-left: 7.5px;
+  text-align: center;
+  color: #2452be;
+  font-size: 20px;
+  
+}
+.S-bluea{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #f78039;
+}
+.C-reda{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #03F7FC;
+}
+.voileta{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #e50306;
+}
+.yellowa{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #e8de1c;
+}
+.C-greya{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #4c8e77;  
+}
+.C-greena{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #4c7b8e;
+}
+.Silvera{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #473458;
+}
+.C-pinka{
+  margin-left: 7.5px;
+  font-size: 20px;
+  color: #473458;
+}
+/* Dot of the dropdown  */
+.blue{
+  color: #a80806;
+  font-size: 12px !important
+}
+.Orange{
+  color: #2452be;
+}
+.S-blue{
+  color: #f78039;
+}
+.C-red{
+  color: #03F7FC;
+}
+.C-grey{
+  color: #00FFA8;  
+}
+.C-green{
+  /* color: #4c8e77;   */
+  color: #00C302;
+  
+}
+.voilet{
+  color: #e50306;
+}
+.yellow{
+  
+  /* color: #784e9d; */
+  color: #e8de1c;
+}
+.Silver{
+  color: #473458;
+}
+.C-pink{
+  color: #a80806;
+  /* color: pink; */
+}
+.C-gold{
+  color: #2452be;
+  /* color: gold; */
+}
+}
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media (max-width: 750px){ 
+  .menu{
+    /* width: 0%; */
+    /* padding: 50px; */
+    /* border: 2px solid green; */
+    /* margin-top: 80px; */
+  }
+  
+  .menu .item{
+    position: relative;
+    cursor: pointer;
+    
+  }
+  
+  .menu .item a{
+    color: #fff;
+    font-size: 9px;
+    /* font-size: 8.5px; */
+    font-weight: 200;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0px;
+    line-height: 10px;
+    width: 200%;
+  }
+/* For Sub-menu  */
+  .sidebar  .sub-menu{
+    margin-left: -35px;
+  }
+  .sidebar  .sub-menu .dropdown{
+    margin-left: 28px;
+  }
+  .sidebar  .sub-menu .sub-menu{
+    margin-left: 0px;
+  }
+  .menu .item i{
+    margin-right: 2px;
+    align-items: center;
+    text-align: center;
+    left: 0;
+  }
+  .menu .item .p-main{
+    font-size: 8px;
+    font-weight: bold;
+  }
+  .sidebar {
+    padding: -250px;
+    /* padding-top: 50px; */
+    font-size: 8px;
+    overflow-x:scroll;
+}
+.menu .item .sub-menu .item .sub-menu {
+  /* margin-left: -40px; */
+  padding: 2px;
+  font-size: 5px;
+  text-align:start;
+}
+/* main dropdown css  */
+.red{
+  /* text-align: center; */
+  color: #a80806;
+  font-size: 10px;
+}
+/* sub dropdown css  */
+.green{
+  margin-left: 4px;
+  text-align: center;
+  color: #2452be;
+  font-size: 7.5px;
+  
+}
+.S-bluea{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #f78039;
+}
+.C-reda{
+  margin-left: 10px;
+  font-size: 8.5px;
+  color: #03F7FC;
+}
+.voileta{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #e50306;
+}
+.yellowa{
+  margin-left: 4px;
+  font-size: 15px;
+  color: #e8de1c;
+}
+.C-greya{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #4c8e77;  
+}
+.C-greena{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #4c7b8e;
+}
+.Silvera{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #473458;
+}
+.C-pinka{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #473458;
+}
+/* Dot of the dropdown  */
+.blue{
+  color: #a80806;
+  /* font-size : px; */
+}
+.Orange{
+  color: #2452be;
+  font-size : 5px;
+}
+.S-blue{
+  color: #f78039;
+  font-size : 5px;
+}
+.C-red{
+  color: #03F7FC;
+  font-size : 5px;
+}
+.C-grey{
+  color: #00FFA8;  
+  font-size : 5px;
+}
+.C-green{
+  /* color: #4c8e77;   */
+  color: #00C302;
+  font-size : 5px;
+  
+}
+.voilet{
+  color: #e50306;
+  font-size : 5px;
+}
+.yellow{
+  
+  /* color: #784e9d; */
+  color: #e8de1c;
+  font-size : 5px;
+}
+.Silver{
+  color: #473458;
+  font-size : 5px;
+}
+.C-pink{
+  color: #a80806;
+  font-size : 5px;
+  /* color: pink; */
+}
+.C-gold{
+  color: #2452be;
+  font-size : 5px;
+  /* color: gold; */
+}
+}
+
+
+
+@media (max-width: 450px){ 
+  .menu .item a{
+    color: #fff;
+    font-size: 5.5px;
+    /* font-size: 5px; */
+    font-weight: 200;
+    text-decoration: none;
+    display: block;
+    /* padding: 5px 0px; */
+    line-height: 10px;
+    width: 200%;
+  }
+  .menu .item i{
+    margin-right: 2px;
+    align-items: center;
+    text-align: center;
+    left: 0;
+  }
+  .sidebar {
+    padding: -250px;
+    font-size: 5px;
+    margin-left: -8px;
+
+    overflow-x:scroll;
+}
+.menu .item .sub-menu .item .sub-menu {
+  padding: 2px;
+  font-size: 2px;
+  text-align:start;
+}
+ .sidebar  .sub-menu{
+    margin-left: -40px;
+  }
+  .sidebar  .sub-menu .dropdown{
+    margin-left: 28px;
+  }
+  .sidebar .closebtn {
+    position: absolute;
+    display: block;
+    /* visibility: hidden; */
+    top: 0;
+    right: 10px;
+    font-size:20px;
+    color: white;
+    text-decoration: none;
+  }
+  .closebtn:hover{
+    color: #303030;
+    /* color: #23252e; */
+    transition: 0.5s ease;
+  
+  }
+  
+  .openbtn {
+    /* display: block; */
+    font-size: 20px;
+    cursor: pointer;
+    /* background-color: #111; */
+    background-color: #23252e;
+    color: white;
+    left: 0;
+    /* margin-right: 40px; */
+    /* padding: 10px 15px; */
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: rgba(21, 23, 29, 0.747);
+    /* border-radius: 10px; */
+    transition: 0.5s ease;
+    color: white;
+  }
+  /* main dropdown css  */
+.red{
+  /* text-align: center; */
+  color: #a80806;
+  font-size: 5px;
+}
+/* sub dropdown css  */
+.green{
+  margin-left: 4px;
+  text-align: center;
+  color: #2452be;
+  font-size: 7.5px;
+  
+}
+.S-bluea{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #f78039;
+}
+.C-reda{
+  margin-left: 10px;
+  font-size: 8.5px;
+  color: #03F7FC;
+}
+.voileta{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #e50306;
+}
+.yellowa{
+  margin-left: 4px;
+  font-size: 15px;
+  color: #e8de1c;
+}
+.C-greya{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #4c8e77;  
+}
+.C-greena{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #4c7b8e;
+}
+.Silvera{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #473458;
+}
+.C-pinka{
+  margin-left: 4px;
+  font-size: 7.5px;
+  color: #473458;
+}
+/* Dot of the dropdown  */
+.blue{
+  color: #a80806;
+  font-size : 0.5px;
+}
+.Orange{
+  color: #2452be;
+  font-size : 5px;
+}
+.S-blue{
+  color: #f78039;
+  font-size : 5px;
+}
+.C-red{
+  color: #03F7FC;
+  font-size : 5px;
+}
+.C-grey{
+  color: #00FFA8;  
+  font-size : 5px;
+}
+.C-green{
+  /* color: #4c8e77;   */
+  color: #00C302;
+  font-size : 5px;
+  
+}
+.voilet{
+  color: #e50306;
+  font-size : 5px;
+}
+.yellow{
+  
+  /* color: #784e9d; */
+  color: #e8de1c;
+  font-size : 5px;
+}
+.Silver{
+  color: #473458;
+  font-size : 5px;
+}
+.C-pink{
+  color: #a80806;
+  font-size : 5px;
+  /* color: pink; */
+}
+.C-gold{
+  color: #2452be;
+  font-size : 5px;
+  /* color: gold; */
+}
+.menu .item .p-main{
+  font-weight: bold;
+}
+}
+
+

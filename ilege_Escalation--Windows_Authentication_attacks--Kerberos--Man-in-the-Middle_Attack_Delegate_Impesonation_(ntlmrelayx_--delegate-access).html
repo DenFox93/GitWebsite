@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Man-in-the-Middle Attack: Delegate Impesonation (ntlmrelayx --delegate-access)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Man-in-the-Middle Attack: Delegate Impesonation (ntlmrelayx --delegate-access)</h1>
+    <br /><br />Check: <a
+      href="Methodology--Network_Pentest--Sniffing-Spoofing-Poisoning--NetNTLM_attacks--Man-in-the-Middle_techniques_(ipv6)--NTLM_Relay_attack_(ipv6).html">NTLM
+      Relay Attack (ipv6)</a> where we have discussed about this attack but for <strong>NTLM hashes</strong> on
+    IPv6<br /><br /><strong>
+      <h3>Prerequisites</h3>
+    </strong><br />• A Linux/Windows host on the network. The attack is hard to execute without a host we have full
+    control over.<br />• Domain users must be allowed to create machine accounts in the domain.<br />• Target
+    computer(s) must have proxy configured, with internal IPs set up as exceptions<br />• To replicate it in our lab we
+    will need LDAP over TLS (LDAPS). See <a
+      href="https://gist.github.com/magnetikonline/0ccdabfec58eb1929c997d22e7341e45" target="_blank">installation guide</a> for setting
+    up certificates on domain controller.<br /> ◇ Active Directory Certificate Services (ADCS) must be running on the DC
+    with a valid certificate installed. This enables LDAP over TLS.<br />• IPv6 must be enabled in the
+    network<br /><br /><strong>
+      <h3>How it works</h3>
+    </strong><br /><strong>MitM part</strong><br />1. We set up a man-in-the-middle DHCP server on IPv6 and serve a DNS
+    IPv6 configuration that points to our rogue DNS IPv6 server.<br />2. When the victim uses WPAD to look for a proxy
+    configuration file over DNS, we let it connect to our fake proxy server and then prompt for authentication using a
+    <code>407 Authentication Required</code> request.<br />3. We capture and relay the (encrypted) credentials of the
+    machine account to LDAPS on the domain controller (DC).<br /><strong>Kerberos part</strong><br />4. We ask the DC
+    over LDAPS to create a new machine account. Active Directory allows any user account, including machine accounts to
+    add 10 machine accounts by default.<br />5. We now have credentials for a machine account. The reason we create a
+    machine account is that we need access to an account with a Service Principal Name (SPN).<br />6. We now ask the DC
+    to configure resource-based constrained delegation for this new machine account on the victim computer object. For
+    example: the machine account <code>WS02$</code> sets the <code>msDS-AllowedToActOnBehalfOfOtherIdentity</code>
+    attribute on the computer object <code>WS02</code> to allow the newly created machine account to impersonate users
+    on it.<br />7. We request a service ticket using the machine account that was created, where we impersonate a user
+    that has local admin access to our target computer.<br />8. We use the service ticket to access the computer with
+    local admin privileges. The ticket with these privileges is only valid on the target box.<br /><br /><br />
+    <h3> </h3><strong>
+      <h3>TO BE CONTINUED!!!</h3>
+    </strong>(DOES NOT WORK)<br /><br />Bibliography:<br />• <a
+      href="https://dirkjanm.io/worst-of-both-worlds-ntlm-relaying-and-kerberos-delegation/#:~:text=creating%20a%20new%20computer%20account%20and%20granting%20it%20delegation%20rights%20to%20the%20victim%20computer" target="_blank">The
+      worst of both worlds: Combining NTLM Relaying and Kerberos delegation - dirkjanm.io</a><br />• <a
+      href="https://chryzsh.github.io/relaying-delegation/" target="_blank">https://chryzsh.github.io/relaying-delegation/</a>
+  </div>
+</body>
+
+</html>

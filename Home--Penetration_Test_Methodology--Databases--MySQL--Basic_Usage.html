@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Basic Usage</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Basic Usage</h1><br />Remember to terminate the line with a semicolon ( ; )<br /><br /><strong>
+      <h3>Basic Usage</h3>
+    </strong><br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;show&nbsp;databases;</div>
+    </div><br /> <a href=""><img src="images/344-1.png" alt="images/344-1.png" /></a><br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;use&nbsp;<span style="color:#000000;font-weight:400">&lt;</span>database<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div> <br /> <a href=""><img src="images/344-2.png" alt="images/344-2.png" /></a><br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;show&nbsp;tables;</div>
+    </div><br /> <a href=""><img src="images/344-3.png" alt="images/344-3.png" /></a><br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;describe&nbsp;&lt;table&gt;;&nbsp;&nbsp;#to&nbsp;show&nbsp;the&nbsp;structure&nbsp;of&nbsp;a&nbsp;table
+      </div>
+    </div> <br /> Describe &lt;table&gt;; is basically a shortcut for “show columns from &lt;table&gt;;”<br /> <a
+      href=""><img src="images/344-4.png" alt="images/344-4.png" /></a><br /> <a href=""><img src="images/344-5.png"
+        alt="images/344-5.png" /></a><br /> ▪ Fields → these are the columns of the table<br /> ▪ Type → data type and
+    between brackets the maximum size for the type<br /> ▪ Null → shows whether a field is allowed to contain a null
+    value (the absence of anything) or not.<br /> ▪ Key → if a column have a designated key<br /> - PRI → is short for
+    primary, must be unique for each record in the table, and it is often set to increment automatically<br /> - UNI →
+    values in a column must be unique. <br /> - MUL → multiple occurrences of the same value are allowed within the
+    column<br /> ▪ Default → default value for new records<br /><br />• <strong>SELECT statement:</strong><br /> The
+    SELECT statement is used to select data from a database. The data returned is stored in a result table, called the
+    result-set.<br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;SELECT&nbsp;&lt;column1,&nbsp;column2,...&gt;&nbsp;FROM&nbsp;&lt;table_name&gt;&nbsp;WHERE&nbsp;&lt;condition&gt;;
+      </div>
+    </div><br /> ◇ <strong>UNION operator</strong>:<br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;SELECT&nbsp;column_name(s)&nbsp;FROM&nbsp;table1&nbsp;UNION&nbsp;SELECT&nbsp;column_name(s)&nbsp;FROM&nbsp;table2;
+      </div>
+    </div><br /><br /> <br />• <strong>Comments</strong><strong><br /></strong>there are two ways to comment a
+    line:<br /> # → hash symbol<br /> -- → two dashes followed by a space<br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;SELECT&nbsp;city&nbsp;FROM&nbsp;world;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;this&nbsp;is&nbsp;a&nbsp;comment<br />mysql&gt;&nbsp;SELECT&nbsp;apple&nbsp;FROM&nbsp;fruits;&nbsp;--&nbsp;this&nbsp;is&nbsp;another&nbsp;comment
+      </div>
+    </div><strong><br /></strong><br /><br /><br /><br /><br /><br /><br />Bibliography and to know more:<br /><a
+      href="https://www.w3schools.com/sql/default.asp" target="_blank">https://www.w3schools.com/sql/default.asp</a>
+  </div>
+</body>
+
+</html>

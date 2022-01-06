@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>NetBIOS Session Service (TCP:139)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>NetBIOS Session Service (TCP:139)</h1><br/>NetBIOS Session Service (<strong>NBSS</strong>) run on TCP port 139, it allows two names to establish a reliable connection in order to exchange data.<br />Once the session has been established with NBSS, the two workstations use the Server Message Block (SMB) protocol<br /><br /><strong><h3>How a connection is established</h3></strong><br />1. The NetBIOS name is resolved into an IP address using the NetBIOS Name Service<br />2. A TCP connection is established between the two devices, using the TCP port 139<br />3. The device that start the connection sends a <span style="text-decoration:underline;">NetBIOS Session Request</span> on the TCP port 139<br />    The NetBIOS Session Request include:<br />   ◇ the NetBIOS name of the application that wants to establish the connection<br />   ◇ the NetBIOS name on the remote device<br />6. If the remote device is listening on that name, there will be a positive response and the session will be established.<br /><br /></div>
+</body>
+</html>

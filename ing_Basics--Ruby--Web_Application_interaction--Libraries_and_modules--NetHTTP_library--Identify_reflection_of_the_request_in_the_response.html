@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Identify reflection of the request in the response</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Identify reflection of the request in the response</h1><br/><br />1. perform a GET request by using the entire URL containing the query string <br />	<div class="codebox"><div class="codebox">target=&quot;example.com/?search=daniele93&quot;<br />res=Net::HTTP.get<span style="color:#000000;font-weight:400">(</span>URI(target)<span style="color:#000000;font-weight:400">)</span></div></div><br />	<a href=""><img src="images/1992-1.png" alt="images/1992-1.png" /></a><br />2. check if the result (res) contains the string we expect(example:<span style="color:#00ff00;">daniele93</span>)<br />	<div class="codebox"><div class="codebox">res=~/daniele93/</div></div><br />	<a href=""><img src="images/1992-2.png" alt="images/1992-2.png" /></a><br />	res contains the string at position 2453</div>
+</body>
+</html>

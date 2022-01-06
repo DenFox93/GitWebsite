@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Execute code with Configure access</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Execute code with Configure access</h1><br/><br />1. In the homepage of Jenkis(http://&lt;IpJenkinsServer&gt;:808) we should see the list of the projects. <span style="text-decoration:underline;">Click on one of them</span>.<br />2. If there are one or more projects in Jenkins, we can check if we have <span style="color:#ff8700;">Configure access</span> to one of the them. <span style="text-decoration:underline;">Click on </span><span style="color:#ff8700;text-decoration:underline;">Configure</span><br />    <a href=""><img src="images/1169-1.png" alt="images/1169-1.png" /></a><br />3. Now we should be in the folder: “http://&lt;IpJenkinsServer&gt;:8080/job/&lt;PROJECT&gt;/configure”<br />Here from <span style="text-decoration:underline;">&quot;Build → Execute Windows Batch Command&quot;</span> we can execute a Powershell command and then click on <span style="text-decoration:underline;">Save</span>.<br />    If there are in the Project multiple commands, we can insert our command as first in the list, to be sure that it will be executed for first<br />    <a href=""><img src="images/1169-2.png" alt="images/1169-2.png" /></a><br />4. Now we can click on “<span style="text-decoration:underline;">Build Now</span>”<br />    <a href=""><img src="images/1169-3.png" alt="images/1169-3.png" /></a><br />5. Now should be executed, and saved in the &quot;Build History&quot;:<br />    <a href=""><img src="images/1169-4.png" alt="images/1169-4.png" /></a><br />6. We can find the the code executed in “Console Output”<br />    <a href=""><img src="images/1169-5.png" alt="images/1169-5.png" /></a><br /><br />7. This is the PowerShell shell obtained on the attacker machine:<br />    <a href=""><img src="images/1169-6.png" alt="images/1169-6.png" /></a><br /></div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>single quote and backslash escaped</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>single quote and backslash escaped</h1><br />1. Submit a random alphanumeric string in the search
+    box (example: 204a2fb1)<br /> Use Burp Suite to intercept the search request and send it to Burp Repeater.<br /> <a
+      href=""><img src="images/1946-1.png" alt="images/1946-1.png" /></a><br /> <span
+      style="text-decoration:underline;">Observe that the random string has been reflected inside a JavaScript
+      string</span><br />2. Test sending the payload <strong>test</strong><strong><span
+        style="color:#00ff00;">&#39;</span></strong><strong>payload</strong> to check if is possible breaking out from
+    the string<br /> <a href=""><img src="images/1946-2.png" alt="images/1946-2.png" /></a><br /> Unfortunately the
+    <span style="color:#00ff00;">single quote</span> gets backslash-escaped, preventing from breaking out of the
+    string<br />3. Replace your input with the following payload to break out of the script block and inject a new
+    script: <br /> <span style="color:#ff0000;">&lt;/script&gt;</span><span
+      style="color:#1e90ff;">&lt;script&gt;</span>alert(1)&lt;/script&gt;<br /> <a href=""><img src="images/1946-3.png"
+        alt="images/1946-3.png" /></a><br /> This is been a simple case where we have simply close the script tag (with
+    <span style="color:#ff0000;">&lt;/script&gt;</span>) that is enclosing the existing JavaScript, and <span
+      style="color:#1e90ff;">introduce some new HTML tags</span> that has triggered the execution of
+    JavaScript<br /><br /><br /><strong>Bibliography:</strong><br />• <a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-single-quote-backslash-escaped</a><br />•
+    <a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts</a>
+  </div>
+</body>
+
+</html>

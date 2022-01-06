@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>PLC Programming</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>PLC Programming</h1><br/>Program execution of PLC<br />•  A line of code in a PLC program is called a <strong>rung</strong><br />•  Each completion of the program is called a <strong>scan</strong><br />• A PLC will complete many scans in a single second. Differently from a SCADA system(every 2 minutes)<br /><br /><strong>Direct(| |) and Reverse(|/|) Contact</strong><br />• <span style="text-decoration:underline;">Direct Contact</span> →  | |<br />• <span style="text-decoration:underline;">Reverse Contact</span> →  |/|<br /><a href=""><img src="images/870-1.png" alt="images/870-1.png" /></a><br /><br /><span style="color:#a5452a;">Example: Motor Control </span><br /><a href=""><img src="images/870-2.png" alt="images/870-2.png" /></a><br />IF <span style="color:#ff0000;">Input_10</span>==True THEN <span style="color:#1e90ff;">DO_8</span>=True                                # reppresented by a <span style="text-decoration:underline;">Direct Contact</span> | |<br />IF <span style="color:#ff8700;">Input_11</span>==False THEN <span style="color:#1e90ff;">DO_8</span>=True                                # represented by a <span style="text-decoration:underline;">Reverse Contact</span> |/|<br />IF <span style="color:#ff0000;">Input_10</span>==True OR <span style="color:#00ff00;">DO_8</span>=True THEN <span style="color:#1e90ff;">DO_8</span>=True          #The OR in the image is reppresented by a <span style="text-decoration:underline;">Branch</span><br /><br /><br /></div>
+</body>
+</html>

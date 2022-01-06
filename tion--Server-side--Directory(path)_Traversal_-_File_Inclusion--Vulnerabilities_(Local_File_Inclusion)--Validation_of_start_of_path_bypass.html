@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Validation of start of path bypass</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Validation of start of path bypass</h1><br />An application could require that the user-supplied
+    filename must start with the expected <span style="color:#1e90ff;">base folder</span> (like /var/www/images in he
+    example below), then it might be possible to include the required base folder followed by suitable traversal
+    sequences. <br /><br /><a href=""><img src="images/350-1.png" alt="images/350-1.png" /></a><br /><br /><br />Payload
+    <code>/var/www/images/../../../etc/passwd</code><br /> <a href=""><img src="images/350-2.png"
+        alt="images/350-2.png" /></a><br /> <a href=""><img src="images/350-3.png"
+        alt="images/350-3.png" /></a><br /><br />Bibliography:<br /><a
+      href="https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass" target="_blank">https://portswigger.net/web-security/file-path-traversal/lab-validate-file-extension-null-byte-bypass</a>
+  </div>
+</body>
+
+</html>

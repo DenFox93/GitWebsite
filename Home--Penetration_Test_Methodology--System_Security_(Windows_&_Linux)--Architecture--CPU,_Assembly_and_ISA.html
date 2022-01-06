@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>CPU, Assembly and ISA</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>CPU, Assembly and ISA</h1><br /><br /><strong>
+      <h3>Machine language</h3>
+    </strong><br /><strong>CPU</strong>(Central Processing Unit) is the device in charge of executing the <span
+      style="color:#ff8700;">machine code</span> of a program.<br /><span style="color:#ff8700;">machine code</span>, or
+    <span style="color:#ff8700;">machine language</span>, is a <span
+      style="color:#ff8700;text-decoration:underline;">set of instructions</span> in hexadecimal (HEX) format that the
+    <strong>CPU</strong> processes<br />Each <span style="color:#ff8700;text-decoration:underline;">instruction</span>
+    is a primitive command that executes a specific operation <br /><br /><strong>
+      <h3>Assembly</h3>
+    </strong>
+    <h3> </h3><strong>
+      <h3>language</h3>
+    </strong><br />Because the complexity of these <span style="color:#ff8700;">instructions</span> in
+    <strong>hexadecimal format</strong> gets translated in a more readable language: <strong><span
+        style="color:#1e90ff;">Assembly</span></strong>(ASM)<br />Instead the <strong><span
+        style="color:#00ff2d;">Assembler</span></strong> are the tools needed convert from <span
+      style="color:#1e90ff;">Assembly language</span>(ASM) to <span style="color:#ff8700;">machine
+      code</span>.<br />Most popular Assembler are:<br />• MASM → Microsoft Macro Assembler (<a
+      href="https://www.microsoft.com/en-us/download/details.aspx?id=12654" target="_blank">https://www.microsoft.com/en-us/download/details.aspx?id=12654</a>)<br />•
+    NASM → Netwide Assembler(<a href="http://www.nasm.us/" target="_blank">http://www.nasm.us/</a>)<br /><br /><strong>
+      <h3>ISA: Instruction Set Architecture</h3>
+    </strong><br />Each type of CPU has its own instruction set architecture (ISA). ISA is what a programmer can see:
+    memory, registers, instructions...<br />• <strong>x86</strong> → This Instruction Set Architecture(ISA) is
+    originated from the Intel 8086 and <span style="text-decoration:underline;">identifies 32-bit processors</span>; 32
+    bit is the length of the registers in the CPU.<br /> If the register(it is an address) is 32 bits, then there are
+    2^32 possible registers, and that means 2^32 (4.294.967.296) possible values. <br /> Because one value in the
+    register can reference an individual byte in memory, a 32-bit system can address a maximum of 4 gigabytes
+    (4.294.967.296 bytes) of RAM<br />• <strong>x64</strong> → This Instruction Set Architecture(ISA) also known as
+    <strong>x86_64</strong> or <strong>AMD64</strong> <span style="text-decoration:underline;">identifies 64-bit
+      processors</span>; 64 bit is the length of the registers in the CPU.<br /> If the register(it is an address) is 64
+    bits, then there are 2^64 possible registers, and that means 2^64 (18.446.744.073.709.551.616) possible
+    values.<br /> Because one value in the register can reference an individual byte in memory, a 64-bit system can
+    address a maximum of 17.179.869.184 gigabytes (18.446.744.073.709.551.616 bytes) of RAM
+  </div>
+</body>
+
+</html>

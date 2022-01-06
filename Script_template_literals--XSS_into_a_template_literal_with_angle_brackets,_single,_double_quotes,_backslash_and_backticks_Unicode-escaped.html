@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped</h1><br/>XSS:<br />• into a template literal<br />• angle brackets Unicode-escaped<br />• single quotes Unicode-escaped<br />• double quotes Unicode-escaped<br />• backslash Unicode-escaped <br />• backticks Unicode-escaped<br /><br /><br /><br />1. Submit a random alphanumeric string in the search box (example: <span style="color:#ff0000;">daniele93</span>)<br />	<div class="codebox"><div class="codebox">/?search=daniele93</div></div><br />	use Burp Suite to intercept the search request and send it to Burp Repeater.<br />	<a href=""><img src="images/1966-1.png" alt="images/1966-1.png" /></a><br />	Observe that the random string has been reflected inside a JavaScript <span style="color:#ffa500;text-decoration:underline;">Template literal</span> (we can recognize them because they <span style="color:#00ff00;text-decoration:underline;">are encapsulated in backticks</span>  (<code>`</code>) inside a &lt;script&gt;....&lt;/script&gt;)<br />2. Replace your input with the following payload to execute JavaScript inside the template string: <span style="color:#a020f0;">${alert(1)}</span><br />	<div class="codebox"><div class="codebox">/?search=$<span style="color:#000000;font-weight:400">{</span>alert(1)<span style="color:#000000;font-weight:400">}</span></div></div><br />	<a href=""><img src="images/1966-2.png" alt="images/1966-2.png" /></a><br />	<a href=""><img src="images/1966-3.png" alt="images/1966-3.png" /></a></div>
+</body>
+</html>

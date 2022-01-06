@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>authentication</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>authentication</h1><br /><strong>
+      <h3>Find subdirectories from logged user perspective</h3>
+    </strong><br />Authenticate with the web application can increase the chance of find more resources, <br />to test
+    the application from the logged user perspective we can use one of these methods<br /><br />• <strong>cookie
+      option</strong><br /> <strong>-c &lt;cookie_string&gt;</strong> → Set a cookie for the HTTP request.<br /> we can
+    pass to dirb the cookie of the logged user<br />
+    <div class="codebox">
+      <div class="codebox">
+        dirb&nbsp;https://google.com&nbsp;-p&nbsp;http://127.0.0.1:8080&nbsp;-c&nbsp;&quot;COOKIE:Daniele&quot;</div>
+    </div><br /> <a href=""><img src="images/332-1.png" alt="images/332-1.png" /></a><br />• <strong>Username and
+      Password option</strong><br /> <strong>-u &lt;username:password&gt;</strong> → Username and password to use<br />
+    <div class="codebox">
+      <div class="codebox">
+        dirb&nbsp;https://google.com&nbsp;-p&nbsp;http://127.0.0.1:8080&nbsp;-u&nbsp;&quot;admin:pass&quot;</div>
+    </div><br /> <a href=""><img src="images/332-2.png" alt="images/332-2.png" /></a><br /> we can decode the
+    Authorization header (<strong>YWRtaW46cGFzcw==</strong>) in the Burpsuite decoder panel<br /> <a href=""><img
+        src="images/332-3.png" alt="images/332-3.png" /></a><br /> <a href=""><img src="images/332-4.png"
+        alt="images/332-4.png" /></a><br /><br />• <strong>Complete custom header</strong><br /> <strong>-H
+      &lt;header_string&gt;</strong> → Add a custom header to the HTTP request<br />
+    <div class="codebox">
+      <div class="codebox">
+        dirb&nbsp;https://google.com&nbsp;-p&nbsp;http://127.0.0.1:8080&nbsp;-H&nbsp;&quot;CustomHeader:&nbsp;this&nbsp;is&nbsp;my&nbsp;&nbsp;header&quot;
+      </div>
+    </div><br /> <a href=""><img src="images/332-5.png" alt="images/332-5.png" /></a>
+  </div>
+</body>
+
+</html>

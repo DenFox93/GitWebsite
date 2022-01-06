@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Rotten Potato (see Juicy Potato)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Rotten Potato (see Juicy Potato)</h1><br /><span style="color:#ff0000;">WARNING: NOT
+      TESTED</span><br /><br /><strong>Prerequisite:</strong><br />Windows OS &lt; Windows 10 1809 <br />Windows OS &lt;
+    Windows Server 2019<br /><br /><br />GitHub: <a
+      href="https://github.com/breenmachine/RottenPotatoNG" target="_blank">https://github.com/breenmachine/RottenPotatoNG</a><br />•
+    Service accounts could intercept a SYSTEM ticket and use it to impersonate the SYSTEM user.<br />• This was possible
+    because service accounts usually have the “SeImpersonatePrivilege” privilege enabled.<br /><br /><a
+      href="https://jlajara.gitlab.io/assets/images/posts/20201122/Diagram_2.png" target="_blank"><img src="images/1341-1.png"
+        alt="images/1341-1.png" /></a><br /><br />1. Trick RPC to authenticate to the proxy with the <span
+      style="color:#ff8700;">CoGetInstanceFromIStorage</span> API call. In this call the proxy IP/Por t is
+    specified.<br />2. RPC send a <span style="color:#ff8700;">NTLM Negotiate</span> package to the proxy.<br />3. The
+    proxy <span style="color:#ff8700;">relies the NTLM Negotiate</span> to <span style="color:#ff8700;">RPC in port
+      135</span>, to be used as a template. At the same time, a call to <span
+      style="color:#ff8700;">AcceptSecurityContext</span> is performed to force a local authentication. Notice that this
+    package is modified to force the local authentication.<br />4. &amp; 5. <span style="color:#ff8700;">RPC 135</span>
+    and <span style="color:#ff8700;">AcceptSecurityContext</span> replies with a NTLM Challenge . The content of both
+    packets are mixed to match a local negotiation and is forwarded to the <span style="color:#ff8700;">RPC</span>, step
+    6..<br />7. <span style="color:#ff8700;">RPC</span> responds with a <span style="color:#ff8700;">NLTM Auth</span>
+    package that is send to <span style="color:#ff8700;">AcceptSecurityContext (8.)</span> and the <span
+      style="color:#ff0000;">impersonation is performed (9.)</span>.<br /><br /><br />Bibliography:<br />• <a
+      href="https://jlajara.gitlab.io/others/2020/11/22/Potatoes_Windows_Privesc.html#rottenPotato" target="_blank">https://jlajara.gitlab.io/others/2020/11/22/Potatoes_Windows_Privesc.html#rottenPotato</a><br />
+  </div>
+</body>
+
+</html>

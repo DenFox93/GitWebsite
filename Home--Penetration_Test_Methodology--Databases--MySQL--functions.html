@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>functions</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>functions</h1><br/><br /><table class="table"><tr><th>Database type</th><th>Query</th></tr><tr><td>Microsoft, MySQL</td><td>SELECT @@version</td></tr><tr><td>Oracle</td><td>SELECT * FROM v$version</td></tr><tr><td>PostgreSQL</td><td>SELECT version()</td></tr></table><br /><div class="codebox"><div class="codebox">mysql&gt;&nbsp;select&nbsp;@@version;</div></div><br />    <a href=""><img src="images/354-1.png" alt="images/354-1.png" /></a><br /><br /><strong>user() </strong>→ returns the name of the user currently using the database<br />    <a href=""><img src="images/354-2.png" alt="images/354-2.png" /></a><br /><strong>substring() </strong>→ returns a substring of the given argument. It takes three parameters: input string, <span style="color:#ff0000;">position of the substring</span>, length of the substring<br />    substring(&#39;d<span style="color:#ff0000;">a</span>niele&#39;, <span style="color:#ff0000;">2</span>, 1) → ‘a’<br />    <span style="text-decoration:underline;">We can also combine substring() with user():</span><br />        user()=d<span style="color:#ff0000;">a</span>niele<br />        substring(user(),2,1) → ‘a’<br />    <a href=""><img src="images/354-3.png" alt="images/354-3.png" /></a></div>
+</body>
+</html>

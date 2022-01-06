@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>BONUS: change the skeleton key</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>BONUS: change the skeleton key</h1><br />The <span style="text-decoration:underline;">Skeleton
+      key</span>(Master Key) by default is “mimikatz” that converted to NT hash is “60BA4FCADC466C7A033C178194C03DF6”.
+    This password will work for any account in the domain. <br />The skeleton key is defined two times first in the
+    function “kuhl_misc_skeleton_rc4_init” and then in “kuhl_misc_skeleton_rc4_init_decryp”:<br />• New versions of
+    mimikatz(from <a
+      href="https://github.com/gentilkiwi/mimikatz/commit/c1c1608ca8712a58035319e848bb666676970383#diff-cf4373b6c7195386ac1973681e5561bd96e1bb9e099cfd3febd1111e986bd17c" target="_blank">29/02/2016</a>)
+    → in the source code file <a
+      href="https://github.com/gentilkiwi/mimikatz/blob/master/mimikatz/modules/kuhl_m_misc.c#L607" target="_blank">kuhl_m_misc.c</a>(lines:607,634)
+    Master Key as the parameter:<br /> DWORD kiwiKey[] = {0xca4fba60, 0x7a6c46dc, 0x81173c03, 0xf63dc094};”<br />• Old
+    versions of mimikatz → in the source code file <a
+      href="https://github.com/gentilkiwi/mimikatz/blob/2d9e15bb8320df727d36564bc16df50ea9e557e4/mimikatz/modules/kuhl_m_misc.c#L672" target="_blank">kuhl_m_misc.c</a>(lines:672,700)
+    Master Key as the parameter:<br /> BYTE kiwiKey[] = {0x60, 0xba, 0x4f, 0xca, 0xdc, 0x46, 0x6c, 0x7a, 0x03, 0x3c,
+    0x17, 0x81, 0x94, 0xc0, 0x3d, 0xf6};<br /><br />If we went change the default skeleton key “mimikatz” in the New
+    versions of mimikatz, we can do that by following these steps:<br /><br />
+    <div class="codebox">
+      <div class="codebox">
+        from&nbsp;sys&nbsp;import&nbsp;argv<br /><br />password=argv[1]<br />print(&quot;The&nbsp;password&nbsp;inserted&nbsp;is&nbsp;--&gt;&nbsp;&quot;&nbsp;+&nbsp;str(password))<br />import&nbsp;hashlib,binascii<br />hash&nbsp;=&nbsp;hashlib.new(&#39;md4&#39;,&nbsp;password.encode(&#39;utf-16le&#39;)).digest()<br />nt=&nbsp;binascii.hexlify(hash)<br />print(&quot;The&nbsp;NTLM&nbsp;calculated&nbsp;is&nbsp;--&gt;&nbsp;&quot;&nbsp;+&nbsp;str(nt))<br /><br />kiwikey=[]<br />splits=[nt[i:i+8]&nbsp;for&nbsp;i&nbsp;in&nbsp;range(0,&nbsp;len(nt),&nbsp;8)]<br />for&nbsp;j&nbsp;in&nbsp;splits:&nbsp;<br />
+        reverse=&quot;&quot;.join(reversed([j[i:i+2]&nbsp;for&nbsp;i&nbsp;in&nbsp;range(0,&nbsp;len(j),&nbsp;2)]));<br />
+        kiwikey.append(&quot;0x&quot;+reverse)<br /><br />kiwikey2=str(kiwikey)<br />kiwikey=kiwikey2.replace(&quot;&#39;&quot;,&nbsp;&quot;&quot;)<br />kiwikey2=kiwikey.replace(&quot;[&quot;,&nbsp;&quot;{&quot;)<br />kiwikey=&nbsp;kiwikey2.replace(&quot;]&quot;,&nbsp;&quot;}&quot;)<br />print<span
+          style="color:#000000;font-weight:400">(</span>&quot;The&nbsp;kiwikey&nbsp;calculated&nbsp;is&nbsp;--&gt;&nbsp;&quot;&nbsp;+&nbsp;str(kiwikey)<span
+          style="color:#000000;font-weight:400">)</span></div>
+    </div><br /><br />We can run it also by directly use wget:<br />
+    <div class="codebox">
+      <div class="codebox">
+        wget&nbsp;-qO&nbsp;-&nbsp;https://raw.githubusercontent.com/DenFox93/passwordToSkeletonKey/main/converter.py&nbsp;|&nbsp;python&nbsp;-&nbsp;<span
+          style="color:#000000;font-weight:400">&lt;</span>PASSWORD<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> wget<br /> ▪ -O &lt;file&gt;, --output-document=&lt;file&gt; → the document of the url will be saved
+    with the filename specified. If - is used as file, documents will be printed to standard output<br /> ▪ -q, --quiet
+    → Turn off Wget&#39;s output<br /> python<br /> ▪ - → read from standard input and not from file<br /> <a
+      href=""><img src="images/1219-1.png" alt="images/1219-1.png" /></a><br /> <a href=""><img src="images/1219-2.png"
+        alt="images/1219-2.png" /></a>
+  </div>
+</body>
+
+</html>

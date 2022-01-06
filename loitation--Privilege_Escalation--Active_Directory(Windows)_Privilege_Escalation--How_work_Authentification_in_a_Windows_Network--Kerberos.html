@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Kerberos</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Kerberos</h1><br /><a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/1. System Security/5 - Cryptography and Password Cracking/authKerberos.png"><img
+        src="images/1121-1.png" alt="images/1121-1.png" /></a><br />In Active Directory (AD), two authentication
+    protocols can be used<br />• Kerberos: default authentication protocol from Windows 2000<br />• NTLMv2
+    Challenge/Response: it provides authentication between two parties without a third trusted party. If in AD
+    environment for different reasons, Kerberos cannot be used, Windows fall back to NTLM<br /><br />Kerberos is a
+    network authentication protocol based on tickets, <a href="https://web.mit.edu/kerberos/" target="_blank">developed by MIT</a>. It
+    is an open standard, here the <a href="https://web.mit.edu/kerberos/dist/index.html" target="_blank">source code</a>(differently
+    from NTLM that was proprietary).<br />The actors involved in a Kerberos transaction/authentication are:<br />• The
+    <strong><span style="color:#ff8700;">KDC</span></strong><span style="color:#ff8700;"> (Kerberos Distribution
+      Center)</span> main process installed on the <span style="color:#ff8700;">Domain Controller(DC)</span>. <br /> KDC
+    provide two services: <br /> ◇ <span style="color:#00ff00;">Authentication Service (AS)</span><br /> ◇ <span
+      style="color:#a020f0;">Ticket-Granting Service (TGS)</span><br />• The <strong><span
+        style="color:#1e90ff;">Client</span></strong> that is requesting access to the <span
+      style="color:#f6ff00;">Service</span><br />• The <strong><span style="color:#f6ff00;">AP</span></strong><span
+      style="color:#f6ff00;">(Application Server)</span> which offer the <strong><span
+        style="color:#f6ff00;">Service</span></strong> to which the Client is attempting to obtain access<br />Because
+    of these three components, Kerberos is named as the three-headed mythological dog.<br />Kerberos protocol allows the
+    <strong>Client</strong> and a <strong>Service</strong> (in the Application Server) to authenticate to each other
+    over an insecure network channel, to do that both Client and Service have to trust a third party: the <strong><span
+        style="color:#ff8700;">Kerberos Distribution Center</span></strong>. <br /><br /><strong>Transport
+      Layer</strong><br />Kerberos uses either UDP or TCP as transport protocol, which sends data in cleartext. Due to
+    this Kerberos is responsible for providing encryption.<br />Ports used by Kerberos are UDP/88 and TCP/88, which
+    should be listen in KDC<br /><br /><strong>Encryption Keys</strong><br />• <span
+      style="color:#ff8700;">KDC(krbtgt)</span> <span style="color:#ff0000;">secret key</span> → krbtgt account&#39;s
+    password hashed with <a href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key function</a>. krbtgt
+    account is the default account for the Key Distribution Center (KDC) service. The password is assigned to the krbtgt
+    account automatically by the system during the creation of the <span style="color:#ff8700;">KDC</span><br />• <span
+      style="color:#1e90ff;">Client(user)</span> <span style="color:#ff0000;">secret key</span> → user account&#39;s
+    password hashed with <a href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key function</a><br />•
+    <span style="color:#f6ff00;">Service</span> <span style="color:#ff0000;">secret key</span> → service account&#39;s
+    password hashed with <a href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key function</a><br />•
+    Session Key <span style="color:#a020f0;">TGS</span> → session key shared between the <span
+      style="color:#1e90ff;">Client</span> and the <span style="color:#a020f0;">TGS</span>(service on the <span
+      style="color:#ff8700;">Kerberos Distribution Center(KDC)</span>)<br />• Session Key <span
+      style="color:#f6ff00;">Service</span> → session key shared between the <span style="color:#1e90ff;">Client</span>
+    and the <span style="color:#f6ff00;">Service</span> (service on the <span style="color:#f6ff00;">Application
+      Server(AP)</span>)<br /><br /><strong>Tickets</strong><br />In <a
+      href="https://tools.ietf.org/html/rfc1510#section-5.3.1">rfc1510</a> we can find the format and content of a
+    ticket<br />• <span style="color:#1ce579;">Ticket Granting Ticket (TGT)</span> → encrypted using the <span
+      style="color:#ff8700;">KDC</span> <span style="color:#ff0000;">secret key</span>(krbtgt account&#39;s password
+    hashed with <a
+      href="http://www.di-srv.unisa.it/~ads/corso-security/www/CORSO-0001/kerberos/ref/kerberos-faq.html#keysalt">string2key
+      function</a>) , so that only the <span style="color:#ff8700;">Domain Controller</span> can decrypt it. By default
+    <span style="color:#1ce579;">TGT</span> is valid for 10 hours and contain:<br /> ◇ <span
+      style="color:#ff8700;text-decoration:underline;">PrincipalService</span>: In .pcap, we can find it as sname.
+    krbtgt/realm@REALM is the principal used when we ask for <em><span style="color:#1ce579;">Ticket Granting
+        Ticket(TGT)</span></em> (e.g.: krbtgt/example.com@EXAMPLE.COM)<br /> ◇ <span
+      style="text-decoration:underline;">IP_list</span>: list of IP addresses that indicate the host where it is
+    possible to use the ticket which will be issued<br /> ◇ <span style="text-decoration:underline;">Timestamp</span>:
+    date and time. It is important that the time on the computers on a network are synchronized in order for Kerberos
+    function properly.<br /> ◇ <span style="text-decoration:underline;">Lifetime</span>: maximum validity time
+    (requested) for the ticket<br /> ◇ <span style="text-decoration:underline;">Session Key </span><span
+      style="color:#a020f0;text-decoration:underline;">TGS</span>: session key shared between the <span
+      style="color:#1e90ff;">Client</span> and the <span style="color:#a020f0;">TGS</span><br /> ◇ <span
+      style="text-decoration:underline;">PAC</span><br />• <em><span style="color:#ff00e0;">ServiceTicket</span></em> →
+    encrypted using the <span style="color:#f6ff00;">Service</span> <span style="color:#ff0000;">secret
+      key</span>(service account&#39;s password hashed with <a
+      href="http://www.di-srv.unisa.it/~ads/corso-security/www/CORSO-0001/kerberos/ref/kerberos-faq.html#keysalt">string2key
+      function</a>), so that only the <span style="color:#f6ff00;">Service on the Application Server</span> can decrypt
+    it.<br /> ◇ <span style="color:#1e90ff;text-decoration:underline;">PrincipalClient</span><br /> ◇ <span
+      style="color:#f6ff00;text-decoration:underline;">PrincipalService</span><br /> ◇ <span
+      style="text-decoration:underline;">IP_list</span><br /> ◇ <span
+      style="text-decoration:underline;">Timestamp</span><br /> ◇ <span
+      style="text-decoration:underline;">Lifetime</span><br /> ◇ <span style="text-decoration:underline;">Session Key
+    </span><span style="color:#f6ff00;text-decoration:underline;">Service</span> <br /> ◇ <span
+      style="text-decoration:underline;">PAC</span><br /><br /><br />The Vulnerability of the Kerberos protocol are
+    described in the chapter:<br /> <a
+      href="entest--Post_Exploitation--Privilege_Escalation--Active_Directory(Windows)_Privilege_Escalation--Windows_Authentication_attacks--Kerberos.html">Exploitation
+      → Low Hanging Fruits → Windows Authentications → Kerberos</a><br /><br /><br />Bibliography:<br />•<span
+      style="color:#a020f0;"> </span><a
+      href="https://tools.ietf.org/html/rfc4120" target="_blank">https://tools.ietf.org/html/rfc4120</a> (2005)<br />• <a
+      href="https://tools.ietf.org/html/rfc1510" target="_blank">https://tools.ietf.org/html/rfc1510</a> (1993)<br />•<span
+      style="color:#a020f0;"> </span><a
+      href="https://zeroshell.org/kerberos/kerberos-operation/" target="_blank">https://zeroshell.org/kerberos/kerberos-operation/</a><br />•
+    <a
+      href="https://www.tarlogic.com/en/blog/how-kerberos-works/" target="_blank">https://www.tarlogic.com/en/blog/how-kerberos-works/</a><br />•
+    <a
+      href="https://docs.oracle.com/cd/E23824_01/html/821-1456/refer-11.html" target="_blank">https://docs.oracle.com/cd/E23824_01/html/821-1456/refer-11.html</a><br />•
+    <a
+      href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-kile/b4af186e-b2ff-43f9-b18e-eedb366abf13" target="_blank">https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-kile/b4af186e-b2ff-43f9-b18e-eedb366abf13</a><br />•<span
+      style="color:#a020f0;"> </span><a
+      href="https://techdirectarchive.com/2020/04/11/active-directory-authentication-kerberos-and-ntlm/" target="_blank">https://techdirectarchive.com/2020/04/11/active-directory-authentication-kerberos-and-ntlm/</a><br />•
+    <a
+      href="https://www.redsiege.com/wp-content/uploads/2020/04/20200430-kerb101.pdf" target="_blank">https://www.redsiege.com/wp-content/uploads/2020/04/20200430-kerb101.pdf</a>
+  </div>
+</body>
+
+</html>

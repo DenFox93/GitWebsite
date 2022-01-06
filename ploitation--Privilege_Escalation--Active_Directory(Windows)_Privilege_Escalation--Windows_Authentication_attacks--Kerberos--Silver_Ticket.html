@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Silver Ticket</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Silver Ticket</h1><br /><br /> <br /><strong>Silver Tickets</strong><br />Silver Tickets are
+    forged <span style="color:#ff00e0;">ServiceTickets</span>(Golden Tickets are <span
+      style="color:#0ee491;">TGT</span>) in KRB_<span style="color:#f6ff00;">AP</span>_REQ with a custom <span
+      style="color:#fa3b75;">PAC</span>(to escalate privileges)<br />Silver Tickets are more easy to obtain than Golden
+    Tickets that require to compromise the <span style="color:#ff8700;">krbtgt account</span>.<br /><br /><strong>Forge
+      the </strong><strong><span style="color:#ff00e0;">ServiceTicket</span></strong><strong> in
+      KRB_</strong><strong><span style="color:#f6ff00;">AP</span></strong><strong>_REQ</strong><br />If an Attacker is
+    been able to extract the Password of a <span style="color:#f6ff00;">Service Account</span>(as seen in the <a
+      href="ploitation--Privilege_Escalation--Active_Directory(Windows)_Privilege_Escalation--Windows_Authentication_attacks--Kerberos--Kerberoasting.html">Kerberoasting</a>
+    vulnerability), he can then forge a <span style="color:#ff00e0;">ServiceTicket</span> with a custom <span
+      style="color:#fa3b75;">PAC</span>.<br />• The <span style="color:#ff00e0;">ServiceTicket</span> is encrypted with
+    the <span style="color:#f6ff00;">Service Account</span> <span style="color:#ff0000;">secret key</span>.<br />• <span
+      style="color:#fa3b75;">PAC</span>(authorization-data) that is inside the <span
+      style="color:#ff00e0;">ServiceTicket</span>: This <span style="color:#fa3b75;">PAC</span> is used for verification
+    by the <span style="color:#f6ff00;">Service</span> in an optional step<br /> As seen in the <a
+      href="Escalation--Active_Directory(Windows)_Privilege_Escalation--How_work_Authentification_in_a_Windows_Network--Kerberos--Authentication_flow.html">explanation
+      of Kerberos</a>, <span style="color:#fa3b75;">PAC</span> is signed with two keys(<a
+      href="https://tools.ietf.org/html/draft-jaganathan-win-krb-authz-00#:~:text=The%20PAC%20contains,key%20of%20the%20KDC">ietf.org</a>),
+    this mean <span style="color:#fa3b75;">PAC</span> contain two checksum:<br /> ▪ signed with the <span
+      style="color:#f6ff00;">target Service</span> <span style="color:#ff0000;">secret key</span> (PAC_SERVER_CHECKSUM)→
+    <span style="color:#f6ff00;">Service</span> <span style="color:#ff0000;">secret Key</span> <br /> ▪ signed with the
+    <span style="color:#ff8700;">KDC(krbtgt account)</span> <span style="color:#ff0000;">secret key</span>
+    (PAC_PRIVSRV_CHECKSUM)<br /> <br /><strong>The problem and the resolution</strong><br />• The problem is that we do
+    not have the <span style="color:#ff8700;">KDC(krbtgt account)</span> <span style="color:#ff0000;">secret key</span>
+    that we need to double sign the <span style="color:#fa3b75;">PAC</span> to create the PAC_PRIVSRV_CHECKSUM.<br />•
+    The resolution is that, &quot;luckily for us&quot;(perspective of an Attacker), <span
+      style="color:#fa3b75;">PAC</span> validation of the checksums(<span
+      style="color:#fa3b75;">PAC</span>_SERVER_CHECKSUM and <span style="color:#fa3b75;">PAC</span>_PRIVSRV_CHECKSUM)
+    with KERB_VERIFY_<span style="color:#fa3b75;">PAC</span>_REQUEST from the <span
+      style="color:#f6ff00;">Service</span> to the <span style="color:#ff8700;">KDC</span> is usually disabled if the
+    the Silver Ticket is less than 20 minutes old<br /><br /><strong>Which </strong><strong><span
+        style="color:#f6ff00;">Service Accounts</span></strong><strong> Target?</strong><br /><span
+      style="color:#f6ff00;">Services</span> that use(or run) Computer Accounts as the Service Accounts. These are <span
+      style="color:#f6ff00;">Services</span> that run on a machine.<br />We can find a complete list of SPNs <a
+      href="https://adsecurity.org/?page_id=183">HERE</a><br /><br /><span style="color:#a5452a;">examples:</span><br />
+    <table class="table">
+      <tr>
+        <th>Service Type</th>
+        <th>Service Silver Tickets needed</th>
+        <th>To gain ...</th>
+      </tr>
+      <tr>
+        <td>Windows File Share</td>
+        <td>CIFS</td>
+        <td>to gain admin rights to any Windows share on the target computer</td>
+      </tr>
+      <tr>
+        <td>Windows Computer</td>
+        <td>HOST</td>
+        <td>to gain admin rights to any Windows service covered by “host” on the target computer. This includes the
+          ability to modify and create scheduled tasks.</td>
+      </tr>
+      <tr>
+        <td>PowerShell Remoting</td>
+        <td>HOST
+          HTTP
+          Depending on OS version, also:
+          WSMAN
+          RPCSS</td>
+        <td>to open a a shell to the target system </td>
+      </tr>
+      <tr>
+        <td>WinRM</td>
+        <td>HOST
+          HTTP
+          In some cases we can ask only for: WINRM</td>
+        <td>to open a a shell to the target system </td>
+      </tr>
+      <tr>
+        <td>WMI</td>
+        <td>HOST
+          RPCSS</td>
+        <td>to remotely execute commands on the target system using WMI.</td>
+      </tr>
+      <tr>
+        <td>LDAP operations (including Mimikatz DCSync)</td>
+        <td>LDAP</td>
+        <td>to gain admin rights to LDAP services on the target system</td>
+      </tr>
+      <tr>
+        <td>Windows Remote Server Administration Tools</td>
+        <td>RPCSS
+          LDAP
+          CIFS</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+      </tr>
+    </table><br /><br /><strong>How gain </strong><strong><span style="color:#ff0000;">secret
+        key</span></strong><strong>(hash) of a Computer Account</strong><br />Computer/machine <span
+      style="color:#f6ff00;">Services</span> are hosted on the machine itself, this mean that to create a Silver Ticket
+    we need the associated Computer Account’s <span style="color:#ff0000;">secret key</span><br />We can recognize
+    Computer Accounts because usually when listed they all end with the dollar($) sign. <br />If an attacker gain <span
+      style="text-decoration:underline;">Local Admin</span> rights to the computer (to gain debug access) or be able to
+    run code as local System, the attacker can dump the Computer Account password hash from the system(e.g.: with
+    Mimikatz).<br />The Password of Computer Accounts are changed every 30
+    days<br /><br /><strong>Conclusion</strong><br />This mean that after that we have forged the <span
+      style="color:#fa3b75;">ServiceTicket</span> we access to another <span style="color:#f6ff00;">Service</span>,
+    without asking the <span style="color:#ff8700;">KDC</span>. <br /><span style="color:#f6ff00;">Services</span> allow
+    access only to other <span style="color:#f6ff00;">Services</span> with the same or lower Account right.<br />Silver
+    Tickets can be more dangerous than Golden Tickets, while the scope is more limited than Golden Tickets, the required
+    hash is easier to get and there is no communication with a <span style="color:#ff8700;">DC</span> when using them,
+    so detection is more difficult than Golden Tickets<br /><br /><br /> <a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/2. Network Security/5. Exploitation/SilverTicketKerberos.png"><img
+        src="images/1142-1.png" alt="images/1142-1.png" /></a><br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://www.slideshare.net/gentilkiwi/mimikatz-how-to-push-microsoft-to-change-some-little-stuff" target="_blank">https://www.slideshare.net/gentilkiwi/mimikatz-how-to-push-microsoft-to-change-some-little-stuff</a><br />•
+    <a
+      href="https://en.hackndo.com/kerberos-silver-golden-tickets/" target="_blank">https://en.hackndo.com/kerberos-silver-golden-tickets/</a><br />•
+    <a href="https://adsecurity.org/?p=2011" target="_blank">https://adsecurity.org/?p=2011</a>
+  </div>
+</body>
+
+</html>

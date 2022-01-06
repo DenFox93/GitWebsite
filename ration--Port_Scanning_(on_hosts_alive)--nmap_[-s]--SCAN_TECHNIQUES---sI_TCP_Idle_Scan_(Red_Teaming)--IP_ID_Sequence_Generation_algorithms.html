@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>IP ID Sequence Generation algorithms</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>IP ID Sequence Generation algorithms</h1><br/><br /><strong><h3>IP ID Sequence Generation algorithm type</h3></strong><br /><br />• <strong>Incremental</strong>: If all the differences between the probes with the Host zombie are less than ten. Difference up to ten here (rather than requiring sequential ordering) is because traffic from other hosts can cause sequence gaps, like in our case where the papabile Zombie Host have to communicate with the target host.<br />    Note that many systems use a different <span style="color:#ff0000;">IP ID</span> space for each host they communicate with. In that case, they may appear vulnerable to the <span style="text-decoration:underline;">idle scan</span> while still being secure<br />    <a href=""><img src="images/619-1.png" alt="images/619-1.png" /></a><br />• <strong>All zeroes</strong>: If all of the <span style="color:#ff0000;">IP ID</span> numbers are zero<br />    <a href=""><img src="images/619-2.png" alt="images/619-2.png" /></a><br />• <strong>Randomized</strong>: If the <span style="color:#ff0000;">IP ID</span> sequence increases every time by at least 20,000 <br /><br />• <strong>Randomized positive</strong>: If any of the differences between two consecutive <span style="color:#ff0000;">IP IDs</span> exceeds 1000, and is not evenly divisible by 256<br /><br />• <strong>Broken Increment</strong>: If all of the differences are divisible by 256 and no greater than 5,120<br /><br /><br />*screenshot of the id taken from <a href="nning_and_Enumeration--Port_Scanning_(on_hosts_alive)--nmap_[-s]--SCAN_TECHNIQUES---sI_TCP_Idle_Scan_(Red_Teaming)--Idle_Scan_with_hping3.html">hping3 idle command<br /></a><br /></div>
+</body>
+</html>

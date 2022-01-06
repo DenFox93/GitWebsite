@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>4. Eradication</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>4. Eradication</h1><br />Now, with the bleeding stopped, the <span
+      style="text-decoration:underline;">goal of the Eradication phase is to get rid of the attackers artifacts on the
+      machine</span>, including accounts, malicious code, pirated software, porn, or anything else the bad guy. left on
+    the machine.<br /><br /><strong>Determine cause and symptoms of the incident</strong><br />Reformatting and
+    reinstalling the operating system from scratch may be considered a valuable shortcut in the handling process. Anyway
+    still exist the opportunity for reinfection via the same channel after you reload the operating system.
+    <br />Because of that we have to determine what the cause of the incident was, to find the vector of infection, and
+    take action to prevent this from happening again.<br /><br /><strong>Restoring from backups</strong><br />Locate the
+    most recent backup before an intrusion<br /><br /><strong>In case of a rootkit style attack (which modifies the
+      operating system itself)</strong><br />1. Wipe the drive (zeroing it out)<br />2. Reformat the drive<br />3.
+    Rebuild the system from the original install media<br />4. Apply patches of OS and
+    Applications<br /><br /><strong>Removing Malicious Software</strong><br />• Remove malware inserted by the attacker:
+    viruses, backdoors, rootkits, ...<br />• If a rootkit (user or kernel) was used, because it change the OS you should
+    rebuild<br /> ◇ Format the drive<br /> ◇ OS (and PATCHES!)<br /> ◇ Applications (and PATCHES!)<br /> ◇ Data (the
+    hardest one, possibly tainted backup)<br />• Note also that the attacker could also did not have used malware but
+    legitimate services such as SSH and Remote Desktop!<br /><br /><strong>Improving Defenses</strong><br />Implement
+    appropriate protection techniques<br />• Apply firewall and router filters<br />• Moving the system to a new name/IP
+    address<br />• Null routing particular IP addresses<br />• Change DNS names<br />• Apply patches and harden the
+    system<br /><br /><strong>Perform Vulnerability Analysis</strong><br />• Perform system vulnerability
+    analysis<br />• Perform network vulnerability analysis<br />• Search for related vulnerabilities<br />• If possible,
+    scan your entire network for interesting ports with a port scanner, such as Nmap<br />• A vulnerability scanner,
+    such as Tenable‘s Nessus, OpenVAS, Rapid7 NeXpose, and Qualys can also be a big
+    help<br /><br /><br /><br /><strong>Bibliography:</strong><br />• <a
+      href="https://www.giac.org/paper/gcih/1902/incident-handling-process-small-medium-businesses/111641" target="_blank">https://www.giac.org/paper/gcih/1902/incident-handling-process-small-medium-businesses/111641</a><br />•
+    <a
+      href="https://www.giac.org/paper/gcih/27783/cyber-threat-intelligence-support-incident-handling/149720" target="_blank">https://www.giac.org/paper/gcih/27783/cyber-threat-intelligence-support-incident-handling/149720</a>
+  </div>
+</body>
+
+</html>

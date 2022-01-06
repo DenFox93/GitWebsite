@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Excessive trust in client-side controls: user can change constant parameters</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Excessive trust in client-side controls: user can change constant parameters</h1><br />The WebApp
+    allow the user to change the value of what should be constant parameters like
+    price<br /><br /><strong>LAB:</strong><br />• This lab doesn&#39;t adequately validate user input<br />• You can
+    exploit a logic flaw in its purchasing workflow to buy items for an unintended price<br /><br /><br />1. When we add
+    a product to the cart the corresponding <span style="text-decoration:underline;">request contains a price
+      parameter</span><br /> <a href=""><img src="images/1880-1.png" alt="images/1880-1.png" /></a><br />2. Change the
+    value of the price<br /> <a href=""><img src="images/1880-2.png" alt="images/1880-2.png" /></a><br />3. Now we can
+    proceed to buy the product at the cheap price<br /> <a href=""><img src="images/1880-3.png"
+        alt="images/1880-3.png" /></a><br /> <a href=""><img src="images/1880-4.png"
+        alt="images/1880-4.png" /></a><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><strong>
+      <h3>Bibliography:</h3>
+    </strong><br />• <a
+      href="https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-excessive-trust-in-client-side-controls" target="_blank">https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-excessive-trust-in-client-side-controls</a>
+  </div>
+</body>
+
+</html>

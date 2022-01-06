@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>LLMNR & NetBIOS NS Spoofing/Poisoning (mispelled share queries)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>LLMNR & NetBIOS NS Spoofing/Poisoning (mispelled share queries)</h1><br /><br /><strong>
+      <h2>Terms that you need know before continue</h2>
+    </strong><br />• <strong>Link-Local Multicast Name Resolution (LLMNR)<br /></strong>From Windows 2000 if name
+    resolution fails with DNS (a hostname lookup can fail for a number of reasons, such as mistyping a hostname,
+    misconfigurations, or decommissioned DNS records), it will use the Link-Local Multicast Name Resolution (LLMNR)
+    protocol to ask neighbouring computers. LLMNR can be used to resolve both IPv4 and IPv6 addresses.<br /><br />•
+    <strong>NetBios Name Service(NBT-NS/NBNS)<br /></strong>From Windows Vista if name resolution fails both with LLMNR
+    and DNS, NetBios Name Service (NBT-NS) will be used. NBT-NS is a similar protocol to LLMNR that serves the same
+    purpose. The main difference between the two is NBT-NS works over IPv4 only.<br /><br />• <strong>New Technology LAN
+      Manager (NTLM)<br /></strong>The NTLM protocol is an authentication protocol used in Microsoft environments. In
+    particular, it allows a user to prove who he is to a server in order to use a service offered by this server. NTLM
+    is the successor to the authentication protocol in Microsoft LAN Manager (LANMAN)<br /><br /><strong>
+      <h2>Spoofing LLMNR and NBNS</h2>
+    </strong><br />On these occasions when LLMNR or NBT-NS are used to resolve a name resolution request, any host on
+    the network who knows the IP of the host being asked about can reply. <br />Even if a host replies to one of these
+    requests with incorrect information, it will still be regarded as legitimate.<br />If the IP of the host being asked
+    about, belongs to a resource that requires identification/authentication, the username and <a
+      href="Home--Penetration_Test_Methodology--System_Security_(Windows_&_Linux)--Cryptography_and_Password_Cracking--Authentication--Windows.html">NT
+      Hash</a> will then be sent to the Man-in-the-Middle(attacker). After collected the hashes the attacker can crack
+    them offline to obtain the plaintext passwords.<br /><br /><strong><span style="color:#a5452a;">A typical scenario
+        of attacking LLMNR or NBT-NS broadcasts</span></strong><br />1. Host A requests an SMB share at the system
+    “\\fileshare\files”, but instead of typing “fileshare” mistakenly types “fileshar”.<br />2. DNS Server can&#39;t
+    resolve “fileshar” as it is an unknown host<br />3. Host A then send a LLMNR or NBT-NS broadcast message asking to
+    the LAN(local network) for the IP address for host “fileshar”<br />4. The Attacker responds to this broadcast
+    message claiming to be the “fileshar” system.<br />5. Host A complies, and sends to the Attacker their username and
+    NTLMv1 or v2 hash to the attacker.<br /><br /><a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/2. Network Security/6. Post Exploitation/SpoofingPoisoning.png"><img
+        src="images/700-1.png" alt="images/700-1.png" /></a><br /><br /><br /><br /><strong>Solution to this
+      Vulnerability:</strong><br /><a
+      href="https://www.4armed.com/blog/llmnr-nbtns-poisoning-using-responder/" target="_blank">https://www.4armed.com/blog/llmnr-nbtns-poisoning-using-responder/</a><br /><br /><br /><strong>Bibliography</strong><br /><a
+      href="https://www.4armed.com/blog/llmnr-nbtns-poisoning-using-responder/" target="_blank">https://www.4armed.com/blog/llmnr-nbtns-poisoning-using-responder/</a><br />https://www.notsosecure.com/pwning-with-responder-a-pentesters-guide/
+  </div>
+</body>
+
+</html>

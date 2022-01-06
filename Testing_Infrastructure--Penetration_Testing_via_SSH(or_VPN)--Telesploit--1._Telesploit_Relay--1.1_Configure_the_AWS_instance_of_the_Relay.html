@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>1.1 Configure the AWS instance of the Relay</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>1.1 Configure the AWS instance of the Relay</h1><br /><strong>
+      <h3>The first thing that we have to configure is Telesploit Relay</h3>
+    </strong><br /><br />• The relay is cloud based:<br /> In the example there is AWS, but we can use any service:
+    Digital Ocean, Google...<br /> With AWS(https://signin.aws.amazon.com/) we have 1 year free. It will use a basic
+    t2.micro instance, this is one of the most basic one. But for what have to do, it is ok<br /> <a href=""><img
+        src="images/998-1.png" alt="images/998-1.png" /></a><br /> *Probably Mattermost(a cloud based, Slack
+    alternative) will not work, because as minimum require 2GB of ram, but everything else will work<br />•<strong>
+      Simpler Interface of AWS: </strong><a
+      href="https://lightsail.aws.amazon.com/" target="_blank">https://lightsail.aws.amazon.com/</a><br /> 1) <strong>Create
+      Instance</strong><br /> 1- Select a platform: Linux<br /> 2- Select a blueprint: OS only → Ubuntu(The relay script
+    is ben tested on Ubuntu 18.04)<br /> 3- Change SSH key pair: <br /> 1&gt; When we download the private key(the
+    Default one) it will be with permission 644(that is too open) we have to change it to 0600<br /> 2&gt; This private
+    key(with extension .pem), has not a passphrase. <br /> We have to add a passphrase, otherwise if accidentally
+    someone came in possession of the private key can access to the instance<br />
+    <div class="codebox">
+      <div class="codebox">
+        ssh-keygen&nbsp;-p&nbsp;-f&nbsp;&lt;privateKey.pem&gt;&nbsp;-P&nbsp;&quot;passphrase&quot;&nbsp;</div>
+    </div><br /> We ha to save this private key otherwise we will can not access to the instance<br /> To know more
+    about public and private keys used on AWS see: <a
+      href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html" target="_blank">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html</a><br />
+    4- As the instance plan choose the lowest one (3.5$ each month)<br /> 5- Identify your Instance: give to it a
+    name<br /> 2) <strong>Now in the home of lightsail.aws.amazon.com we see our new instance</strong><br /> The public
+    address assigned could change if the instance is been shutdown for a while!<br /> 1- <span
+      style="text-decoration:underline;">We have to assign to it a static ip</span>:<br /> 1&gt; click on the
+    instance<br /> 2&gt; Networking tab<br /> 3&gt; create a static ip<br /> 1. Attach to an instance: select the one
+    that we have created for our relay<br /> 2. Identify static ip: give it a name<br /> 4&gt; Now we have a static
+    public ip for our instance <br /> 2- <span style="text-decoration:underline;">Add port 443 listening</span><br />
+    1&gt; click on the instance<br /> 2&gt; Networking tab<br /> 1. Firewall: add another connection<br /> 1)
+    Application: HTTPS<br /> 2) Protocol: TCP<br /> 3) Port Range: 443<br /> *We will not use HTTP for communicate, the
+    only time that we need it(listening on localhost on the relay) is to validate the certificate of the website with
+    Let’s Encrypt<br /> it will set up a stand alone server to do a challenge to make sure that we own the domain.<br />
+    This mean that after we run relay_setup.sh, we can come back here and delete this listening connection. <br /> We
+    will require it open every 90 days when we have to renew the certificate with Let&#39;s Encrypt<br /> We can also
+    leave the 80 port open but is not recommended <br /> To know more go to:<br /> • <a
+      href="https://letsencrypt.org/docs/allow-port-80/" target="_blank">https://letsencrypt.org/docs/allow-port-80/</a><br /> • <a
+      href="https://letsencrypt.org/docs/challenge-types/" target="_blank">https://letsencrypt.org/docs/challenge-types/</a><br />•
+    <strong>We need associate the Ip address of the instance with a subdomain of our own domain</strong><br /> To do
+    that on godaddy see: <a
+      href="https://www.godaddy.com/help/create-a-subdomain-4080" target="_blank">https://www.godaddy.com/help/create-a-subdomain-4080</a><br /><br />
+  </div>
+</body>
+
+</html>

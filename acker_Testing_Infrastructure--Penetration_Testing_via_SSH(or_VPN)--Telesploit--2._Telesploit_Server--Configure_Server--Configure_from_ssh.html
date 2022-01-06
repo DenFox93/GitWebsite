@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Configure from ssh</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Configure from ssh</h1><br/>Normally to configure the Server device we can connect to it the keyboard, mouse, display and configure everything<br /><br /><strong><h3>Do a configuration remotely is a very very rare case. Normally we have not do it because we do the normal configuration locally</h3></strong><br /><span style="color:#ff0000;">WARNING: The changes below has to be done only if we have to configure the Server remotely</span><br />These are changes that we have to do before access remotely<br />2. We have to edit the SSH daemon configuration so to permit the root login remotely with a simple password<br />    Yes this could be a vulnerability but we need it only for the remote configuration, after that the script server_setup.sh anyway will overwrite it with <code>PermitRootLogin prohibit-password</code><br />    prohibit-password will allow key-based access(more secure than password)<br />    <a href=""><img src="images/1002-1.png" alt="images/1002-1.png" /></a><br />    Kali(on Intel) does not enable ssh by default, on Raspberry yes<br />    So if we are on an Intel based computer:<br />    <div class="codebox"><div class="codebox">daniele@TelesploitServer:/$&nbsp;gedit&nbsp;/etc/ssh/sshd_config</div></div><br />    <a href=""><img src="images/1002-2.png" alt="images/1002-2.png" /></a><br />    Change<br />    <code>#PermitRootLogin prohibit-password</code><br />    to<br />    <code>PermitRootLogin yes</code><br />3. Start ssh service<br />    <div class="codebox"><div class="codebox">daniele@TelesploitServer:/$&nbsp;sudo&nbsp;systemctl&nbsp;start&nbsp;ssh.service</div></div><br /><br />4.Connect to it via ssh from the Telesploit Client to start the configuration<br />    <div class="codebox"><div class="codebox">daniele@TelesploitClient:/$&nbsp;ssh&nbsp;root@<span style="color:#000000;font-weight:400">&lt;</span>IPTelesploitServer<span style="color:#000000;font-weight:400">&gt;</span></div></div><br />    </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Insufficient workflow validation: jump checkout step</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Insufficient workflow validation: jump checkout step</h1><br /><br /><strong>
+      <h3>Jump the checkout step</h3>
+    </strong><br />During a purchase workflow, try to jump the checkout step and get directly a confirmation order of
+    the articles in the cart<br /><br /><strong>Discover WebApp 2FA Workflow</strong><br />1. Put a product in the
+    cart<br /> <a href=""><img src="images/1895-1.png" alt="images/1895-1.png" /></a><br />2. Confirm and checkout the
+    order in the cart<br /> <a href=""><img src="images/1895-2.png" alt="images/1895-2.png" /></a><br />3. Get the order
+    confirmation page<br /> <a href=""><img src="images/1895-3.png"
+        alt="images/1895-3.png" /></a><br /><br /><strong>Exploit</strong><br />1. What if we put an object in the cart
+    (step 1) <br /> <a href=""><img src="images/1895-4.png" alt="images/1895-4.png" /></a><br />2. Then we NOT confirm
+    the checkout(step 2) <br />3. We send directly a GET request for the order confirmation? “GET
+    /cart/order-confirmation?order-confirmation=true”<br /> Edit step 1 POST request by sending it to Burp
+    Repeater<br /> <strong>This could work because we have the same Session Cookie</strong><br /> <a href=""><img
+        src="images/1895-5.png" alt="images/1895-5.png" /></a><br />4. OPTIONAL View the response in the Browser<br />
+    <a href=""><img src="images/1895-6.png" alt="images/1895-6.png" /></a><br /><br />Bibliography:<br /><a
+      href="https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-insufficient-workflow-validation" target="_blank">https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-insufficient-workflow-validation</a>
+  </div>
+</body>
+
+</html>

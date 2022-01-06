@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>finding Buffer Overflows</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>finding Buffer Overflows</h1><br/><strong><h3>How to find a Buffer Overflow in an application</h3></strong><br />Techniques that we can use in different scenarios<br />• If we have access to the source code we can use <span style="text-decoration:underline;">static analysis tools</span> like:<br />   ◇ <a href="http://www.splint.org/">Splint</a><br />   ◇ <a href="http://cppcheck.sourceforge.net/">Cppcheck</a><br />• If we do NOT have access to the source code we can use <span style="text-decoration:underline;">dynamic analysis tools</span> (to tracks all executions and the data flow) like:<br />   ◇ a fuzzer: <br />   ◇ a tracer<br />•  Hunt for the vulnerability with a debugger<br />   ◇ When a crash of the application occurs randomly<br />   ◇ Use cloud-fuzzing to brute-force the crash of the application (using file-based inputs)<br /> <br /> <br />Generally a 50% of the vulnerabilities are not exploitable but they may lead to DOS (denial of service attacks) or cause other side-effects</div>
+</body>
+</html>

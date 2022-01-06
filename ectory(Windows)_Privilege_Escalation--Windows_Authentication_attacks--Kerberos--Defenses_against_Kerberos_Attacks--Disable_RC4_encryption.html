@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Disable RC4 encryption</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Disable RC4 encryption</h1><br />From Windows Vista is possible disable RC4 encryption at group
+    policy level.<br /><br /><strong>If we want disable RC4 encryption only locally in “Local Security
+      Policy”</strong><br />Control Panel → Administrative Tools → Local Security Policy → Security Options →
+    &quot;Network security: Configure encryption types allowed for Kerberos&quot;<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;reg&nbsp;add&nbsp;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters&nbsp;/v&nbsp;SupportedEncryptionTypes&nbsp;/t&nbsp;REG_DWORD&nbsp;/d&nbsp;0x7ffffff8&nbsp;/f&nbsp;
+      </div>
+    </div><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;reg&nbsp;query&nbsp;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters&nbsp;/v&nbsp;SupportedEncryptionTypes
+      </div>
+    </div><br /> <a href=""><img src="images/1185-1.png" alt="images/1185-1.png" /></a><br /><br /><strong>If we want
+      disable RC4 encryption to all the Computers of the Domain:</strong><br /><span
+      style="text-decoration:underline;">From the Domain Controller</span><br />Control Panel\System and
+    Security\Administrative Tools → Default Domain Policy (right click edit)<br /><a href=""><img
+        src="images/1185-2.png" alt="images/1185-2.png" /></a><br /><br />Computer Configuration → Policies → Windows
+    Settings → Security Settings → Local Policies → Security Options → &quot;Network security: Configure encryption
+    types allowed for Kerberos&quot;<br /><a href=""><img src="images/1185-3.png"
+        alt="images/1185-3.png" /></a><br /><br />Define these Policy settings: <br />• AES_128_HMAC_SHA1<br />•
+    AES256_HMAC_SHA1<br />• Future encryption types<br /><a href=""><img src="images/1185-4.png"
+        alt="images/1185-4.png" /></a><br /><br />Bibliography:<br />• <a
+      href="https://social.technet.microsoft.com/Forums/windowsserver/en-US/01fe4703-08a5-4012-8ced-c9133b7115e9/configuring-group-policy-using-powershell-to-disable-rc4-kerberos-etype?forum=winserver8gen" target="_blank">Configuring
+      Group policy using powershell to disable RC4 Kerberos etype (microsoft.com)</a><br />• <a
+      href="https://www.stigviewer.com/stig/windows_10/2017-12-01/finding/V-63795" target="_blank">https://www.stigviewer.com/stig/windows_10/2017-12-01/finding/V-63795</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Decrypt communications</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Decrypt communications</h1><br /><strong>
+      <h3>Decrypt communications if we know the password of the Access Point</h3>
+    </strong><br /><br /><br />1. Find in the captured file the <span style="text-decoration:underline;">4 way WPA
+      handshake</span><br /> display filter:<br />
+    <div class="codebox">
+      <div class="codebox">eapol</div>
+    </div><br /> <span style="text-decoration:underline;">EAPoL</span> (protocol) is the abbreviation of
+    <strong>Extensible Authentication Protocol over LAN</strong>. EAPoL (Extensible Authentication Protocol over LAN) is
+    a network authentication protocol used in 802.1x (Port Based Natwork Access Control).<br /> <a href=""><img
+        src="images/1840-1.png" alt="images/1840-1.png" /></a><br /><br />2. <span
+      style="text-decoration:underline;">Before decoding</span> we need to make some changes in the IEEE 802.11 protocol
+    settings.<br /> Go to: Edit → Preferences → expand the protocol section → IEEE 802.11<br /> <a href=""><img
+        src="images/1840-2.png" alt="images/1840-2.png" /></a><br /><br />3. Decryption Keys (Edit) → Create button (+)
+    → for Key type field select <span style="color:#ff8700;text-decoration:underline;">wpa-pwd</span><br /> enter the
+    <span style="color:#ff0000;">password for the Wi-Fi network</span>, and after the colon enter the <span
+      style="color:#a020f0;">name (SSID) of the network</span> and click OK.<br /> <a href=""><img
+        src="images/1840-3.png"
+        alt="images/1840-3.png" /></a><br /><br /><br /><br /><br /><br /><br />Bibliography:<br /><a
+      href="https://miloserdov.org/?p=2525" target="_blank">https://miloserdov.org/?p=2525</a>
+  </div>
+</body>
+
+</html>

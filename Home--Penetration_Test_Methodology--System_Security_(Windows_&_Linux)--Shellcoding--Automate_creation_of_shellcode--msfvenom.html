@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>msfvenom</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>msfvenom</h1><br/><br /><a href="st_Methodology--System_Security_(Windows_&_Linux)--Shellcoding--Encoding_custom_Shellcode-payload--NULL-free_shellcode--msfvenom_encoding.html">In the previous chapter</a>, we used <span style="text-decoration:underline;">msfvenom</span> to encode a custom payload. Since Metasploit offers a big list of powerful payloads let&#39;s see them<br /><br />Each payload has:<br />• a target OS<br />• its own features<br />   ◇ meterpreter → interactive connection<br />   ◇ cmd → run a single command<br /><br /><strong>List of payloads</strong><br /><div class="codebox"><div class="codebox">msfvenom&nbsp;--list&nbsp;payloads</div></div><br /><a href=""><img src="images/540-1.png" alt="images/540-1.png" /></a><br /><br /><strong>payload&#39;s options</strong><br />with argument --payload-options<br /><div class="codebox"><div class="codebox">msfvenom&nbsp;-p&nbsp;&lt;name_of_the_msfvenom_payload&gt;&nbsp;--list-options</div></div><br /><a href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/1. System Security/4 - Shellcoding/msfvenom-payload-options.png"><img src="images/540-2.png" alt="images/540-2.png" /></a><br /><br /><strong><h3>example: generate a shellcode</h3></strong><br /><div class="codebox"><div class="codebox">msfvenom&nbsp;-p&nbsp;windows/messagebox&nbsp;TEXT=&quot;Hello&nbsp;World!&quot;&nbsp;-f&nbsp;c&nbsp;-a&nbsp;x86&nbsp;--platform&nbsp;windows</div></div><br />    <strong>-p</strong> → sets windows/messagebox as the payload to use<br />    <strong>TEXT=</strong> → sets “Hello World!” as the text to show in the message box<br />    <strong>-f</strong> → sets the format of the output to the language code C<br />    <strong>--platform</strong> → target Windows as platform for the shellcode<br />  <br />To test if the shellcode works properly we can test it wit with the program seen in the chapter “<a href="Home--Penetration_Test_Methodology--System_Security_(Windows_&_Linux)--Shellcoding--Test_if_a_Shellcode_works.html">Test if a Shellcode works</a>”<br />    <a href=""><img src="images/540-3.png" alt="images/540-3.png" /></a><br /><br /><br /></div>
+</body>
+</html>

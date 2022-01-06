@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Session Cookies</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Session Cookies</h1><br /><strong>example:</strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        printf&nbsp;&nbsp;&quot;GET&nbsp;/&nbsp;&nbsp;HTTP/1.1\r\nHost:linuxjourney.com\r\n\r\n&quot;&nbsp;&nbsp;|&nbsp;openssl&nbsp;s_client&nbsp;-connect&nbsp;linuxjourney.com:443&nbsp;-ign_eof
+      </div>
+    </div><br /><a href="file:///CherryTree/screenshot/HTTPS/session cookies.png"><img src="images/107-1.png"
+        alt="images/107-1.png" /></a><br /><br /><span style="text-decoration:underline;">Session cookies</span> have a
+    single parameter, <strong>session ID</strong> that is referring to the session. A web developer can choose to use a
+    custom name for this Session ID.<br /> At the subsequent request to the server the browser will insert in the header
+    the Session ID so that the client is recognized by the server. <br /> With the session ID the server retrieves the
+    state of the client and its associated <span style="text-decoration:underline;">session variables</span>.<br />
+    These <span style="text-decoration:underline;">session variables</span> <strong>are stored server side</strong> in
+    text files with the name of their session ID(e.g.: sessionID.txt)<br /> <br />So the main difference between cookies
+    and session cookies is that <span style="text-decoration:underline;">cookies have parameters stored client
+      side</span> whereas <span style="text-decoration:underline;">session cookies have session variables stored server
+      side</span>.<br /> This storage of session variables on the server side is done to hide the application logic or
+    just to avoid the back and forth data transmission typical of cookies. session variables usually expire before then
+    cookies.<br /> <br />Alternatively to session cookies, session ID’s can also be carried through the GET method
+    appended to the requesting URL. <br /><br /><a
+      href="file://C:/CherryTree/screenshot/cookies/session cookie.png"><img src="images/107-2.png"
+        alt="images/107-2.png" /></a>
+  </div>
+</body>
+
+</html>

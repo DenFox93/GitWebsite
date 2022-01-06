@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Test: Input is sanitized?</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Test: Input is sanitized?</h1><br /><strong>use a HTML tag in the search field</strong><br /> ◇
+    <div class="codebox">
+      <div class="codebox">&lt;h1&gt;HTMLinjection<span style="color:#000000;font-weight:400">&lt;</span>/h1<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> <a href=""><img src="images/1573-1.png" alt="images/1573-1.png" /></a><br /> <a href=""><img
+        src="images/1573-2.png" alt="images/1573-2.png" /></a><br /> input not sanitized!<br /> ◇ <div class="codebox">
+      <div class="codebox">&lt;h6&gt;HTMLinjection<span style="color:#000000;font-weight:400">&lt;</span>/h6<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> <a href=""><img src="images/1573-3.png" alt="images/1573-3.png" /></a><br /> input not sanitized!<br />
+    ◇ <div class="codebox">
+      <div class="codebox">&lt;h1&nbsp;style=-moz-transform:rotate(-180deg);&gt;HTMLinjection<span
+          style="color:#000000;font-weight:400">&lt;</span>/h1<span style="color:#000000;font-weight:400">&gt;</span>
+      </div>
+    </div><br /> moz-transform:rotate() → <a
+      href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform" target="_blank">https://developer.mozilla.org/en-US/docs/Web/CSS/transform</a><br />
+    <a href=""><img src="images/1573-4.png" alt="images/1573-4.png" /></a><br /> ◇ Image Injection<br />
+    <div class="codebox">
+      <div class="codebox"><span
+          style="color:#000000;font-weight:400">&lt;</span>img&nbsp;src=&quot;https://example.org/earth.jpg&quot;<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> <a href=""><img src="images/1573-5.png" alt="images/1573-5.png" /></a><br /> ◇ iframe inject (A web
+    application rendered inside the Vulnerable Web Application)<br />
+    <div class="codebox">
+      <div class="codebox"><span
+          style="color:#000000;font-weight:400">&lt;</span>iframe&nbsp;src=&quot;https://www.example.com&quot;<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div>
+  </div>
+</body>
+
+</html>

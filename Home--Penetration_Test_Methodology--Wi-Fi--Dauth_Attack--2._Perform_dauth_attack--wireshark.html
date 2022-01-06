@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>wireshark</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>wireshark</h1><br /><br /><br />To filter in Wireshark for <span
+      style="text-decoration:underline;">deauthentication frames</span>, you need to use:<br />
+    <div class="codebox">
+      <div class="codebox">(wlan.fc.type&nbsp;==&nbsp;0)&nbsp;&amp;&amp;&nbsp;<span
+          style="color:#000000;font-weight:400">(</span>wlan.fc.type_subtype&nbsp;==&nbsp;0x0c<span
+          style="color:#000000;font-weight:400">)</span></div>
+    </div><br /> <a href=""><img src="images/1831-1.png" alt="images/1831-1.png" /></a><br /> The Deauth code used by
+    default by aireplay-ng to deauthenticate a device from the network is 7. Code 7 meaning that a radio is informing
+    the other radio to deauth because they isn&#39;t an associaation(<a
+      href="https://blogs.arubanetworks.com/industries/802-11-reason-codes-and-status-codes/#:~:text=Example%3A%20Deauthentication%20frame%20with%20reason,association%20with%20this%20access%20point." target="_blank">source</a>)<br />
+    <a href=""><img src="images/1831-2.png" alt="images/1831-2.png" /></a><br /><br /><br /><strong>WPA handshake
+      captured with Wireshark</strong><br />display filter:<br />
+    <div class="codebox">
+      <div class="codebox">eapol</div>
+    </div><br /><span style="text-decoration:underline;">EAPoL</span> (protocol) is the abbreviation of
+    <strong>Extensible Authentication Protocol over LAN</strong>. EAPoL (Extensible Authentication Protocol over LAN) is
+    a network authentication protocol used in 802.1x (Port Based Natwork Access Control).<br /> <a href=""><img
+        src="images/1831-3.png" alt="images/1831-3.png" /></a>
+  </div>
+</body>
+
+</html>

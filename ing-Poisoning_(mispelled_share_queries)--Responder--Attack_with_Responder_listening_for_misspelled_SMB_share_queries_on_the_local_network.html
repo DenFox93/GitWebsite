@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Attack with Responder listening for misspelled SMB share queries on the local network</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Attack with Responder listening for misspelled SMB share queries on the local network</h1>
+    <br /><br />set up the Responder listening for <strong><span
+        style="text-decoration:underline;">wrong</span></strong> misspelled SMB share queries on the local network.
+    Responder allows us to step in and answer those queries NetBIOS and LLMNR requests asking to authenticate with us.
+    The host trust us and sends its NTLMv1/v2 password hash to us.<br />If give an <span
+      style="color:#ff0000;">error</span> about others services are using the ports needed we can check them by:
+    <code>sudo lsof -i -P -n | grep LISTEN</code><br />
+    <div class="codebox">
+      <div class="codebox">
+        cd&nbsp;/usr/share/responder<br />python&nbsp;Responder.py&nbsp;-I&nbsp;eth0&nbsp;--lm&nbsp;-rdwv</div>
+    </div><br /> ◇ --lm → try to downgrade the NTLMv1/v2 to LANMAN hashes<br /> ◇ -r, --wredir → enable answers for
+    netbios wredir suffix queries. Answering to wredir will likely break stuff on the network. Default: False<br /> ◇
+    -d, --NBTNSdomain → enable answers for netbios domain suffix queries. Answering to domain suffixes will likely break
+    stuff on the network. Default: False<br /> ◇ -w , --wpad → start the WPAD rogue proxy server. Default: False<br />
+    If enabled attacker can act as a <em>Web Proxy Auto-Discovery Protocol (WPAD) Server</em>. If the attack has success
+    Responder will act as Web Proxy for the victims. Go here to know more about this attack type: <a
+      href="https://www.trustedsec.com/blog/wpad-man-in-the-middle-clear-text-passwords/" target="_blank">https://www.trustedsec.com/blog/wpad-man-in-the-middle-clear-text-passwords/</a><br />
+    ◇ -v, --verbose → increase verbosity<br /> <br /> <a href=""><img src="images/703-1.png"
+        alt="images/703-1.png" /></a> <a href=""><img src="images/703-2.png" alt="images/703-2.png" /></a><br /> Now
+    that we have obtained the hash we can crack it with tools like JohnTheRipper <br /> <br />
+  </div>
+</body>
+
+</html>

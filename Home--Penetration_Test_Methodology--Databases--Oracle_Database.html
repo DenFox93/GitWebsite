@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Oracle Database</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Oracle Database</h1><br />Oracle is a multi-model database with a single, integrated back-end.
+    This means that it can support multiple data models like document, graph, relational, and key-value within the
+    database. <br /><br />Default Oracle username and passwords<br />• <a
+      href="https://docs.oracle.com/cd/A91202_01/901_doc/win.901/a90163/username.htm#1150296" target="_blank">https://docs.oracle.com/cd/A91202_01/901_doc/win.901/a90163/username.htm#1150296</a><br />•
+    <a
+      href="http://www.petefinnigan.com/default/oracle_default_passwords.htm" target="_blank">http://www.petefinnigan.com/default/oracle_default_passwords.htm</a><br />•
+    <a href="https://cirt.net/passwords?vendor=Oracle" target="_blank">https://cirt.net/passwords?vendor=Oracle</a><br /><br />Oracle
+    runs a TNS listener service that is used to interact with the database on TCP port 1521.<br /> <a href=""><img
+        src="images/1235-1.png" alt="images/1235-1.png" /></a><br /> <br /><strong>Interact with TNS
+      listener</strong><br />We can interact with this TNS listener service using <strong>tnscmd10g</strong><br />
+    <div class="codebox">
+      <div class="codebox">root@kali:/#&nbsp;tnscmd10g&nbsp;version&nbsp;-h&nbsp;&lt;IpHost&gt;&nbsp;</div>
+    </div><br /> <a href=""><img src="images/1235-2.png" alt="images/1235-2.png" /></a><br /> if response is not an
+    error, the SID are inside: SERVICE=(SERVICE_NAME=&lt;SID_NAME&gt;)<br />for older versions of TNS listener(before
+    version 10g) use <strong>tnscmd.pl</strong> written by the same author<br /><br /><br /><br />
+  </div>
+</body>
+
+</html>

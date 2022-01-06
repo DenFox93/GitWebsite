@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Link files</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Link files</h1><br/>To link the object files we ca use <strong>GoLink</strong>:<br /><a href="http://www.godevtool.com/GolinkFrame.htm">http://www.godevtool.com/GolinkFrame.htm</a><br />We can install GoLink by extracting it a put it in the same folder of NASM, because we have already put C:\Program Files\NASM  in the environment variables we can use the command GoLink in every folder of our pc<br /><br /><span style="color:#a5452a;">example:</span><br /><div class="codebox"><div class="codebox">GoLink.exe&nbsp;/entry&nbsp;_main&nbsp;demo1.obj&nbsp;kernel32.dll&nbsp;user32.dll</div></div><br /><a href=""><img src="images/491-1.png" alt="images/491-1.png" /></a><br /><strong>/entry</strong> &lt;value&gt; → set program entry point to &lt;value&gt;<br />   For example, <em>/entry main</em> will start the program at the code label &quot;main:&quot;. If you do not specify the entry point with this switch GoLink assumes START will be used (in upper or lower case or a mixture). So if you want to use this default you should ensure that your code has the label &quot;START:&quot; at the correct place to start execution. Every EXE file needs an entry point, but in DLLs it is optional.<br /><br /><strong>Kernel32.dll User32.dll →</strong> These libraries are required for the program to work correctly because the program calls functions that are defined in these libraries<br />    These files contain the most common APIs. During the linking process GoLink looks at the list of files one by one for the required imports. When it has found all the required imports it will stop looking at the listed files.<br />    <strong><br /></strong></div>
+</body>
+</html>

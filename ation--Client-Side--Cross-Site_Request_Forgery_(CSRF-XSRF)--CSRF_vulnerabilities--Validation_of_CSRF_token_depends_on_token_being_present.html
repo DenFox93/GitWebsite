@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Validation of CSRF token depends on token being present</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Validation of CSRF token depends on token being present</h1><br /><br />Some applications
+    correctly validate the token when it is present <span style="text-decoration:underline;">but skip the validation if
+      the token is omitted!</span> <br />So what we need to do is try to remove the entire parameter containing the
+    token and check if we can bypass the validation<br /><br />1. Check the request (in this scenario for update the
+    email)<br /> <a href=""><img src="images/1715-1.png" alt="images/1715-1.png" /></a><br />2. Send to the Repeater and
+    observe if we change the value of the <span style="color:#00dbff;">csrf parameter</span> the request is
+    rejected<br /> <a href=""><img src="images/1715-2.png" alt="images/1715-2.png" /></a><br /> <a href=""><img
+        src="images/1715-3.png" alt="images/1715-3.png" /></a><br /> <br />5. Delete the CSRF token and check if the
+    request is accepted <br /> <a href=""><img src="images/1715-4.png" alt="images/1715-4.png" /></a><br /> Yes! as we
+    can see from the Response on the right!<br /> <span style="text-decoration:underline;">This mean that the website is
+      vulnerable!</span><br /><br /><strong>Generate a PoC</strong><br />Right click on the Request → Engagement Tools →
+    Generate CSRF PoC<br /> <a href=""><img src="images/1715-5.png" alt="images/1715-5.png" /></a><br />1. From
+    &quot;Options&quot; select “Include auto-submit script”<br /> <a href=""><img src="images/1715-6.png"
+        alt="images/1715-6.png" /></a><br />2. Then “Regenerate” then we have two solutions:<br /> ◇ “Copy HTML” and
+    paste it in our attacker Server that in the LAB is called “Exploit Server”<br /> ◇ “Test in Browser”, this can be
+    used just as a PoC for Penetration Testers<br /> Note: if we need to edit the CSRF HTML PoC, remember to edit the
+    same values also in the Request above it<br /> <br /> <br /><strong>
+      <h3>Bibliography:</h3>
+    </strong><br /><a
+      href="https://portswigger.net/web-security/csrf/lab-token-validation-depends-on-token-being-present" target="_blank">https://portswigger.net/web-security/csrf/lab-token-validation-depends-on-token-being-present</a>
+  </div>
+</body>
+
+</html>

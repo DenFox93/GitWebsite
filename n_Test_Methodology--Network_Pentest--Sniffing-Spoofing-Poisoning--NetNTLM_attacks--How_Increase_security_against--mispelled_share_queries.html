@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>mispelled share queries</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>mispelled share queries</h1><br/><a href="e_Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--LLMNR_&_NetBIOS_NS_Spoofing-Poisoning_(mispelled_share_queries).html">misspelled SMB share queries</a><br />    When a client/target cannot resolve a name via DNS it will fall back to name resolution via LLMNR (introduced in Windows Vista) and NBT-NS. These can be exploited.<br />   ◇ <span style="text-decoration:underline;">If is possible disable LLMNR and NBT-NS</span><br />      ▪ Disable LLMNR:<br />          Local Computer Policy → Computer Configuration → Administrative Templates → Network → Group Policy Editor → DNS Client → “Turn OFF Multicast Name Resolution”<br />      ▪ Disable NBT-NS:<br />          Network Connections → Network Adapter Properties → TCP/IPv4 Properties → Advanced tab → WINS tab → “Disable NetBIOS over TCP/IP”<br />   ◇ <span style="text-decoration:underline;">If a company cannot disable LLMNR/NBT-NS</span><br />      ▪ Require Network Access Control. If an attacker cannot get onto the Network, the attack cannot be performed<br />      ▪ Require strong user passwords. The more complex the password, harder for the attacker is to crack the hash</div>
+</body>
+</html>

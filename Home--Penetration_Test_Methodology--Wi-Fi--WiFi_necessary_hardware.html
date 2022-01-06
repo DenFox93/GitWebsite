@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>WiFi necessary hardware</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>WiFi necessary hardware</h1><br /><strong>Necessary Hardware</strong><br /><br />• Integrated WNIC
+    into notebooks are not the ideal solution<br /> Integrated WNIC (Wireless Network Interface Controller) that enables
+    Wi-Fi communications in the notebook chassis are not the ideal solution for penetration testers as they can not
+    provide the necessary signal power and receiving sensitivity, crucial parameters for a successful wireless
+    attack.<br /><br />• external USB Wi-Fi dongle are better<br /> A <span style="text-decoration:underline;">better
+      option is to buy an external USB Wi-Fi dongle</span>. This is especially true if you plan to perform your attacks
+    from a virtualized environment as an integrated wireless card will simply work as an Ethernet card in your guest
+    OS<br /> What to look when we buying a new Wi-Fi adapter<br /> ▪ Signal power<br /> ▪ Receiver sensitivity<br /> ▪
+    Linux driver support<br /><br />From Aircrack-ng:<br />• How determine the chipset and driver of a wireless card: <a
+      href="http://www.aircrack-ng.org/doku.php?id=compatibility_drivers#determine_the_chipset" target="_blank">LINK</a><br />• What is
+    the best wireless card to buy: <a
+      href="https://www.aircrack-ng.org/doku.php?id=faq#what_is_the_best_wireless_card_to_buy" target="_blank">LINK</a><br /> ◇ Alfa
+    AWUS036ACH (a/b/g/n/ac) is the best performing card, but the driver can be unstable enough to crash your
+    kernel<br /> ◇ Alfa AWUS036ACM (a/b/g/n/ac) is the highest performing of the STABLE devices, but it requires kernel
+    4.19.5 or higher<br /> Above are the wireless card recommended while i am writing this blog: 10/08/2021
+    <br /><br /><strong>Antenna of Wi-Fi adapters (APs)</strong><br />external USB Wi-Fi dongle with integrated antenna
+    are not the best choice when it comes to penetration testing. We need a flexible adapter that gives us the ability
+    to change the attached antenna to fit your scenario.<br />• <span style="text-decoration:underline;">Power Gain
+      (dB/dBi/dBd)</span>:<br /> Power Gain is the connection range of a Wi-Fi adapter and is specified using <span
+      style="text-decoration:underline;">decibels</span>(dB):<br /> ◇ dBi<br /> ◇ dBd (1 dBd = 2.14dBi)<br /> ◇ dBm
+    (measured in mW not dB) → measures the power the antenna is emitting, which can play a significant role in how much
+    range the router has<br />• <span style="text-decoration:underline;">Types of antennas</span>:<br /> ◇ <span
+      style="text-decoration:underline;">Omnidirectional</span><br /> They are designed to pick up signals coming from
+    multiple directions , typically in a 360° area. Because of that, they are commonly found on all wireless enabled
+    consumer devices. <br /> Power Gain ranges from 2 dBi to 9 dBi. But because power spreads in each direction, their
+    power gain is inherently lower than directional antennas which focus their energy across a narrow angle.<br /> ◇
+    <span style="text-decoration:underline;">Directional</span><br /> They their power gain is inherently higher than
+    omnidirectional antennas, because focus their energy across a narrow angle.<br /> Power Gain of these antennas can
+    be easily over 12 dBi <br /><br /><br />Bibliography:<br />• <a
+      href="https://www.data-alliance.net/blog/dbi-db-dbm-dbmw-defined-explained-and-differentiated/#:~:text=dBi%20(decibels%20per%20isotropic%20dB,a%20relative%20measure%20of%20milliwatts.&text=dbm%20is%20logarithmic%20and%20mw%20is%20linear." target="_blank">https://www.data-alliance.net/blog/dbi-db-dbm-dbmw-defined-explained-and-differentiated/#:~:text=dBi%20(decibels%20per%20isotropic%20dB,a%20relative%20measure%20of%20milliwatts.&amp;text=dbm%20is%20logarithmic%20and%20mw%20is%20linear.</a><br /><br /><br />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Weaknesses of the protocol</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Weaknesses of the protocol</h1><br/><br />To exploit it we can go to the chapter<strong> </strong><a href="Home--Penetration_Test_Methodology--Network_Pentest--Sniffing-Spoofing-Poisoning--NetNTLM_attacks.html">Exploitation → Metasploit → Windows Authentication Attack → LM/NTLMv1 Attack</a><br /><br /><strong><h3>Weakness:</h3></strong><br /><strong>No Diffusion</strong> → each part of the <span style="color:#ff0000;">Response</span> is not linked to the previous one. This allows attacks on the three blocks individually<br />    <a href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/1. System Security/5 - Cryptography and Password Cracking/LANMANN-No Diffusion.png"><img src="images/797-1.png" alt="images/797-1.png" /></a><br />    The third <span style="color:#ff0000;">Response(RESPpart3)</span> is much weaker than the others, since it has 5 null bytes for padding<br />    <a href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/1. System Security/5 - Cryptography and Password Cracking/LANMANN-No Diffusion2.png"><img src="images/797-2.png" alt="images/797-2.png" /></a><br /> <br /><strong>Only randomness in the protocol is the Challenge</strong> → in an attack scenario if we impersonate the server,the challenge(the only randomness in the protocol) is chosen by us.<br /><br /></div>
+</body>
+</html>

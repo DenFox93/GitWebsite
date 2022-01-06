@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Redis</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Redis</h1><br />Redis like MongoDB is another NoSQL database <br />Redis Server TCP port:
+    6379<br /><br /><strong>Obtain informations</strong><br />NSE script: <a
+      href="https://nmap.org/nsedoc/scripts/redis-info.html" target="_blank">https://nmap.org/nsedoc/scripts/redis-info.html</a><br />metasploit
+    script: <a
+      href="https://www.rapid7.com/db/modules/auxiliary/scanner/redis/redis_server/" target="_blank">https://www.rapid7.com/db/modules/auxiliary/scanner/redis/redis_server/</a><br />
+    <div class="codebox">
+      <div class="codebox">
+        root@kali:/#&nbsp;nmap&nbsp;--script&nbsp;redis-info&nbsp;-sV&nbsp;-p&nbsp;6379&nbsp;&lt;IP&gt;<br />msf&gt;&nbsp;use&nbsp;auxiliary/scanner/redis/redis_server
+      </div>
+    </div><br /> <a href=""><img src="images/1241-1.png"
+        alt="images/1241-1.png" /></a><br /><br /><strong>Connect</strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        nc&nbsp;-vn&nbsp;&lt;IP&gt;<br />redis-cli&nbsp;-h&nbsp;&lt;IP&gt;&nbsp;&nbsp;#sudo&nbsp;apt-get&nbsp;install&nbsp;redis-tools
+      </div>
+    </div><br /> <a href=""><img src="images/1241-2.png" alt="images/1241-2.png" /></a><br /> this means that we need
+    valid credentials to access the Redis instance.<br /> <br /><strong>Bruteforcing</strong><br />Redis databases are
+    particularly <span style="text-decoration:underline;">good targets for brute-force attacks</span> because of their
+    improved high-speed access. Even when password-protected, Redis databases allow for thousands of password attempts
+    per second. Because of that make sure to <span style="text-decoration:underline;">generate a strong and very long
+      password</span> so that this attack is infeasible.(Source: <a
+      href="https://redis.io/commands/auth#:~:text=Security%20notice" target="_blank">Redis manual</a>)<br />
+    <div class="codebox">
+      <div class="codebox">
+        msf&gt;&nbsp;use&nbsp;auxiliary/scanner/redis/redis_login<br />root@kali:/#&nbsp;nmap&nbsp;--script&nbsp;redis-brute&nbsp;-p&nbsp;6379&nbsp;&lt;IP&gt;<br />root@kali:/#&nbsp;hydra&nbsp;–P&nbsp;/path/pass.txt&nbsp;&lt;IP&gt;&nbsp;redis
+      </div>
+    </div><br /> <a href=""><img src="images/1241-3.png" alt="images/1241-3.png" /></a><br /><br />If we have found
+    valid credentials we can connect with the Redis instance with redis-cli and authenticate the session with:<br />
+    <div class="codebox">
+      <div class="codebox">IP&gt;&nbsp;AUTH&nbsp;&lt;username&gt;&nbsp;<span
+          style="color:#000000;font-weight:400">&lt;</span>password<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> Valid credentials will be responded with: +OK<br /><br />Bibliography:<br /><a
+      href="https://book.hacktricks.xyz/pentesting/6379-pentesting-redis" target="_blank">https://book.hacktricks.xyz/pentesting/6379-pentesting-redis</a><br /><a
+      href="https://book.hacktricks.xyz/brute-force#redis" target="_blank">https://book.hacktricks.xyz/brute-force#redis</a><br />
+  </div>
+</body>
+
+</html>

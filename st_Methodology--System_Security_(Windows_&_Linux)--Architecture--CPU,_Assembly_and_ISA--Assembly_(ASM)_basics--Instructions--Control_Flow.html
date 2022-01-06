@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Control Flow</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Control Flow</h1><br/><strong><h3>CALL and RETN instructions</h3></strong><br />Subroutines (or procedures) are implemented by using the <strong>CALL</strong> and<strong> RETN </strong>instruction pair<br /><br />1. <strong>CALL</strong> instruction jumps to the function address specified<br />   ◇ push the current instruction pointer (EIP) to the stack <br /><br />2. <strong>RETN</strong> instruction when the function finish to execute, that automatically jump back to the address directly after the last CALL used<br />   ◇ remove the actual EIP  from the stack frame and reset it to the location before the time of <span style="color:#1e90ff;">prologue</span> routine<br />   ◇ ESP is automatically updated and point to the nearest value after the CALL</div>
+</body>
+</html>

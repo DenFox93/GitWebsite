@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Basic Usage</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Basic Usage</h1><br/><strong>Commands in PostgreSQL</strong><br />Although PostgreSQL uses SQL for queries, the client has its own set of commands that are far from intuitive. Whereas the MySQL client uses command mnemonics like use and show tables , Psql uses combinations of backslashes and single letters to issue commands. These commands can be listed with the \? help command.<br /><div class="codebox"><div class="codebox">postgres=#&nbsp;\?</div></div><br />    <a href=""><img src="images/1233-1.png" alt="images/1233-1.png" /></a><br /><br />list databases<br /><div class="codebox"><div class="codebox">postgres=#&nbsp;\l</div></div><br />    <a href=""><img src="images/1233-2.png" alt="images/1233-2.png" /></a><br />    <br />connect to a database<br /><div class="codebox"><div class="codebox">postgres=#&nbsp;\c&nbsp;merchant</div></div><br />    <a href=""><img src="images/1233-3.png" alt="images/1233-3.png" /></a><br /><br />describe(list) the tables once we are connect to database<br /><div class="codebox"><div class="codebox">merchant=#&nbsp;\d</div></div><br />    <a href=""><img src="images/1233-4.png" alt="images/1233-4.png" /></a><br /><br />query a table<br /><div class="codebox"><div class="codebox">merchant=#&nbsp;select&nbsp;*&nbsp;from&nbsp;payment;</div></div><br /><div class="codebox"><div class="codebox">merchant=#&nbsp;TABLE&nbsp;payment;</div></div><br />    <a href=""><img src="images/1233-5.png" alt="images/1233-5.png" /></a></div>
+</body>
+</html>

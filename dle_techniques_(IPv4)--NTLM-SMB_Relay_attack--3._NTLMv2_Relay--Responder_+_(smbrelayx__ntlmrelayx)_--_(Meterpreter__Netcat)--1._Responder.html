@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>1. Responder</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>1. Responder</h1><br/><br /><strong>1. Disable SMB and HTTP on the Responder</strong><br />We need to disable SMB and HTTP in Responder.conf because MultiRelay need to use ports 80/tcp and 445/tcp<br />    To check their status:<br />    <div class="codebox"><div class="codebox">responder&nbsp;-I&nbsp;eth0&nbsp;-rv</div></div><br />    -r →  will make Responder reply to NetBIOS workstation/redirect requests<br />    -v → verbose to show more output<br />    <a href=""><img src="images/2114-1.png" alt="images/2114-1.png" /></a><br />    <br />    To edit their value to Off:<br />    <div class="codebox"><div class="codebox">nano&nbsp;/etc/responder/Responder.conf</div></div><br />    <a href=""><img src="images/2114-2.png" alt="images/2114-2.png" /></a><br /><br /><strong>2. Start the Responder </strong><br />   ◇ If we want use <a href="Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--Capture_the_Hahes_redirect_to_Attacker's_SMB_share_using_UNC_path.html">UNC paths</a><br />       <div class="codebox"><div class="codebox">root@kali:~#&nbsp;responder&nbsp;-I&nbsp;eth0</div></div><br />        use also the option --lm if we want conduct an NTLM downgrade attack<br />   ◇ If we want to wait for <a href="e_Sign-On(SSO)_implementation_of_Windows_in_order_to_capture_NTLM_hashes--LLMNR_&_NetBIOS_NS_Spoofing-Poisoning_(mispelled_share_queries).html">misspelled share queries (LLMNR &amp; NetBIOS NS Spoofing/Poisoning)</a><br />       <div class="codebox"><div class="codebox">root@kali:~#&nbsp;responder&nbsp;-I&nbsp;eth0&nbsp;-rdwv</div></div><br />        <a href=""><img src="images/2114-3.png" alt="images/2114-3.png" /></a><br />        use also the option --lm if we want conduct an NTLM downgrade attack<br /></div>
+</body>
+</html>

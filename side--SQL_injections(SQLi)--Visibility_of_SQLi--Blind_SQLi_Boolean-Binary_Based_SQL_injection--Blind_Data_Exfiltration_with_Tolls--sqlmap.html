@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>sqlmap</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>sqlmap</h1><br /><a
+      href="Home--Penetration_Test_Methodology--WebApp_Pentest--Exploitation--Server-side--SQL_injections(SQLi)--SQLi_Tools--sqlmap.html">SqlMap</a><br />To
+    test i the parameters are Injectable with the Boolean Technique we need to use --technique=B <br /><br />• Test page
+    for various input and try to extract data with Boolean Technique<br /> In this case we try to enumerate the
+    databases<br />
+    <div class="codebox">
+      <div class="codebox">
+        sqlmap&nbsp;-u&nbsp;http://www.example.com/info.php&nbsp;--dbs&nbsp;--technique=B&nbsp;--keep-alive&nbsp;--level=3
+      </div>
+    </div><br /> ▪ --dbs → Enumerate DBMS databases<br /> ▪ --dump → Dump DBMS database table entries. Can take very
+    long time<br /> ▪ --technique=B → SQL injection technique to test for. B stands for Boolean based SQL
+    injection<br /> ▪ --keep-alive → Use persistent HTTP(s) connections<br /> ▪ --level=3 → Level of tests to perform.
+    At this level and above it will test various Headers including “User-agent”. For more informations about the levels
+    see <a
+      href="odology--WebApp_Pentest--Exploitation--Server-side--SQL_injections(SQLi)--SQLi_Tools--sqlmap--5._DB_Enumeration--Fine_tuning_the_Payloads.html">Fine
+      Tuning Payloads</a><br /><br />• Test for single input with Boolean technique<br />
+    <div class="codebox">
+      <div class="codebox">
+        sqlmap&nbsp;-u&nbsp;&#39;https://example.com/sqli/sqli.php?name=aa&#39;&nbsp;-p&nbsp;name&nbsp;-D&nbsp;sqli&nbsp;-T&nbsp;Customers&nbsp;--columns&nbsp;--technique=B&nbsp;-v3
+      </div>
+    </div><br /> -v3 → verbosity increased, we can see all the queries done <br /> <a href=""><img
+        src="images/1698-1.png" alt="images/1698-1.png" /></a><br /> <a href=""><img src="images/1698-2.png"
+        alt="images/1698-2.png" /></a><br /><br /><strong>Detect True and False output results</strong><br />Web
+    applications sometime when they found true or false result for a request change their output. <br />Because of that
+    we can use these switches:<br /> ◇ --string → a string which is <span style="text-decoration:underline;">always be
+      present in </span><span style="color:#00ff00;text-decoration:underline;">true</span><span
+      style="text-decoration:underline;"> output pages</span><br /> ◇ --not-string → a string which is <span
+      style="text-decoration:underline;">always be present in </span><span
+      style="color:#ff0000;text-decoration:underline;">false</span><span style="text-decoration:underline;"> output
+      pages</span>
+  </div>
+</body>
+
+</html>

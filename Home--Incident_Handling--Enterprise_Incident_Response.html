@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Enterprise Incident Response</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Enterprise Incident Response</h1><br />Determining the systems compromised in an enterprise with
+    thousands of machines can seem impossible, but with the right tools and techniques. <br /><br /><strong>Need to
+      start somewhere</strong><br />When we are working any incident, the first thing our responders ask for is:<br />•
+    Web Proxy: the logs for the egress connections from the firewall<br />• DNS cache or DNS logs<br /> ◇ compare the
+    current cache of the DNS server with a list of evil IPs and domains by using a tool like <a
+      href="https://bitbucket.org/ethanr/dns-blacklists/src/master/" target="_blank">dns-blacklists</a>.py. <br /> A list to compare
+    with is the one from <a href="http://www.malwaredomainlist.com/mdl.php" target="_blank">Malware Domain List</a>.<br />• Connection
+    Logs: the logs from whatever external web-filtering device the organization is using<br /> ◇ Because malware not
+    always makes persistent connection back to the bad guys’ command and control systems but they can also connect back
+    at regular (or irregular) intervals.
+  </div>
+</body>
+
+</html>

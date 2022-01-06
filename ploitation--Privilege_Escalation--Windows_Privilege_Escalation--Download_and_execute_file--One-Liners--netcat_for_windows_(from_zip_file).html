@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>netcat for windows (from zip file)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>netcat for windows (from zip file)</h1><br/><br />In this example will listen on port 4444<br /><div class="codebox"><div class="codebox">PS&gt;&nbsp;(new-object&nbsp;System.Net.WebClient).DownloadFile(&quot;http://nmap.org/dist/ncat-portable-5.59BETA1.zip&quot;,&nbsp;&quot;$env:userprofile\desktop\file.zip&quot;);$ZippedFilePath&nbsp;=&nbsp;&quot;$env:userprofile\desktop\file.zip&quot;;$DestinationFolder&nbsp;=&nbsp;&quot;$env:userprofile\desktop\&quot;;[void]&nbsp;(New-Item&nbsp;-Path&nbsp;$DestinationFolder&nbsp;-ItemType&nbsp;Directory&nbsp;-Force);$Shell&nbsp;=&nbsp;new-object&nbsp;-com&nbsp;Shell.Application;$Shell.Namespace($DestinationFolder).copyhere($Shell.NameSpace($ZippedFilePath).Items(),4);Invoke-Expression&nbsp;&quot;$env:userprofile\desktop\ncat-portable-5.59BETA1\ncat.exe&nbsp;-vnl&nbsp;4444&quot;;<br /><br />PS&gt;&nbsp;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\ncat-portable-5.59BETA1&quot;;Remove-Item&nbsp;-Path&nbsp;&quot;$env:userprofile\desktop\file.zip&quot;;</div></div><br /><br /></div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Manually create a Shellcode from C++</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Manually create a Shellcode from C++</h1><br /><br />In the chapter before to create a Shellcode
+    we have <a
+      href="Home--Penetration_Test_Methodology--System_Security_(Windows_&_Linux)--Shellcoding--Manually_create_a_Shellcode_from_Assembly.html">wrote
+      the code directly into assembly code</a>, now we will use C++ and its compiled version. <br />We have to keep in
+    mind that each compiler adds its own code to the main one that we write, moreover we need to adjust the machine code
+    in order for it to work<br /><br /><br /><strong>
+      <h3>Example of functions that we want to spawn on the victim machine</h3>
+    </strong><br />When we want to spawn a function on a victim machine we need to be sure that the target program loads
+    the <span style="color:#ff8700;">DLL</span> that exposes the function<br />• function that spawn a
+    <strong>shell</strong>:<br /> ◇ <a
+      href="https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winexec?redirectedfrom=MSDN" target="_blank">Winexec</a><br />
+    ▪ <span style="color:#ff8700;">DLL</span>: Kernel32.dll<br /> ◇ <a
+      href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb762153(v=vs.85).aspx" target="_blank">ShellExecute</a><br /> ▪
+    <span style="color:#ff8700;">DLL</span>: Shell32.dll<br />• function that spawn a <strong>message
+      box</strong>:<br /> ◇ <a
+      href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms645505(v=vs.85).aspx" target="_blank">MessageBox</a><br /> ▪
+    <span style="color:#ff8700;">DLL</span>: User32.dll<br /><br />
+  </div>
+</body>
+
+</html>

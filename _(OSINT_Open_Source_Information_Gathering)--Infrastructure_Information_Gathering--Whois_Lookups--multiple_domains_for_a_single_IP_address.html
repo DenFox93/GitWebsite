@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>multiple domains for a single IP address</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>multiple domains for a single IP address</h1><br />In this phase the first thing to do is resolve
+    all of the hostnames we have in order to determine what IP addresses are used by the organization<br />
+    <div class="codebox">
+      <div class="codebox">nslookup&nbsp;elsfoo.com</div>
+    </div><br /><a href=""><img src="images/597-1.png" alt="images/597-1.png" /></a><br /><br /><br /><strong>
+      <h3>How many </h3>
+    </strong><strong>
+      <h3>domains</h3>
+    </strong><strong>
+      <h3> has the </h3>
+    </strong><strong>
+      <h3>Ip address</h3>
+    </strong><strong>
+      <h3>?</h3>
+    </strong><br /> It is possible that more than one <span style="color:#ff8700;">domain</span> is configured on the
+    same <span style="color:#a020f0;">IP address</span> of the name server<br /> <span style="color:#a5452a;">examples
+      of scenarios:</span><br /> ◇ with shared hosting where hundreds of <span style="color:#ff8700;">websites</span>
+    are configured on the <span style="color:#a020f0;">same server</span><br /> ◇ in corporate networks where multiple
+    <span style="color:#ff8700;">subdomains</span> run on the same <span style="color:#860cd2;">web server</span><br />
+    <a href=""><img src="images/597-2.png" alt="images/597-2.png" /></a><br /> <br /> To find these domains we have to
+    do a <strong>Reverse Lookup</strong> via <a
+      href="Home--Penetration_Test_Methodology--Network_Pentest--Scanning_and_Enumeration--DNS.html">shell</a> or with
+    online tools/websites<br /> ▪ <div class="codebox">
+      <div class="codebox">nslookup&nbsp;-query=PTR&nbsp;www.elsfoo.com</div>
+    </div><br /> ▪ <a href="https://dnslytics.com/reverse-ip" target="_blank">https://dnslytics.com/reverse-ip</a><br /> ▪ <a
+      href="http://reverseip.domaintools.com/" target="_blank">http://reverseip.domaintools.com/</a><br /> ▪ <a
+      href="https://www.robtex.com/" target="_blank" >https://www.robtex.com/</a><br /> ▪ <a
+      href="https://www.bing.com/search?q=ip:198.178.124.83" target="_blank">https://www.bing.com/search?q=ip:198.178.124.83</a><br />
+    <br /> This is a <span style="text-decoration:underline;">cyclical process</span> every time we discover new
+    subdomains, this process regress to the step back of <a
+      href="Home--Penetration_Test_Methodology--Network_Pentest--Scanning_and_Enumeration--DNS.html">DNS
+      enumeration</a><br /><br />
+  </div>
+</body>
+
+</html>

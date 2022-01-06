@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Router & routing table</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Router & routing table</h1><br/><br /><strong>Router</strong> allow to forward IP datagrams from one network to another.<br /><strong>Routing protocols</strong> are used to determine the best path to reach a network<br /><br />A router has different interfaces, to know to which one has to forward a received packet, the router inspects for the destination address in the packet and then perform a lookup in the <strong>routing table</strong> and search for an IP match.<br /><br /><strong><h3>example of a routing table:</h3></strong><br /><table class="table"><tr><th>interface of the router</th><th>IP of the destination network of the packet  </th><th>Netmask of the destination network  </th></tr><tr><td>1</td><td>228.84.0.0</td><td>255.255.0.0</td></tr><tr><td>2</td><td>192.168.3.0</td><td>255.255.255.0</td></tr><tr><td>3</td><td>0.0.0.0</td><td>0.0.0.0</td></tr></table><br />• <strong>Interface 1</strong> is used to forward the packets to 228.84.0.0/16<br />• <strong>Interface 2</strong> is used to forward the packets to 192.168.3.0/24<br />• <strong>Interface 3</strong> <span style="text-decoration:underline;">is used as the default route</span> for packets whose destination does not match any other entry in the table<br /><br />- For example if a packet transit from the router of the example with destination IP: <strong>192.168.3.8</strong>, this IP reside in the 192.168.3.0/24 network(as we see in the below image) and so the packet is routed through interface 2<br /><a href=""><img src="images/64-1.png" alt="images/64-1.png" /></a><br />- If a packet transit from the router of the example with destination IP: <strong>78.33.57.5</strong>, this IP does not reside in no one of the network listed in the routing table and so is routed to the default route 0.0.0.0 through interface 3<br />- <br /><br /><br /><br /></div>
+</body>
+</html>

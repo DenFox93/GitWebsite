@@ -1,0 +1,339 @@
+/* Met Office external website                                                                            
+
+Colours:
+- black/dark grey: #202A2C
+- dark grey: #666666      
+- grey: #DDDDDD (thin lines)
+- light grey: #EEEEEE (background colour)
+- darkish green: #BCDB0C                 
+- green: #CCFF33                         
+- darkish blue: #4BA8BA                  
+- blue: #00ADD0                          
+
+*/
+
+/*******************************************************************************
+ * GENERAL
+ ******************************************************************************/
+/*<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700' rel='stylesheet' type='text/css'>*/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700);
+
+body {
+    /* font-size: 13px; */
+    font-family: 'Fira Code' , monospace !important;
+    /* font-family: "Open Sans", sans-serif !important; */
+    box-sizing: border-box;
+    color: white;
+    background-color: #23252e;
+    /* white-space: pre-wrap; */
+}
+/* Title  */
+.h2-t {
+    text-align: center;
+    font-weight: 800;
+    /* font-size: 30px; */
+}
+.h2-t a{
+    font-family:'Courier New', Courier, monospace;
+    color: #e50306;
+    text-decoration: none;
+}
+button {
+    border: none;
+    padding: 0 5px;
+    background: none;
+    margin: 0;
+    border: 2px solid rgb(255, 255, 255);
+    color: white;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+button:hover {
+    color: #666666;
+}
+
+#index_header {
+    text-align: center;
+}
+
+/* .two-panels {
+    background: #EEEEEE;
+} */
+
+div.two-panels {
+    height: inherit;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.tree-panel {
+    flex: 19vw;
+    margin-left: 1vw;
+    height: 100%;
+    overflow: auto;
+    border-right: 3px solid red;
+    
+    /*background-color: #EEEEEE;
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 20px;*/
+    /*margin: 0.75em 0 0.75em 20px;*/
+}
+
+.page-panel {
+    flex: 80vw;
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+
+}
+
+.page-panel iframe {
+    width: 100%;
+    border: 0px;
+    margin-top: 0px;
+    height: 100%;
+    /* box-sizing: border-box; */
+    /* overflow-y: auto; */
+}
+
+.page {
+    /* padding: 20px;  */
+    margin: 10px;
+    width: 100%;
+    margin-bottom: 80px;
+}
+.page a{
+    color: rgb(248, 11, 11);
+}
+.page img{
+    /* align-items: center; */
+    /* text-align: center; */
+    margin: auto;
+    display: block;
+}
+#page_frame{
+    margin: 10px;
+    width: 75%;
+    right: 0;
+    margin-right: 15px;
+    /* width: 100%; */
+    height: 100%;
+}
+
+.clear {
+    clear: both
+}
+
+/*******************************************************************************
+ * TREE INDEX
+ ******************************************************************************/
+
+.tree {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+/* fix for firefox */
+.tree button {
+    border-width: 2px;
+}
+
+.tree a, .tree a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.tree ul {
+    padding-inline-start: 20px;
+    list-style-type: none;
+    line-height: 0.3;
+}
+
+.tree ul.outermost {
+    padding-inline-start: 0;
+}
+
+.tree li {
+    padding-inline-start: 0;
+}
+.tree li.leaf {
+    padding-inline-start: 10px;
+    line-height: 2;
+}
+.tree li a {
+    width: 100%;
+    display: inline-block;
+    font-size: 17px;
+    padding: 15px 0px;
+    color: white;
+    border-bottom: 1px solid rgb(254, 255, 254);
+}
+
+.tree li:hover {
+    background: rgba(193, 193, 193, 0.7);
+    color: white;
+}
+.tree li {
+    white-space: nowrap;
+}
+
+.tree a.show, div.tree a.hide { display: none; }
+
+.hide {
+    display: none;
+}
+
+/*******************************************************************************
+ * NODE PAGES
+ ******************************************************************************/
+
+/* TABLES */
+
+table {
+    border: 1px solid #202A2C;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgb(193, 193, 193);
+}
+
+td, th {
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #202A2C;
+    text-align: center;
+}
+
+/* HEADINGS */
+
+.page h1 {
+    font-weight: bold;
+    display: inline;
+}
+
+.page h1.title {
+    text-align: center;
+    /* border: 2px solid #a80806; */
+    /* background: rgb(193, 193, 193); */
+    margin: 0 auto 1vh auto;
+    width: 100%;
+    display: inline-block;
+}
+
+.page h2 {
+    padding-top: 1em;
+    /*padding-bottom: 0.5em;*/
+    font-weight: bold;
+    font-size: 150%;
+    color: #ffffff;
+    display: inline;
+}
+
+.page h3 {
+    padding-top: 0.75em;
+    font-weight: bold;
+    font-size: 125%;
+    color: #ffffff;
+    display: inline;
+}
+
+/* LINKS */
+
+/*div.page a, div.page a:visited {
+    color: #005BCA;
+    text-decoration: none;
+}
+
+div.page a:hover, div#me a:hover {
+    text-decoration: underline;
+}*/
+
+/* CODE */
+
+/* span.code-node {
+    color: #FFFF00;   yellow
+} */
+
+.codebox, .page code, .page pre {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: normal;
+    font-size: 13px;
+    background-color: #EEEEEE;
+    /* border: 1px solid #202A2C; */
+}
+
+.codebox {
+    /* display: inline-block; */
+    padding: 5px 7px;
+    width: 95%;
+    color: black;
+}
+
+.page p.tagged-text, .page code {
+    /*color: #859C00;*/
+    color: black;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.page pre {
+    padding: 0.25em;
+    overflow: auto !important;
+    width: 75%;
+}
+
+/* img{
+    margin-left: auto;
+    margin-right: auto;
+} */
+/* IMAGES */
+
+/*img {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}*/
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+     background: #23252e; 
+     width: 6px;
+     height: 6px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #a6a6a8; 
+    border-radius: 8px;
+    width:5px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d3d4d8; 
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: #23252e;
+  }
+
+
+
+  

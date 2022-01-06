@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>1.2 Configure Relay from the Client</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>1.2 Configure Relay from the Client</h1><br /><strong>
+      <h3>Configure</h3>
+    </strong><br />The configuration of the relay can be done also directly from the <span
+      style="color:#00ff00;">console of lightsail.aws.amazon.com that is browser based</span> but from the experience of
+    Dustin Dykes (aka @DHAhole) Chief Consultant of Telesploit it will disconnect constantly, so is better to configure
+    by connecting via ssh from the Client(the machine of the Penetration Tester)<br /> <a href=""><img
+        src="images/999-1.png" alt="images/999-1.png" /></a><br />1. To check if the Telesploit Relay works and is
+    online we have to ping the subdomain that we have associated with the Ip address of the AWS instance(see <a
+      href="https://www.godaddy.com/help/create-a-subdomain-4080" target="_blank">here</a>) <div class="codebox">
+      <div class="codebox">daniele@TelesploitClient:/$&nbsp;ping&nbsp;<span
+          style="color:#000000;font-weight:400">&lt;</span>relaySubdomain<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br />2. Now we want to access via ssh:<br />
+    <div class="codebox">
+      <div class="codebox">daniele@TelesploitClient:/$&nbsp;ssh&nbsp;-i&nbsp;&lt;private-key.pem&gt;&nbsp;ubuntu@<span
+          style="color:#000000;font-weight:400">&lt;</span>relayIpAddress<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> It will ask for a passphrase that we have inserted <a
+      href="_Test_Methodology--Network_Pentest--Attacker_Testing_Infrastructure--Penetration_Testing_via_SSH(or_VPN)--Telesploit--1._Telesploit_Relay.html">during
+      the creation of Telesploit Relay</a> on AWS.<br /> To know more about the private and public key on amazon AWS see
+    <a
+      href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html" target="_blank">https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html</a><br />3.
+    <span style="text-decoration:underline;">Now we are on the AWS instance(that will become our Telesploit
+      Relay)</span>, we have to install from github the code of Telesploit <br />
+    <div class="codebox">
+      <div class="codebox">
+        daniele@TelesploitRelay:~$&nbsp;sudo&nbsp;-i&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#we&nbsp;have&nbsp;to&nbsp;run&nbsp;relay_setup.sh&nbsp;as&nbsp;root<br />root@TelesploitRelay:~#&nbsp;cd&nbsp;/root&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#in&nbsp;ubuntu&nbsp;the&nbsp;home&nbsp;directory&nbsp;is&nbsp;rappresented&nbsp;with&nbsp;~
+      </div>
+    </div><br /> <a href=""><img src="images/999-2.png" alt="images/999-2.png" /></a><br />
+    <div class="codebox">
+      <div class="codebox">
+        root@TelesploitRelay:~#&nbsp;apt-get&nbsp;update&nbsp;-y<br />root@TelesploitRelay:~#&nbsp;apt-get&nbsp;upgrade&nbsp;-y<br />root@TelesploitRelay:~#&nbsp;git&nbsp;clone&nbsp;https://github.com/telesploit/telesploit-relay.git<br />root@TelesploitRelay:~#&nbsp;cd&nbsp;telesploit-relay/<br />root@TelesploitRelay:~#&nbsp;ls<br />root@TelesploitRelay:~#&nbsp;./relay_setup.sh
+      </div>
+    </div><br /> <br />4. <a href="https://github.com/telesploit/telesploit-relay" target="_blank">relay_setup.sh</a> will ask the
+    following questions:<br /> 1) <span style="text-decoration:underline;">Enter the FQDN for relay server, e.g.
+      relay-os.telesploit.com</span>:<br /> <a href=""><img src="images/999-3.png" alt="images/999-3.png" /></a><br />
+    If the relay does not resolve, then exit now. Verify a corresponding A record exists in the page of the the webpage
+    provider(example Godaddy)<br /> To associate the Ip address of the AWS Instance with a subdomain of our own domain
+    on godaddy see: <a
+      href="https://www.godaddy.com/help/create-a-subdomain-4080" target="_blank">https://www.godaddy.com/help/create-a-subdomain-4080</a><br />
+    4) <span style="text-decoration:underline;">Enter your email address for registering the Lets Encrypt
+      certificate:</span><br /> <a href=""><img src="images/999-4.png" alt="images/999-4.png" /></a><br /> Enter an
+    email (also gmail is ok) for Let&#39;s Encrypt, that will warning us when 90 days are coming up, and we have to
+    reopen port 80 to reapply the certificate<br /> <em>The following questions are to setup Mattermost</em><br /> mysql
+    is going to be used for Mattermost<br /> mysql will holds the database of the conversations <br /> 3) <span
+      style="text-decoration:underline;">Enter the password for the mysql server (no single quotes)</span>: <br /> <a
+      href=""><img src="images/999-5.png" alt="images/999-5.png" /></a><br /> 4) <span
+      style="text-decoration:underline;">Enter the password for the Mattermost mmuser (alphanumeric only)</span>:<br />
+    <a href=""><img src="images/999-6.png" alt="images/999-6.png" /></a><br /> <a href=""><img src="images/999-7.png"
+        alt="images/999-7.png" /></a><br /> In the script first we have written the commands to execute in a text file
+    and then we have given this file with the commands to execute to mysql:<br /> the explanation of the following
+    command is on the <a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-batch-commands.html" target="_blank">mysql manual</a><br />
+    <a href=""><img src="images/999-8.png" alt="images/999-8.png" /></a><br /> We can check explanation of the mysql
+    commands in <a href="https://github.com/telesploit/telesploit-relay" target="_blank">relay_setup.sh</a>:<br /> - here: <a
+      href="https://docs.mattermost.com/install/install-ubuntu-1604-mysql.html" target="_blank">https://docs.mattermost.com/install/install-ubuntu-1604-mysql.html</a><br />
+    - or here: <a
+      href="https://docs.mattermost.com/install/install-ubuntu-1804.html#installing-mysql-database-server" target="_blank">https://docs.mattermost.com/install/install-ubuntu-1804.html#installing-mysql-database-server</a><br />
+    <br /> certbot will be installed to set up Let&#39;s Encrypt. Let’s Encrypt uses the ACME protocol to verify that
+    you control a given domain name and to issue you a certificate. <br /> To get a Let’s Encrypt certificate we need an
+    ACME client and certbot is very good :)<br /> <a href=""><img src="images/999-9.png"
+        alt="images/999-9.png" /></a><br /><br />5. After that relay_setup.sh has finished we can renoot the AWS
+    instance<br />
+    <div class="codebox">
+      <div class="codebox">root@TelesploitRelay:~#&nbsp;reboot</div>
+    </div><br />6. We have to reaccess via ssh to the AWS instance via shh as we are already done at the point 2<br />
+    <div class="codebox">
+      <div class="codebox">daniele@TelesploitClient:/$&nbsp;ssh&nbsp;-i&nbsp;&lt;private-key.pem&gt;&nbsp;ubuntu@<span
+          style="color:#000000;font-weight:400">&lt;</span>relayIpAddress<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> It will ask for a passphrase that we have inserted <a
+      href="_Test_Methodology--Network_Pentest--Attacker_Testing_Infrastructure--Penetration_Testing_via_SSH(or_VPN)--Telesploit--1._Telesploit_Relay.html">during
+      the creation of Telesploit Relay</a> on AWS.<br />7. Check the listening connections on the AWS relay<br />
+    <div class="codebox">
+      <div class="codebox">daniele@TelesploitRelay:~$&nbsp;netstat&nbsp;-clant</div>
+    </div><br /> the only listening connections should be :<br /> port 22 → listening on all ipv4 network adapters
+    (0.0.0.0) and ipv6 network adapters(::)<br /> port 443 → listening on on all ipv4 network adapters (0.0.0.0) and
+    ipv6 network adapters(::)<br /> Mattermost server port 8065 → listening on all IPv6 network adapters(::) <br /> IRC
+    (port 6667) → listening on all IPv6 network adapters(::)<br /> <a href=""><img src="images/999-10.png"
+        alt="images/999-10.png" /></a><br /> <a href=""><img src="images/999-11.png"
+        alt="images/999-11.png" /></a><br /><br />
+  </div>
+</body>
+
+</html>

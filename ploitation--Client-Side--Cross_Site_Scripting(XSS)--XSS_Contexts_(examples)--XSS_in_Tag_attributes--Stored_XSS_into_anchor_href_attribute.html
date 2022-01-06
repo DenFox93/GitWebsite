@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Stored XSS into anchor href attribute</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Stored XSS into anchor href attribute</h1><br/><br />Sometimes the XSS context is into a type of HTML tag attribute that itself can create a scriptable context. Here, you can execute JavaScript without needing to terminate the attribute value. <br />For example, if the XSS context is into the href attribute of an anchor tag, you can use the javascript pseudo-protocol to execute script. <br /><span style="color:#a52a2a;">example:</span><br />&lt;a href=&quot;<span style="color:#ff0000;">javascript:alert(1)</span>&quot;&gt;<br /><br /><br /><br />1. Determine the context. We have submitted these values<br />   ◇ comment=204a2fb1<br />   ◇ name=aaaa<br />   ◇ email=bbbbb@bb.bb<br />   ◇ website=cccc.cc<br />    <a href=""><img src="images/1934-1.png" alt="images/1934-1.png" /></a><br />    <span style="text-decoration:underline;">Observe that the “cccc.cc” has been reflected inside a href quoted attribute</span>.<br /><br />2. Our payload will be in the <span style="text-decoration:underline;">website parameter</span><br />3. Now if we post a comment with these values<br />    <span style="color:#00ff00;">terminate the attribute value with quote(&quot;)</span> and <span style="color:#1e90ff;">introduce a new attribute</span> that creates a scriptable context <br />   <span style="color:#00ff00;"> </span>PAYLOAD:   <span style="color:#00ff00;">“</span><h3>onmouseover</h3><h3>=”alert(1)</h3><br />    <a href=""><img src="images/1934-2.png" alt="images/1934-2.png" /></a><br />    <a href=""><img src="images/1934-3.png" alt="images/1934-3.png" /></a><br />    That in the source code will be:<br />    <a href=""><img src="images/1934-4.png" alt="images/1934-4.png" /></a><br /><br />4. Exploited! every time we pass the mouse on “aaaa”we will get alert(1)<br />    <a href=""><img src="images/1934-5.png" alt="images/1934-5.png" /></a><br />    <a href=""><img src="images/1934-6.png" alt="images/1934-6.png" /></a></div>
+</body>
+</html>

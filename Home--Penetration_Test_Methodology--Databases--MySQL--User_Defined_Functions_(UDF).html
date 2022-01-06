@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>User Defined Functions (UDF)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>User Defined Functions (UDF)</h1><br />UDF means User Defined Functions in MySQL. It’s like coding
+    your own functions inside a DLL and calling them inside MySQL. We are going to use the “lib_mysqludf_sys_64.dll” DLL
+    library which can be found inside the Metasploit framework. You can use the UDF libraries based on the OS and
+    architecture that is inside your Metasploit installation directory
+    “/usr/share/metasploit-framework/data/exploits/mysql/”. <br /><a
+      href="https://github.com/rapid7/metasploit-framework/tree/master/data/exploits/mysql" target="_blank">Click here for the github
+      link to the files.</a><br /><br /><br /><strong>Check the architecture of MySQL running</strong><br />
+    ‘@@version_compile_os’ → architecture of the MySQL instance <br /> ‘@@version_compile_machine’ → architecture of the
+    operating system.<br />
+    <div class="codebox">
+      <div class="codebox">
+        mysql&gt;&nbsp;select&nbsp;@@version_compile_os,&nbsp;@@version_compile_machine;<br />#&nbsp;alternative<br />mysql&gt;&nbsp;show&nbsp;variables&nbsp;like&nbsp;&#39;%compile%&#39;;
+      </div>
+    </div><br /> <a href=""><img src="images/1243-1.png" alt="images/1243-1.png" /></a><br /> In this case we are
+    running MySQL inside a 32-bit Debian Linux OS.<br /><br />....<br /><br />Bibliography:<br /><a
+      href="https://osandamalith.com/2018/02/11/mysql-udf-exploitation/" target="_blank">https://osandamalith.com/2018/02/11/mysql-udf-exploitation/</a>
+  </div>
+</body>
+
+</html>

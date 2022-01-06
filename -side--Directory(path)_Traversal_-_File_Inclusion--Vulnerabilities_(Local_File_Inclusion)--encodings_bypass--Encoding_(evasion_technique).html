@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Encoding (evasion technique)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Encoding (evasion technique)</h1><br /><strong>NULL byte (%00)</strong><br />The <span
+      style="color:#ff0000;">NULL byte (%00)</span> can be useful to terminate the malicious string in case the WebApp
+    <span style="color:#00ff00;">append to it something else</span>, like below:<br />
+    <code>file_read (&quot;/htdocs/website/reports/&quot; + user_input </code><code><span style="color:#00ff00;">+ &quot;.pdf&quot;</span></code><code>);</code><br />The
+    <span style="color:#ff0000;">%00</span> would allow the user to terminate the string before read any other file
+    extensions<br />
+    <code>../../etc/passwd</code><code><span style="color:#ff0000;">%00</span></code><br /><br /><strong>Web Application
+      Filtering</strong><br />Web applications sometime perform filtering operations on these nasty characters:<br /> ◇
+    .<br /> ◇ \<br /> ◇ /<br />Because of that we should be aware of different <span
+      style="text-decoration:underline;">encodings</span>:<br />
+    <table class="table">
+      <tr>
+        <th>character</th>
+        <th>URL encoding</th>
+        <th>double URL encoding</th>
+      </tr>
+      <tr>
+        <td>.</td>
+        <td>%2e</td>
+        <td> </td>
+      </tr>
+      <tr>
+        <td>/</td>
+        <td>%2f</td>
+        <td>%252F</td>
+      </tr>
+      <tr>
+        <td>\</td>
+        <td>%5c</td>
+        <td>%255c</td>
+      </tr>
+    </table><br /> see here(<a
+      href="https://owasp.org/www-community/Double_Encoding" target="_blank">https://owasp.org/www-community/Double_Encoding</a>) for
+    more on Double Encoding<br />Payloads(combinations of the previous encodings):<br />
+    <table class="table">
+      <tr>
+        <th>../</th>
+        <th>..\</th>
+      </tr>
+      <tr>
+        <td>%2e%2e%2f</td>
+        <td>%2e%2e%5c</td>
+      </tr>
+      <tr>
+        <td>%2e%2e/</td>
+        <td>%2e%2e\</td>
+      </tr>
+      <tr>
+        <td>..%2f</td>
+        <td>..%5c</td>
+      </tr>
+      <tr>
+        <td>..%252f</td>
+        <td>%252e%252e%255c</td>
+      </tr>
+    </table><br /><br />
+  </div>
+</body>
+
+</html>

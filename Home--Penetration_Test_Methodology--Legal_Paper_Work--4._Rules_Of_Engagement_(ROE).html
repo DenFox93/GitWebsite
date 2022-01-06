@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>4. Rules Of Engagement (ROE)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>4. Rules Of Engagement (ROE)</h1><br /><strong>
+      <h2>Rules of Engagement</h2>
+    </strong><br />If we don&#39;t nail down written Rules of Engagement in advance, we could run into significant
+    trouble and the penetration test will be seen as less valuable.<br />• <a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/0. Planning/Rules_of_Engagement_Worksheet.rtf">HERE</a>
+    we have an example of how can be formatted such document<br /><br />• <strong>incident handling
+      procedure</strong><br />We also need a contact(client&#39;s employee or manager) with which we can communicate if
+    an <a
+      href="Home--Penetration_Test_Methodology--Legal_Paper_Work--4._Rules_Of_Engagement_(ROE)--Announced_VS_Unannounced_Tests.html">incident</a>
+    occurs.<br /> When we conduct a penetration test, incidents(unwanted situation that affect client&#39;s environment)
+    can happen especially when we don&#39;t have a lot of knowledge about the tested environment. If we plan to do risky
+    test we have to communicate it to the client, so that these can be done in preferred hours where a service stoppage
+    is less painful.<br /> We have always have an <span style="text-decoration:underline;">incident handling
+      procedure</span> ready:<br /> simplest way is to have the contact of a person on the client&#39;s side that is
+    available to coordinate the incident handling. <br /> <br />
+    <div class="codebox">
+      <div class="codebox">
+        In&nbsp;case&nbsp;of&nbsp;technical&nbsp;inquiries&nbsp;regarding&nbsp;the&nbsp;target&nbsp;assets,&nbsp;Pentester&nbsp;will&nbsp;contact&nbsp;DanieleVolpe@company.com<br />In&nbsp;the&nbsp;event&nbsp;of&nbsp;suspecting&nbsp;that&nbsp;a&nbsp;major&nbsp;incident&nbsp;took&nbsp;place&nbsp;(e.g.:&nbsp;service&nbsp;unavailability)&nbsp;Pentester&nbsp;will&nbsp;immediately&nbsp;contact&nbsp;<br>Daniele&nbsp;Volpe&nbsp;of&nbsp;IT&nbsp;Service&nbsp;at&nbsp;phone&nbsp;number&nbsp;+39&nbsp;123&nbsp;456&nbsp;789
+      </div>
+    </div><br /><br />• <strong>Encrypted Communications</strong>: agree upon a secured method of communication
+    regarding vulnerability details and the final report. We can use:<br /> ▪ encrypted email<br /> ▪ security content
+    management technology (e.g: <a href="https://www.box.com/en-gb/cloud-content-management" target="_blank">Box</a>)<br /> ▪ PGP/GPG,
+    due to the additional technical requirements and the waning usage, it is not very used these days.<br /> ▪ NO ZIP
+    files, are less secure because the shared password used to protect the symmetric key in the ZIP file could come
+    under attack. A bad guy could steal the shared password, or it could leak if it is shared among too many
+    people.<br /> <br />• <strong>daily debriefing conference call</strong><br /> At the beginning or end of each
+    testing dayor most commonly once or twice a week, schedule a brief session(15-30 minutes long) between the testing
+    team and one or two representatives of the target organization. These calls help to make sure that everyone
+    understands the progress of the test and to identify any issues early on.<br /> During the debriefing, the team
+    should discuss what the team has done so far and what they plan to do next<br /><br />• <strong>Remain in the
+      scope</strong><br /> we make sure that the target of the engagement is property of our client<br /> If the
+    target&#39;s client use a shared hosting service(type of web hosting where a single physical server hosts multiple
+    sites), in that case we can&#39;t conduct an assessment on that target, unless the hosting provider give us a
+    written permission<br /><br />• <strong>Dates and Time of Day</strong><br /> Agree upon an explicit start date and a
+    finish date and upon acceptable times for testing. if testing are required during off-hours or weekends additional
+    charge incur (up to 25%)<br /><br />• <strong>Automated Shunning functionality by IDS/firewall</strong><br /> I the
+    Rules of Engagement must explicitly take into account any automated shunning functionality the target organization
+    may have. This mean that if IDS or IPS spots an attack, it could reconfigure a firewall to automagically block
+    it.<br /> If Auto shunning is <span style="text-decoration:underline;">too widely applied</span> could turn
+    inadvertently a penetration test into a denial-of-service attack. Or narrowly focused blocking would just render
+    much of the test useless. <br /> To avoid these conditions, you should do one of the following, and document it in
+    the Rules of Engagement:<br /> ◇ Have target organization personnel disengage shunning functionality.<br /> ◇
+    Include an exception for the source addresses of the testing organization.<br /> ◇ <a
+      href="Home--Penetration_Test_Methodology--Legal_Paper_Work--4._Rules_Of_Engagement_(ROE)--Announced_VS_Unannounced_Tests.html">Announce
+      the test</a> and get an alert when shunning starts so that it can be manually deactivated, allowing traffic from
+    testers through.<br /><br />• <strong>Viewing data on the target</strong><br /> ◇ If the penetration tester
+    successfully penetrates a target, should they avoid viewing data on the target?<br /> ▪ By default our Rules of
+    Engagement allow the testers to view configuration data from a machine but to avoid looking at any customer and user
+    data on the machine.<br /> ▪ With the written permission of the client, in some tests, it may be appropriate to
+    sample small amounts of sensitive user data to confirm access and assess the business impact.<br /> - focus more on
+    counting the number of sensitive records that is possible to access than on retrieving them<br /> ◇ If Sniffers are
+    used, explicit that if any personal data are captured from the network will be ignored by the penetration testing
+    team <br /><br />• <strong>What the Rules of Engagement does </strong><strong><span
+        style="color:#ff0000;text-decoration:underline;">NOT</span></strong><strong> include</strong><br /> ◇ price of
+    the test service<br /> ◇ Limitations of Liability: this is better handled in the Contractual Agreement<br /> ◇
+    Intellectual property Ownership: also this is better handled in the Contractual Agreement and explain to who belong
+    the resulting report and the methodology behind it:<br /> ▪ target organization<br /> ▪ penetration tester<br /> ▪
+    both<br /> ◇ Permission to conduct the test: also this is better handled in the <a
+      href="Home--Penetration_Test_Methodology--Legal_Paper_Work--5._Contractual_Agreements.html">Contractual
+      Agreement</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>whois_miner</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>whois_miner</h1><br /><br />Path: recon/companies-multi/whois_miner<br /> <br />Uses the ARIN
+    Whois RWS to harvest companies, locations, netblocks, and contacts <span
+      style="text-decoration:underline;">associated with the given </span><strong><span
+        style="color:#ff8700;text-decoration:underline;">company</span></strong><span
+      style="text-decoration:underline;"> search string</span>.<br />Then it updates the respective tables with the
+    results.<br /><br />
+    <div class="codebox">
+      <div class="codebox">
+        marketplace&nbsp;search&nbsp;whois<br />marketpace&nbsp;info&nbsp;recon/companies-multi/whois_miner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#informations&nbsp;about&nbsp;the&nbsp;module<br />marketplace&nbsp;install&nbsp;recon/companies-multi/whois_miner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#install&nbsp;this&nbsp;module<br />modules&nbsp;load&nbsp;recon/companies-multi/whois_miner
+      </div>
+    </div><br /><br /><br />
+    <div class="codebox">
+      <div class="codebox">db&nbsp;insert&nbsp;companies</div>
+    </div><br /> we have to insert the name of the <span style="color:#ff8700;">company</span> name when it ask for
+    <span style="text-decoration:underline;">Company(TEXT):</span> the other parameters are optional<br /> <a
+      href=""><img src="images/653-1.png" alt="images/653-1.png" /></a><br /><br />
+    <div class="codebox">
+      <div class="codebox">run</div>
+    </div><br /> <a href=""><img src="images/653-2.png" alt="images/653-2.png" /></a><br /> <br />To see the
+    results<br />
+    <div class="codebox">
+      <div class="codebox">show&nbsp;companies<br />show&nbsp;locations<br />show&nbsp;netblocks<br />show&nbsp;contacts
+      </div>
+    </div><br /><br /><strong>
+      <h3>If give error</h3>
+    </strong>
+    <h3> </h3>
+    <code><br />[!] HTTPSConnectionPool(host=&#39;whois.arin.net&#39;, port=443): Max retries exceeded with url: /rest/org/COMPANY (Caused by SSLError(SSLError(&quot;bad handshake: Error([(&#39;SSL routines&#39;, &#39;tls_process_ske_dhe&#39;, &#39;dh key too small&#39;)])&quot;))).<br />[!] Something broken? See https://github.com/lanmaster53/recon-ng/wiki/Troubleshooting#issue-reporting.</code><br />comment
+    the last line of the file /etc/ssl/openssl.cnf<br />
+    <div class="codebox">
+      <div class="codebox">#CipherString&nbsp;=&nbsp;DEFAULT@SECLEVEL=2</div>
+    </div><br /><br />
+  </div>
+</body>
+
+</html>

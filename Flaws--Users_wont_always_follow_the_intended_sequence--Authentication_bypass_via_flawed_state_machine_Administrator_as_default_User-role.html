@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Authentication bypass via flawed state machine: Administrator as default User-role</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Authentication bypass via flawed state machine: Administrator as default User-role</h1><br/><br /><strong><h3>Administrator as default User-role</h3></strong><br />Webpage could have Administrator as default User-role. What if we try to skip the role-selection request?<br /><br /><strong>Discover WebApp 2FA Workflow</strong><br />1. POST request to login with our credentials (username &amp; password)<br />    <a href=""><img src="images/1896-1.png" alt="images/1896-1.png" /></a><br />2. Now we GET request the webpage for select our role in the WebApp<br />    <a href=""><img src="images/1896-2.png" alt="images/1896-2.png" /></a> <br />    below the response of the WebApp  <br />    <a href=""><img src="images/1896-3.png" alt="images/1896-3.png" /></a><br />3. POST request with the role that we have selected<br />    <a href=""><img src="images/1896-4.png" alt="images/1896-4.png" /></a><br /><br /><strong><h3>Exploitation</h3></strong><br />What would happen if we we arrive at the step 2 we drop the request for the webpage for select our role in the WebApp<br />2. Drop request<br />    <a href=""><img src="images/1896-5.png" alt="images/1896-5.png" /></a><br />    <a href=""><img src="images/1896-6.png" alt="images/1896-6.png" /></a><br /><br />We can an admin page, because as default user in this WebApp have Administrator role!  🤯<br /><a href=""><img src="images/1896-7.png" alt="images/1896-7.png" /></a><br /><br /><br /></div>
+</body>
+</html>

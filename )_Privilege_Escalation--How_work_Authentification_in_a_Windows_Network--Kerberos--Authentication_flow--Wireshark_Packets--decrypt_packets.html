@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>decrypt packets</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>decrypt packets</h1><br/><br />If we hold an accounts long-term Kerberos <span style="color:#ff0000;">secret key</span> used to encrypt the packets during the transmission, we can provide it to Wireshark in the settings:<br />    Edit → Preferences → Protocols → KRB5<br />    Here we have to add the .keytab file that contain the password to decrypt the packets<br />    <a href=""><img src="images/1137-1.png" alt="images/1137-1.png" /></a><br />Now when we restart Wireshark we should see the encrypted data in cleartext<br /><br /><strong>How to generate keytab file</strong><br />First we have to install the<span style="color:#0288d1;"> </span><strong>heimdal-dbg</strong> package<br /><div class="codebox"><div class="codebox">root@kali:/#&nbsp;apt-get&nbsp;install&nbsp;heimdal-clients</div></div><br />Now we can use <strong>ktutil</strong> tool. <br /><span style="text-decoration:underline;">The only important data</span> that we will insert <span style="text-decoration:underline;">is the password</span>(of the <span style="color:#ff8700;">krbtgt</span> or of the <span style="color:#f6ff00;">Service</span> account). because is this one that Wireshark will use to decrypt the data<br /><div class="codebox"><div class="codebox">root@kali:/#&nbsp;ktutil<br />ktutil:&nbsp;addent&nbsp;-password&nbsp;-p&nbsp;[principal]&nbsp;-k&nbsp;0&nbsp;-e&nbsp;rc4-hmac<br />ktutil:&nbsp;write_kt&nbsp;key2.keytab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#save&nbsp;file&nbsp;in&nbsp;the&nbsp;current&nbsp;folder</div></div><br /><a href=""><img src="images/1137-2.png" alt="images/1137-2.png" /></a><br /></div>
+</body>
+</html>

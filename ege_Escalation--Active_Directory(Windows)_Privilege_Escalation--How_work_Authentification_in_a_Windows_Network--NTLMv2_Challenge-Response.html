@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>NTLMv2 Challenge/Response</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>NTLMv2 Challenge/Response</h1><br /><br />NTLMv2 was developed as a response to password cracking
+    tools released in the late 1990s, including L0phtCrack.<br />It is a more sophisticated form of authentication than
+    NTLMv1 and is more difficult to crack. <br /><br />Cracking sniffed NTLMv2 challenge/response exchanges is still
+    possible, but it tends to be considerably slower than LANMAN Challenge/Response or NTLMv1 Challenge/Response sniffed
+    from the network.<br /><br />Although NTLM has been replaced by Kerberos, it is still widely used and supported in
+    Windows machines. <br />it is still used when the client that is authenticating to a server:<br /> ◇ use IP address
+    of the Target instead of a SPN (Service Principals Names) for authentication<br /> ◇ does not belong to the same
+    domain.<br /> ◇ is NOT a Windows system<br />Because of the above implementations, NTLMv2 is rarely fully disabled
+    in corporate environments.<br /><br /><a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/Authentication/NTLMv2.png"><img src="images/724-1.png"
+        alt="images/724-1.png" /></a><br /><a
+      href="https://viewer.diagrams.net/?tags={}&highlight=FFFFFF&edit=_blank&layers=1&nav=1&title=NTLMv2.png#R7VxZc5s6FP41fgzDvjwmdn370CzTtNPbpzuKUWwmGLkgx3Z%2F%2FZVAwiCEsR0Wj1v3oXAQEpzv7EdkZIyX239isFrcIx%2BGI131tyNjMtJ1TTVc8h%2Bl7DKK6XoZYR4HPhu0JzwHvyG%2Fk1HXgQ%2BT0kCMUIiDVZk4Q1EEZ7hEA3GMNuVhrygsr7oCc1ghPM9AWKX%2BCHy8yKiupe7pn2EwX%2FCVNZVdeQGzt3mM1hFbb6Qbr%2Bkvu7wEfC42PlkAH20KJOPTyBjHCOHsaLkdw5DylrMtu29aczV%2F7hhG%2BJgbfj9O4DhJpht%2F9rq03C%2Fvm%2B%2FbGzbLOwjXkL%2BGHZL57l7IwZwecMIrIutQHEIUp0PtX2uUDchffE9SE7xjLOZEOsFNkgrALRmgWatt8Y5stYdv5NJnkCz4suSFspXLT0PIhSfUSwvqKSqQvrdGLm8WAYbPKzCjVzdEigltgZchu%2FwahOE4fynD81Tyy2d9hzGG21qWazmQREEgWkIc78gQfgOXoh2XeXa%2B2UuabjPaoiBlJqMBJtzzfOo9wOSAYXwC3roEb4F5RE5X9HC2jsPdXUykHOJmLpZZLvB0OmU8zdCfqIqV3oIBDlBECF5LDNdtV%2FGMEs9vTFdx3SrbJVzXLUdxzY44b1Q4r9nk%2FG6HifUTMSAcwGX%2BJjhGb5DzNEIRFNjMSCAM5pSjM8IxSOh3lJ8BMXe37MIy8H26jBTQPYptASJogFVVAJn8613Jv1tr7%2FoxbxXrOkFLEERk%2FANYQrlxq7GDLdq8u%2FRfS4i7gs3ztArkWr82z2kC%2FWQwjxWTGtC%2FwmSFomQwvPf2uGRVyBVVbc%2F7iZJgulXl15w%2BJcEwm90fZXqJIbY9HkvsKEarAvULeIHhE0oC5tBeEMZoSQaEwoXcLlcMdQEutMZhEBFceMirVjEcpz8Zhrbraqk2z2PgB3D%2FOsxFcPIkiMns2WNFKKaQsMl4IKxTCgsHlts5TQCUCOINit8SZTVrR0xsUzAYjsRgqBIxcTsTE7tZTKQQ%2BSRuzb1no2jIJeqQXIhYgE1iKJjCSecG4X8JjN%2FTmwRhcSbO2BnXi0SndsBzBICNKsCWTULCCsJaZ3GAUe8T6hKfMz3%2BOKT8%2Fkg2czXBoC0Igu5UHYLZZzRo1IeDyQpELYZ5z5licnJ8WAByWvYU1y4XnuMqulUWDdtTvOLPHFhSvGaXACP%2FlhakKGNDkCTBrIwO4Ua8%2B5exLT35SU8UzXY4YbItXp7simdPMA7Iy1C8CoyHfqW8JbBdVzGI5xA3OrwqPkUDLeE2p8UwJIn8e%2Fk5ZBCwFZ5QkFpUBr8jVkksYYoEreMZZHcVK1ziRHZ5IkOcKGNEZaJUIvLXPl9IuES26lQMmX25XRNcdPUr%2FLWGyV%2FnIpUivRpleH2aDPOIWluTyThWx4dSXc%2BuSfZPVl0RPXGirlW3Wp67OrBEHhP4FM8q%2BFj3POxEISDZQ7%2FYWbVm99SiHu9OcZp2MLQ713rzYFAdL0AYwmjeXyGo0binud906rZllT1Br21Jct9rJMdjgg9LS02k346Dl1QIZa796ESi71Iik6wWJMgVrYt6ZHmoMwmyZVXEQZsIAxqUDm2HUenlGbIKcq%2B9BFvma06ME8qa4sNXsE5xgdsAp%2Blh2h2lZz%2FZHfR4nxrSE54ZHhtzkAdMvfmBVxs0NhH7hPn2kFODkWr7qd9gxJbVjtuoI36nzoC%2Bha5%2Bvr8d39xPiCiqb3B3rFpfTaZHAlnFMssoWxKn4PbqFBqbjH07hYdvX%2B7f6SM9%2FpheRWNZFUzE8M5AVhRsQ9dJ9Eddwh%2Bn2ILtzpEbarcI709cjlITLxBHV7JTJO%2FuXcxOEaet3LA1vL8FS5hgsFxdBeDeBUb0jqxMOyjmvGN8Cdkc3Q3bUjYnNmeGR76Fmm9zLqeqTiGbu1EVwzuY0dETsdW37xxmqWHeOxwd7huO2ssOeazT2EvMAuHBatyCkInCc2waKfomvec00mmsMf1NIz%2BcRpqKZ5fFxZDYpF7TSKfL%2BlLnVqTRODjDFpkcrwy3COPRRSbHKU9kG%2F1ah8YiU98xyyNepAXoaQBDP7mc9kSb4aulX1wEc3FFp%2BuMXcVoQLqTvV%2FkW9iPVucnjrX3g5lx8bsCcb%2FBub0CU9xR3rEZd9srN%2FSzceECtburtnNls4ys7az1GRq6spSgXuUZK%2FJPErQyPyn9CWASiEcpRVeNkezzD3lTMs9a5SlszUbXPOrsIV01j4xIs81DQ5kyt6101TgvXSXCAnaFYSs6IKl%2FXkMT1nHVg88lhkz82569HmRP0K5ZPS2HallRtKKa5ErToChaWVG8Jk354IbwRvXhn0w2qo87aCRgiV8Xn6s%2FttBbNDvSH3Ezk6WW9KcjfehqS8Kf2qYU9jSakjZlS1sayen%2BD4Rk8rD%2FKyzGp%2F8B" target="_blank">View
+      Image</a><br /><br /><strong>1</strong>. Client makes an authentication with the Server<br /><strong>2.</strong>
+    Server sends <span style="color:#0ee491;">Server Challenge</span><br /><strong>3.</strong> Client formulates a
+    response:<br /> 1) The NTLMv2 challenge/response algorithm is based on a <span style="color:#a5452a;">user&#39;s NT
+      hash</span> stored in the SAM database. <br /> 2) The <span style="color:#a5452a;">user&#39;s NT hash</span>, it
+    is used <span style="text-decoration:underline;">as a key</span> in the keyed hash algorithm HMAC- MD5 to hash the
+    pair &lt;USERNAME,DomainName&gt;<br /> While USERNAME is upper case, the DomainName that is the Server is case
+    sensitive<br /> 4) This result (the &lt;USERNAME,DomainName&gt; name hashed with the <span
+      style="color:#a5452a;">user&#39;s NT hash</span>) is also called <span style="color:#7c7c7c;">NTLMv2 One-Way
+      Function (OWF)</span> <br /> 5) NTLMv2 One-Way Function (OWF) is then used as a key in the next round round of
+    HMAC-MD5 hashing,<br /> OWF is applied to the <span style="color:#0ee491;">Server Challenge</span> + Timestamp +
+    <span style="color:#078756;">Client Challenge</span> (generated in a pseudorandom fashion) + some Other Fields
+    (which are not documented in detail by Microsoft). <br /> 6) The result is called the <span
+      style="color:#ff1b00;">NTLMv2 response</span>, which is sent to the server along with the <span
+      style="color:#078756;">Client Challenge</span>. <br /><br /><br />Cracking NTLMv2 requires sniffing the <span
+      style="color:#0ee491;">Server Challenge</span> and the <span style="color:#078756;">Client Challenge</span>+<span
+      style="color:#ff1b00;">NTLMv2 Response</span> <br />Clearly because this is a more sophisticated form of
+    authentication there is a lot more cryptographic work in cracking NTLMv2 challenge/response than the NTLMv1
+    challenge/response.<br /><br />Bibliography:<br />• <a
+      href="https://www.sans.org/blog/protecting-privileged-domain-accounts-network-authentication-in-depth/" target="_blank">https://www.sans.org/blog/protecting-privileged-domain-accounts-network-authentication-in-depth/</a><br />•
+    <a
+      href="https://www.giac.org/paper/gsec/2507/securing-legacy-clients-windows-environment-transitioning-windows-2000-active-directory/104346" target="_blank">https://www.giac.org/paper/gsec/2507/securing-legacy-clients-windows-environment-transitioning-windows-2000-active-directory/104346</a><br />•
+    <a
+      href="https://www.giac.org/paper/gcih/12114/pass-the-hash-attacks-tools-mitigation/119029" target="_blank">https://www.giac.org/paper/gcih/12114/pass-the-hash-attacks-tools-mitigation/119029</a><br />
+  </div>
+</body>
+
+</html>

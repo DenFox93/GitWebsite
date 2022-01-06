@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>simple Encoding URL (percent encoding)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>simple Encoding URL (percent encoding)</h1><br/><br />Encoding serves as one of the more important approaches to defeating blacklist-style filters, or even some whitelist-style filters.<br /><br />Differences between encoding the payload <span style="color:#ff0000;">&lt;script&gt;alert(&quot;xss vulnerable&quot;)&lt;/script&gt;</span> with:<br />• BurpSuite<br />    %3c%73%63%72%69%70%74%3e%61%6c%65%72%74%28<span style="color:#0000ff;">%22%78%73%73%20%76%75%6c%6e%65%72%61%62%6c%65%22%</span>29%3c%2f%73%63%72%69%70%74%3e<br />    Burp Decoder encoded every single character, even the alphanumerics. Although it was unnecessary in this case, there might well be times when we avail ourselves of this feature.<br />• ZAP<br />    %3Cscript%3Ealert%28<span style="color:#0000ff;">%22xss+vulnerable%22</span>%29%3C%2Fscript%3E<br />    <br />• Firefox Web Console<br />    %3Cscript%3Ealert(&#39;<span style="color:#0000ff;">xss%20vulnerable</span>&#39;)%3C%2Fscript%3E<br />    </div>
+</body>
+</html>

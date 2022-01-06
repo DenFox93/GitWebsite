@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Validation of Referer can be circumvented</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Validation of Referer can be circumvented</h1><br /><br /><strong>Circumnavigate Validation of the
+      Referer</strong><br />If the application validates that the domain in the Referer <br />• starts with the expected
+    value, then the attacker can place this as a subdomain of their own domain:<br />
+    <code>http://vulnerable-website.com.attacker-website.com/csrf-attack</code><br /><br />• contains its own domain
+    name, then the attacker can place the required value somewhere in the URL:<br />
+    <code>http://attacker-website.com/csrf-attack?vulnerable-website.com</code> <br /><br /><span
+      style="text-decoration:underline;">Note:</span><br />Although you may be able to identify this behavior using
+    Burp, you will often find that this approach no longer works when you go to test your proof-of-concept in a browser.
+    This because in an attempt to reduce the risk of sensitive data being leaked in this way, many browsers now strip
+    the query string from the <code>Referer</code> header by default.<br />You can override this behavior by making sure
+    that the response containing your exploit has the <code>Referrer-Policy: unsafe-url header set</code>. This ensures
+    that the full URL will be sent, including the query string. <br /><br /><strong>
+      <h3>How to test the vulnerability</h3>
+    </strong><br />This is our request<br /><a href=""><img src="images/1723-1.png"
+        alt="images/1723-1.png" /></a><br />1. Try to change the value of the Referer HTTP header, the request is
+    rejected. <br /> <a href=""><img src="images/1723-2.png" alt="images/1723-2.png" /></a><br /> How we can see the
+    <span style="text-decoration:underline;">request is been rejected as expected</span><br />2. Now copy the <span
+      style="color:#1e90ff;">original value of the Referer header</span> and append it in the form of a query string to
+    the <span style="color:#ff0000;">changed value of before</span><br /> <a href=""><img src="images/1723-3.png"
+        alt="images/1723-3.png" /></a><br /> <a href=""><img src="images/1723-4.png"
+        alt="images/1723-4.png" /></a><br /> This mean that the WebApp is vulnerable|<br /><br /><strong>
+      <h3>How to Exploit</h3>
+    </strong><br />To create a Poc on <a
+      href="p_Pentest--Exploitation--Client-Side--Cross-Site_Request_Forgery_(CSRF-XSRF)--How_to_construct_a_CSRF_attack--BurpSuite_Generate_CSRF_PoC.html">Burpsuite
+      Professional as seen HERE</a><br />1. right click on the request → Engagement Tools → create CSRF PoC<br />2.
+    Options → Include Auto-submit script → Regenerate<br />4. Edit the JavaScript so that the third argument of the
+    history.pushState() function includes a query string with your lab instance URL as follows:<br />
+    <code>history.pushState(&quot;&quot;, &quot;&quot;, &quot;/?</code><code><span style="color:#1e90ff;">vulnerableVictimSite.net</span></code><code>&quot;)</code><br />
+    This will cause the Referer header in the generated request to contain the URL of the target site in the query
+    string, just like we tested earlier. <br /> <a href=""><img src="images/1723-5.png"
+        alt="images/1723-5.png" /></a><br />5. extra (portswigger LAB): If you store the exploit and test it by clicking
+    &quot;View exploit&quot;, you may encounter the &quot;invalid Referer header&quot; error again. This is because many
+    browsers now strip the query string from the Referer header by default as a security measure. To override this
+    behavior and ensure that the full URL is included in the request, go back to the exploit server and add the
+    following header to the &quot;Head&quot; section:<br /> <code>Referrer-Policy: unsafe-url</code><br /> <a
+      href=""><img src="images/1723-6.png" alt="images/1723-6.png" /></a><br /><br />Bibliography:<br />• <a
+      href="https://portswigger.net/web-security/csrf#:~:text=Validation%20of%20Referer%20can%20be%20circumvented"  target="_blank">https://portswigger.net/web-security/csrf#:~:text=Validation%20of%20Referer%20can%20be%20circumvented</a><br />LAB:
+    <a
+      href="https://portswigger.net/web-security/csrf/lab-referer-validation-broken"  target="_blank">https://portswigger.net/web-security/csrf/lab-referer-validation-broken</a>
+  </div>
+</body>
+
+</html>

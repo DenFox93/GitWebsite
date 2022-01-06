@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Calculate Subnet</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Calculate Subnet</h1><br /><strong>
+      <h3>Find network part</h3>
+    </strong>
+    <h3>:</h3><br />To do that we have to do a bitwise(meaning operations on bits) <strong>AND </strong>operation
+    between IP and netmask<br />So the operation is that one <strong><span style="color:#00ff00;">(IP AND
+        netmask)</span></strong><br /><span style="color:#a5452a;text-decoration:underline;">example</span><span
+      style="color:#a5452a;">:</span> 192.168.45.23/255.255.224.0 → 11000000.10101000.00101101.00010111<strong>
+      AND</strong> 11111111.11111111.11100000.00000000 → <br /> ⇒ 11000000.10101000.00100000.00000000 → <span
+      style="color:#ff0000;">192.168.32.0</span> <br /> this <span style="color:#ff0000;">192.168.32.0</span> is the
+    <strong>Network prefix(part) </strong>in decimal notation; <br /> to <span
+      style="text-decoration:underline;">identify this network</span> we can use the following notation
+    192.168.32.0/255.255.224.0 or also <span style="color:#0000ff;">192.168.32.0/19</span> (19 are the number of 1 in
+    the netmask)<br /> The format <span style="color:#0000ff;">192.168.32.0/19</span> is also called <strong>CIDR
+      notation</strong><br /> ◇ <a
+      href="https://www.subnet-calculator.com/cidr.php" target="_blank">https://www.subnet-calculator.com/cidr.php</a><br /> <a
+      href=""><img src="images/1841-1.png" alt="images/1841-1.png" /></a><br /> ◇ <a
+      href="https://www.ipaddressguide.com/cidr" target="_blank">https://www.ipaddressguide.com/cidr</a><br /> <br /><strong>
+      <h3>Find </h3>
+    </strong><strong>
+      <h3>host part</h3>
+    </strong><strong>(number of maximum hosts in the network)</strong>:<br />The host part of the IP address is the one
+    that is not covered by the netmask. <br /><span style="text-decoration:underline;">Host part</span> → 32 - (network
+    part) == Number of bits at the end of the subnet mask set to 0<br /><span style="color:#a5452a;">example:</span>
+    255.255.224.0 → 11111111.11111111.11100000.00000000 <br /> ◇ how we can see there are 13 zeros, so 2<sup>13</sup> →
+    2<sup>13</sup>=8192 hosts<br /> ◇ 32 - 19 = 13 → 2<sup>13</sup>=8192 hosts<br /><br /> <br /><strong>
+      <h2>Network</h2>
+    </strong><strong>
+      <h2> and </h2>
+    </strong><strong>
+      <h2>Broadcast</h2>
+    </strong><strong>
+      <h2> Addresses</h2>
+    </strong>
+    <h2> <br /></h2> The possible hosts in a given network are always reduced by 2 because there are always 2 special
+    address:<br />• <strong><span style="color:#1e90ff;">network address(network id)</span></strong>: Address used to
+    identify the entire network. It is the first address in the network and its host portion is set to all zeros.<br />
+    ◇ (<span style="text-decoration:underline;">network part</span>) AND (<span
+      style="color:#a020f0;text-decoration:underline;">host part</span> with all 0)<br />• <strong><span
+        style="color:#00ff00;">broadcast address(broadcast ip)</span></strong>: It is the last address in the network.
+    it is used for addressing all the nodes in the network at the same time<br /> ◇ (<span
+      style="text-decoration:underline;">network part</span>) AND (<span
+      style="color:#a020f0;text-decoration:underline;">host part</span> with all 1)<br />This technical limitation
+    should be extinct (<a href="http://tools.ietf.org/html/rfc1878" target="_blank">RFC1878</a>) but is still used to keep compatibility
+    with old equipment.<br /><span style="color:#a5452a;">example:</span> <span
+      style="color:#0000ff;">192.168.32.0/19</span> → 192.168.32.0/255.255.224.0<br /> counting the bits in the host
+    part we have the number of hosts: 13bits so 2<sup>13</sup>=8192 host (minus network and broadcast addresses so 8190
+    hosts)<br /> <span style="color:#a020f0;text-decoration:underline;">host part</span>:
+    00000000.00000000.000<strong><span style="text-decoration:underline;">00000.00000000</span></strong><br /> ◇ <span
+      style="color:#1e90ff;text-decoration:underline;">network part</span>: 11000000.10101000.00100000.00000000 AND
+    00000000.00000000.000<strong><span style="text-decoration:underline;">00000.00000000</span></strong> →
+    11000000.10101000.001<strong>00000.00000000</strong><br /> <span style="color:#1e90ff;">192.168.32.0</span><br /> ◇
+    <span style="color:#00ff00;text-decoration:underline;">broadcast address</span>: 11000000.10101000.00100000.00000000
+    AND 00000000.00000000.000<strong><span
+        style="text-decoration:underline;">11111.11111111</span></strong>→11000000.10101000.001<strong>11111.11111111</strong>
+    → <br /> <span style="color:#00ff00;">192.168.63.255</span><br /> <br /><br /> <br />
+  </div>
+</body>
+
+</html>

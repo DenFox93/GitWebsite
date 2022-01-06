@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>angle brackets and double quotes HTML encoded + single quotes escaped</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>angle brackets and double quotes HTML encoded + single quotes escaped</h1><br />Some applications
+    <span style="text-decoration:underline;">attempt to prevent input from breaking out of the JavaScript string by
+      escaping any single quote characters with a backslash</span>.  In this situation, <span
+      style="text-decoration:underline;">applications often make the mistake of failing to escape the backslash
+      character itself</span>. This means that an attacker can use their own backslash character to neutralize the
+    backslash that is added by the application.<br /><span style="color:#a52a2a;">example:</span><br /><strong><span
+        style="color:#00ff00;">&#39;</span></strong><span style="color:#ffa500;">;alert(document.domain)//</span> gets
+    converted to: <strong><span style="color:#00ff00;">\&#39;</span></strong><span
+      style="color:#ffa500;">;alert(document.domain)//</span><br />You can use the alternative
+    payload:<br /><strong><span style="color:#00ff00;">\&#39;</span></strong><span
+      style="color:#ffa500;">;alert(document.domain)//</span> → which gets converted to → <strong><span
+        style="color:#00ff00;">\\&#39;</span></strong><span
+      style="color:#ffa500;">;alert(document.domain)//</span><br /><br /><br />1. Submit a random alphanumeric string in
+    the search box (example: 204a2fb1)<br /> Use Burp Suite to intercept the search request and send it to Burp
+    Repeater. <br /> <a href=""><img src="images/1949-1.png" alt="images/1949-1.png" /></a><br /> <span
+      style="text-decoration:underline;">Observe that the random string has been reflected inside a JavaScript
+      string</span><br /><br />2. Try sending the payload <strong>test&#39;payload</strong> and observe that <span
+      style="text-decoration:underline;">single quote gets backslash-escaped</span>, preventing you from breaking out of
+    the string.<br /> <a href=""><img src="images/1949-2.png" alt="images/1949-2.png" /></a><br /><br />3. Try sending
+    the payload <strong>test\payload</strong> and observe that <span style="text-decoration:underline;">backslash
+      doesn&#39;t get escaped</span>.<br /> <a href=""><img src="images/1949-3.png"
+        alt="images/1949-3.png" /></a><br /><br />4. Replace your input with the following payload to break out of the
+    JavaScript string and inject an alert: <br /> ◇ <h3>\&#39;</h3>
+    <h3>-alert(1)</h3>
+    <h3>//</h3><br /> <a href=""><img src="images/1949-4.png" alt="images/1949-4.png" /></a><br /> ◇ <h3>\&#39;</h3>
+    <h3>;alert(1)</h3>
+    <h3>//</h3> (ALTERNATIVE)<br /> <a href=""><img src="images/1949-5.png" alt="images/1949-5.png" /></a><br /> This
+    happen because:<br /> ◇ <span style="color:#00ff00;">single backslash</span> (<strong><span
+        style="color:#00ff00;">\</span></strong>) is an escape character(for the next character) in Javascript. This
+    means that it <h3>i</h3>nvokes an alternative interpretation of the next character<br /> ▪ \n → is a newline
+    character rather than the letter n<br /> ▪ \\ → will output a single backslash<br /> ▪ \\\\ → will output two, and
+    so on <br /> ▪ \&quot; → will output a literal quote instead of close a string<br /> ◇ <span
+      style="color:#1e90ff;">double slash</span> (<strong><span style="color:#1e90ff;">//</span></strong>) is a Single
+    line comment in javascript<br /><br /><br />5. Vulnerable ;)<br /> <a href=""><img src="images/1949-6.png"
+        alt="images/1949-6.png" /></a><br /><br /><br /><br /><br /><br /><br /><strong>Bibliography:</strong><br /><a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-double-quotes-encoded-single-quotes-escaped" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-double-quotes-encoded-single-quotes-escaped</a>
+  </div>
+</body>
+
+</html>

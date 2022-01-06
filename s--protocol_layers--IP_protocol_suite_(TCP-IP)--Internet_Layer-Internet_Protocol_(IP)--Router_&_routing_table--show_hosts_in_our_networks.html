@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>show hosts in our networks</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>show hosts in our networks</h1><br/>with the command <span style="text-decoration:underline;">ifconfig</span> we can see that in addition to the Ethernet interface <strong>eth0</strong> and the loopback interface <strong>lo</strong>, we have also a virtual interface<strong> tap0</strong> created by the software OpenVPN that connect us to the VPN.<br /><br />To see which host are in our network we can use:<br /><div class="codebox"><div class="codebox">nmap&nbsp;-sn&nbsp;10.175.34.0/24</div></div><br />or the command<br /><div class="codebox"><div class="codebox">arp-scan&nbsp;--interface=tap0&nbsp;--localnet</div></div><br /><a href=""><img src="images/83-1.png" alt="images/83-1.png" /></a></div>
+</body>
+</html>

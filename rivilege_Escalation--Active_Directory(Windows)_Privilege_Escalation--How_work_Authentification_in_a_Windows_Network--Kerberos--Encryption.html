@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Encryption</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Encryption</h1><br /><strong>
+      <h2>Encryption</h2>
+    </strong><br />Kerberos to encrypt and decrypt Tickets and Authenticators uses only symmetrical key encryption (same
+    key is used to encrypt and decrypt).<br /><br /><strong>string2key</strong><br />Kerberos use the <a
+      href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key</a> hash function to transforms an <span
+      style="text-decoration:underline;">unencrypted password</span> of a user/service/krbtgt into an <span
+      style="text-decoration:underline;">encryption key</span>. The <span style="text-decoration:underline;">encryption
+      key</span> will be used as the key for an <span style="text-decoration:underline;">encryption type</span> to
+    encrypt Tickets and Authenticators.<br />string2key is a function based on the PBKDF2 algorithm(<a
+      href="https://www.rfc-editor.org/rfc/rfc8429.html#:~:text=Modern%20encryption,algorithm" target="_blank">rfc8429</a>) that has as
+    input the <span style="text-decoration:underline;">encryption key</span> and a &quot;salt&quot;.<br />By default a
+    Kerberos “salt” includes the <span style="color:#1e90ff;">Client Principal Name</span> and the name of the realm(<a
+      href="https://www.rfc-editor.org/rfc/rfc8429.html#:~:text=The%20default%20salt,practices" target="_blank">rfc8429</a>).<br /><span
+      style="color:#ff8700;">KDC</span> in KRB-AS-REP can override the salt with a padata parameter (PA-PW-SALT,
+    PA-AFS3-SALT, PA-ETYPE-INFO, PA-ETYPE-INFO2...)(<a
+      href="https://tools.ietf.org/html/rfc4120#section-3.1#:~:text=The%20salt%20value,etc)." target="_blank">rfc4120</a>)<br /><span
+      style="color:#a5452a;">example: salt=daniele@EXAMPLE.COM</span><br />
+    <code> EncryptionKey</code><code><sub>daniele</sub></code><code> = string2key(UnencryptedPassword</code><code><sub>daniele</sub></code><code> + &quot;daniele@EXAMPLE.COM&quot; )</code><br /><br /><strong>Encryption
+      Keys(secret keys)</strong><br />As we have seen in Kerberos Protocol we have 3 <span style="color:#ff0000;">secret
+      keys</span>:<br />• <span style="color:#ff8700;">KDC(krbtgt)</span> <span style="color:#ff0000;">secret key</span>
+    → krbtgt account&#39;s password hashed with <a
+      href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key function</a>. krbtgt account is the
+    default account for the Key Distribution Center (KDC) service. The password is assigned to the krbtgt account
+    automatically by the system during the creation of the <span style="color:#ff8700;">KDC</span><br />• <span
+      style="color:#1e90ff;">Client(user)</span> <span style="color:#ff0000;">secret key</span> → user account&#39;s
+    password hashed with <a href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key function</a><br />•
+    <span style="color:#f6ff00;">Service</span> <span style="color:#ff0000;">secret key</span> → service account&#39;s
+    password hashed with <a href="https://www.kerberos.org/software/tutorial.html#1.3.4" target="_blank">string2key
+      function</a><br /><br /><strong>Encryption Types</strong><br />By default, Kerberos will use the highest method of
+    encryption that is supported by the system(most secure is AES256_HMAC_SHA1). <br />From Windows Vista/Server 2016
+    all of these encryption types are supported:<br />• DES_CBC_CRC → disabled by default in Vista/2008<br />•
+    DES_CBC_MD5 → disabled by default in Vista/2008<br />• RC4_HMAC_MD5 → XP &amp; 2003 default, as well as the
+    strongest encryption they support.<br /> <a
+      href="odology--System_Security_(Windows_&_Linux)--Cryptography_and_Password_Cracking--Authentication--Windows--Hashing_algorithms--NT_algorithm.html">NT
+      hash</a> of the user&#39;s password is used as key for RC4_HMAC encryption method. <br /> RC4(also known as ARC4
+    or ARCFOUR) encryption ignore the salt input to the string2key function; the function itself is a single iteration
+    of the MD4 hash function applied to the UTF-16 encoded password, with no salt at all. Described in <a
+      href="https://tools.ietf.org/html/rfc4757#:~:text=The%20key%20used,compatibility%20reasons" target="_blank">rfc4757</a> and <a
+      href="https://tools.ietf.org/html/rfc8429#:~:text=the%20RC4%20encryption,this%20time" target="_blank">rfc8429</a><br /> ◇
+    String2Key(NThash):<br /> return MD4(UNICODE(NThash))<br />• AES128_HMAC_SHA1 → introduced with Vista/2008<br />•
+    AES256_HMAC_SHA1 → default in Vista/2008 and higher<br /><br /><br /><strong>Change settings</strong><br />Supported
+    Kerberos encryption types can be configured under the following setting(Windows 7):<br />Search for “Edit group
+    policy” in the search bar:<br />Computer Configuration -&gt; Windows Settings -&gt; Security Settings -&gt; Local
+    Policies -&gt; Security Options -&gt; Network Security: Configure encryption types allowed for Kerberos<br /><a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/1. System Security/5 - Cryptography and Password Cracking/encryption_types.png"><img
+        src="images/1125-1.png" alt="images/1125-1.png" /></a><br /><br />Bibliography:<br />• <a
+      href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-configure-encryption-types-allowed-for-kerberos"  target="_blank">https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/network-security-configure-encryption-types-allowed-for-kerberos</a>
+  </div>
+</body>
+
+</html>

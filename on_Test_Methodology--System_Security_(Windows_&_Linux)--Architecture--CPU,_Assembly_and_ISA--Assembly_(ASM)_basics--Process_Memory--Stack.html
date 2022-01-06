@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Stack</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Stack</h1><br/>The <span style="color:#a020f0;">Stack</span> is a Last-in-First-out (<strong>LIFO</strong>) block of memory. It is located in the higher part of the memory.<br />The <span style="color:#a020f0;">Stack</span> is like an array used for saving a function’s return addresses, passing function arguments, and storing local variables.<br /><br /><strong>How stack grows?</strong><br />as we can see from the memory structure diagram, <br />• the <span style="color:#a020f0;">Stack</span> grows downward, towards the lower memory addresses<br />• the <span style="color:#ff0000;">Heap</span> grows upward, towards the higher memory addresses<br />This is probably due to historical reasons when the memory in old computers was limited and divided into two parts: <span style="color:#ff0000;">Heap</span> and <span style="color:#a020f0;">Stack</span><br /><br /><a href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/1. System Security/1 - Architecture Fundamentals/process-memory.png"><img src="images/478-1.png" alt="images/478-1.png" /></a><br /><br /><br /><strong>ESP register (x86 naming convention)</strong><br />The <strong>ESP</strong> register (Stack Pointer) points the top of the stack. ESP is modified each time a value is pushed in (<span style="text-decoration:underline;">PUSH</span>) or popped out (<span style="text-decoration:underline;">POP</span>)<br /><br /><span style="text-decoration:underline;">PUSH</span> → The ESP value is decremented(the Stack grows backward), in x86 by 4 or in x64 by 8. Then PUSH write data to the new top of the stack.<br /><span style="text-decoration:underline;">POP</span> → It retrieves data from the top of the Stack(address location pointed by ESP). after a POP operation, the ESP value is incremented, in x86 by 4 or in x64 by 8. <br />    Remember that when a value is popped from the stack is not deleted (or zeroed). It will stay in the stack until another instruction overwrites it.<br /><br /><br /></div>
+</body>
+</html>

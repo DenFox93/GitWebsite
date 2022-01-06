@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>enumerating SID</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>enumerating SID</h1><br /><strong>
+      <h3>Enumerating SID</h3>
+    </strong><br />The SID (Service Identifier) is essentially the database name, depending on the install you may have
+    one or more default SIDs, or even a totally custom dba defined SID.<br /><br /><strong>Odat</strong><br />Tested on
+    Oracle Database 10g, 11g, 12c, 18c and 19c.<br />
+    <div class="codebox">
+      <div class="codebox">root@kali:/#&nbsp;odat&nbsp;all&nbsp;-s&nbsp;&lt;IpHost&gt;&nbsp;-P&nbsp;1521</div>
+    </div><br /> <a href=""><img src="images/1237-1.png" alt="images/1237-1.png" /></a><br />
+    <br /><br /><strong>Oscanner</strong>(no more updated) <br />Work on older versions of the Oracle Database (before
+    10g)<br />oscanner get some valid SID and then it will brute-force for valid credentials<br />
+    <div class="codebox">
+      <div class="codebox">root@kali:/#&nbsp;oscanner&nbsp;-s&nbsp;&lt;IpHost&gt;&nbsp;-P&nbsp;1521</div>
+    </div><br /> <a href=""><img src="images/1237-2.png" alt="images/1237-2.png" /></a><br /><br />Bibliography:<br /><a
+      href="https://book.hacktricks.xyz/pentesting/1521-1522-1529-pentesting-oracle-listener" target="_blank">https://book.hacktricks.xyz/pentesting/1521-1522-1529-pentesting-oracle-listener</a><br />
+  </div>
+</body>
+
+</html>

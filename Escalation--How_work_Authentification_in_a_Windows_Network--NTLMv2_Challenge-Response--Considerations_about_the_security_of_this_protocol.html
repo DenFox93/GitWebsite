@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Considerations about the security of this protocol</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Considerations about the security of this protocol</h1><br/><strong><h3>Considerations about the security of this protocol:</h3></strong><br /><br />• Due to the Timestamp and <span style="color:#078756;">Client Challenge</span>, the Response of the client is different every time that is generated<br />• Impossible to create rainbow tables to gather the NT hash or the password from the NTLMv2 response.<br />• Dictionary does not make sense as the key (HMAC-MD5) is a hash.<br />• The only possible attack is by brute-forcing the HMAC-MD5 key<br />• The NTLMv2 hash is bound to a particular server and particular username so it’s not reusable.<br /><br />After doing these considerations we can say that cracking NTLMv2 hashes is considered infeasible (if the password is strong enough).<br />Anyway we can still use the hash to mount different attacks</div>
+</body>
+</html>

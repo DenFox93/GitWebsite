@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>dump NTDS.dit file stored on the Domain Controller</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>dump NTDS.dit file stored on the Domain Controller</h1><br />If we are dealing with <span
+      style="text-decoration:underline;">host based IPS or Anti-Virus</span> that is detecting LSASS injection attempts,
+    we are taking a significant risk when injecting assembly into this process.<br />In we are in Domain Controller,
+    <span style="text-decoration:underline;">a </span><strong><span style="text-decoration:underline;">Volume Shadow
+        Copy Service</span></strong><span style="text-decoration:underline;"> extraction is the best approach to ensure
+      stability</span>. <br />The original LSASS injection process in meterpreter can be risky on a Domain Controller,
+    and should probably be avoided. Because of that a safer approach for getting hashes from a domain controller system
+    is the use of the Volume Shadow Copy Service (VSS), a built-in feature of Windows 2003 and later for creating
+    backups of files on Windows, even if they are write-protected. VSS works through the concept of snapshots, which
+    hold the changes made to files in the system, allowing a tool to roll the system back to an earlier
+    state.<br /><br /><br /><br /><strong>How prevent this type of attack</strong><br />The best way to stay protected
+    against this attack is to limit the number of users who can log onto Domain Controllers, including commonly
+    protected groups such as Domain and Enterprise Admins, but also Print Operators, Server Operators, and Account
+    Operators. These groups should be limited, monitored for changes, and frequently recertified.<br />In addition,
+    leveraging monitoring software to alert on and prevent users from retrieving files off Volume Shadow Copies will be
+    beneficial to reduce the attack surface.<br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://stealthbits.com/blog/extracting-password-hashes-from-the-ntds-dit-file/" target="_blank">https://stealthbits.com/blog/extracting-password-hashes-from-the-ntds-dit-file/</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>How setup Lab</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>How setup Lab</h1><br /><strong>
+      <h3>How to setup the Lab</h3>
+    </strong><br />1.In both the victim and attacker machine:<br /> <a href=""><img src="images/1199-1.png"
+        alt="images/1199-1.png" /></a><br />2. Linux(attacker):<br />
+    <div class="codebox">
+      <div class="codebox">
+        ifconfig<br />sudo&nbsp;dhclient&nbsp;-r&nbsp;eth0<br />sudo&nbsp;dhclient&nbsp;eth0<br />ifconfig<br />ping&nbsp;&lt;windows-victimIP&gt;&nbsp;&nbsp;&nbsp;#after&nbsp;point&nbsp;3
+      </div>
+    </div><br />3. Windows(victim)<br />
+    <div class="codebox">
+      <div class="codebox">
+        ipconfig<br />netsh&nbsp;advfirewall&nbsp;set&nbsp;allprofiles&nbsp;state&nbsp;off<br />ipconfig<br />ping&nbsp;<span
+          style="color:#000000;font-weight:400">&lt;</span>Linux-attackerIP<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /><br />bibliography<br /><a
+      href="https://www.notsosecure.com/pwning-with-responder-a-pentesters-guide/" target="_blank">https://www.notsosecure.com/pwning-with-responder-a-pentesters-guide/</a><br /><a
+      href="https://www.sikich.com/insight/using-multirelay-with-responder-for-penetration-testing/" target="_blank">https://www.sikich.com/insight/using-multirelay-with-responder-for-penetration-testing/</a>
+  </div>
+</body>
+
+</html>

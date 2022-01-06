@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2FA broken logic: choose to who send the 2FA code</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>2FA broken logic: choose to who send the 2FA code</h1><br /><br />This is the same LAB &amp;
+    vulnerability seen in the <a
+      href="ogy--WebApp_Pentest--Exploitation--Server-side--(Business_Logic__Application_Logic__Logic)_Flaws--Excessive_trust_in_client-side_controls.html">Busisness
+      Logic Flaws → Excessive Trust in client-side
+      controls</a><br /><br />-------------------------------<br /><br /><strong>
+      <h3>Understand the process of verification and investigate about the 2fa verification process</h3>
+    </strong><br />1. Login with username=wiener &amp; password=peter<br /> <a href=""><img src="images/2090-1.png"
+        alt="images/2090-1.png" /></a><br /> <a href=""><img src="images/2090-2.png"
+        alt="images/2090-2.png" /></a><br />2. Automatically a request to verify the user for 2FA code<br /> <a
+      href=""><img src="images/2090-3.png" alt="images/2090-3.png" /></a><br /> the <span
+      style="color:#ff0000;">verify</span> parameter in /login2 is used to determine for which account generate the 2FA
+    code<br />3. Now we have to insert the 2FA code that in our request with the <span
+      style="color:#ff0000;">mfa-code</span> parameter and finally login<br /> <a href=""><img src="images/2090-4.png"
+        alt="images/2090-4.png" /></a><br /> Note that the <span style="color:#a020f0;">session cookie</span> between
+    the GET request of point 2 and the POST request of point 3 is remained unchanged<br /> <br /><strong>
+      <h3>How to Exploit the Logic of this Application</h3>
+    </strong><br />At point 2 we see that a request for a 2FA code is generated and sent for our user with the parameter
+    <span style="color:#ff0000;">verify</span>.<br />What would happen if we change this parameter with the value of
+    another user, the 2FA code will be generated for the other user?<br />Let&#39;s check this:<br />4. Send the request
+    of point 2 to Burp Repeater and change the verify parameter value to another user (example: Carlos)<br /> <a
+      href=""><img src="images/2090-5.png" alt="images/2090-5.png" /></a><br /> If we check our email no 2FA code is
+    been generated for us, maybe is generated for carlos<br />5. It&#39;s time to try to Bruteforce the 2FA code of
+    carlos.<br /> To do that /login <span style="text-decoration:underline;">another time</span>* with valid credentials
+    (username=wiener&amp;password=peter) but then for POST /login2 request insert a random 2FA code(we need to
+    bruteforce it with Burp Intruder)<br /> *We login another time otherwise we would use a <span
+      style="color:#a020f0;">session</span> already in use.<br /> Send the invalid POST /login2 request to Burp Intruder
+    and try to Bruteforce the 2FA of carlos <br /> Change:<br /> ▪ verify → carlos<br /> ▪ mfa-code → Add<br /> <a
+      href=""><img src="images/2090-6.png" alt="images/2090-6.png" /></a><br />6. Burp Intruder → Payloads<br /> ▪
+    Payload Sets -&gt; Payload Type -&gt; Brute Forcer<br /> ▪ Change the value of Payload Options accordingly to the
+    mfa-code seen in precedence<br /> <a href=""><img src="images/2090-7.png" alt="images/2090-7.png" /></a><br /> Start
+    the Attack!<br />7. Results<br /> <a href=""><img src="images/2090-8.png" alt="images/2090-8.png" /></a><br /> Show
+    the correct response in the browser<br /> <a href=""><img src="images/2090-9.png"
+        alt="images/2090-9.png" /></a><br /><br /><br /><strong>Bibliography:</strong><br /><a
+      href="https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-broken-logic" target="_blank">https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-broken-logic</a><br /><a
+      href="https://portswigger.net/web-security/authentication/multi-factor" target="_blank">https://portswigger.net/web-security/authentication/multi-factor</a><br />
+  </div>
+</body>
+
+</html>

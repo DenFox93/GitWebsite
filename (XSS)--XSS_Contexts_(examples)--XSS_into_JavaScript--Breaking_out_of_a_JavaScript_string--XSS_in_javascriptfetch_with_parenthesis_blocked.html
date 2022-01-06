@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>XSS in javascript:fetch with parenthesis blocked</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>XSS in javascript:fetch with parenthesis blocked</h1><br /><br />XSS in javascript:fetch:<br />•
+    with parenthesis blocked (cannot do the request)<br /><br /><strong>
+      <h3>Not use common characters in payloads</h3>
+    </strong><br />Some websites make XSS more difficult by <span style="text-decoration:underline;">restricting which
+      characters you are allowed to use</span> (<span style="text-decoration:underline;">Like not possible use
+    </span><span style="color:#a020f0;text-decoration:underline;">parenthesis</span>)<br />This can be done :<br /> ◇ on
+    the website level<br /> ◇ by deploying a WAF that prevents your requests from ever reaching the website.<br />In
+    these situations, you need to experiment with other ways of calling functions which bypass these security measures.
+    <br /><span style="color:#a52a2a;">example:</span><br />
+    <div class="codebox">
+      <div class="codebox">onerror=alert;throw&nbsp;1</div>
+    </div><br /> The above code assigns the alert() function to the global exception handler and the throw statement
+    passes the 1 to the exception handler (in this case alert). The end result is that the alert() function is called
+    with 1 as an argument.<br /> <a href=""><img src="images/1957-1.png"
+        alt="images/1957-1.png" /></a><br /><br /><br /><strong>LAB</strong><br />1. Submit a random alphanumeric string
+    in the search box (example: 4)<br /> Use Burp Suite to intercept the search request and send it to Burp Repeater.
+    <br />
+    <div class="codebox">
+      <div class="codebox">/post?postId=4</div>
+    </div><br /> = → %3D<br /> <a href=""><img src="images/1957-2.png" alt="images/1957-2.png" /></a> <br /> we can see
+    that the input is been <span style="text-decoration:underline;">reflected into a href attribute</span> <span
+      style="text-decoration:underline;">with </span><span
+      style="color:#ffa500;text-decoration:underline;">javascript:fetch</span><br /><br />2. Solution <div
+      class="codebox">
+      <div class="codebox">
+        /post?postId=4&amp;&#39;},x=x=&gt;{throw/**/onerror=alert,1337},toString=x,window+&#39;&#39;,{x:&#39;</div>
+    </div><br /> payload in the in the source code <a href=""><img src="images/1957-3.png"
+        alt="images/1957-3.png" /></a><br /><br />3. To Lab to be completed we need to click on the “back to Blog”
+    button, because <span style="text-decoration:underline;">it contain the href with the payload</span><br /> <a
+      href=""><img src="images/1957-4.png" alt="images/1957-4.png" /></a><br /> <a href=""><img src="images/1957-5.png"
+        alt="images/1957-5.png" /></a><br /><br /><strong>
+      <h3>EXPLANATION</h3>
+    </strong> (from <a
+      href="https://security.stackexchange.com/questions/229055/reflected-xss-in-a-javascript-url-with-some-characters-blocked" target="_blank">here</a>)<br />Why
+    the <strong>/post?postId=4</strong><strong><span style="color:#00ff00;">&amp;</span></strong><strong><span
+        style="color:#1e90ff;">&#39;},x</span></strong><strong>=</strong><strong><span
+        style="color:#ffa500;background-color:#90ee90;">x=&gt;{throw/**/onerror=alert,1337}</span></strong><strong><span
+        style="background-color:#90ee90;">,</span></strong><strong><span
+        style="color:#a020f0;background-color:#90ee90;">toString=x,window+&#39;&#39;</span></strong><strong><span
+        style="background-color:#90ee90;">,</span></strong><strong><span
+        style="color:#ff0000;background-color:#90ee90;">{x:&#39;</span></strong> payload works?<br /> ◇ <strong><span
+        style="color:#00ff00;">&amp;</span></strong> appends a new parameter to leave the postId parameter
+    untouched.This is esentially creating a new parameter named <strong><span
+        style="color:#1e90ff;">&#39;},x</span></strong> with the rest of the XSS payload <strong><span
+        style="background-color:#90ee90;">x=&gt;{throw/**/onerror=alert,1337},toString=x,window+&#39;&#39;,{x:&#39;</span></strong> as
+    its value. This way the URL does not break, while the whole payload makes its way into the anchor tag containing the
+    vulnerable JavaScript URL.<br /> ◇ <strong><span style="color:#1e90ff;">&#39;}</span></strong> → breaks out
+    of body:&#39;/post?postId=4&#39;}<br /> <a href=""><img src="images/1957-6.png" alt="images/1957-6.png" /></a><br />
+    ◇ <strong><span style="color:#ffa500;">x=x=&gt;{throw/**/onerror=alert,1337}</span></strong> →  is the arrow
+    function which assigns alert as global error handler and throws 1337<br /> ▪ Note that also <strong><span
+        style="color:#ffa500;">x=x=&gt;{onerror=alert;throw 1}</span></strong> works<br /> <a href=""><img
+        src="images/1957-7.png" alt="images/1957-7.png" /></a><br /> ◇ <strong><span style="color:#a020f0;">toString=x,
+        window+&#39;</span></strong><span style="color:#a020f0;">&#39;</span> →  assigns x to toString and then forces a
+    string conversion on window<br /> ◇ <strong><span
+        style="color:#ffa500;">x=x=&gt;{throw/**/onerror=alert,1337}</span></strong><strong>,</strong><strong><span
+        style="color:#a020f0;">toString=x, window+&#39;</span></strong><span style="color:#a020f0;">&#39;</span> → Is a
+    fancy way to call alert(1337). It basically overwrites the toString method and triggers
+    it. ,toString=alert(1337),window+&#39;&#39;, doesn&#39;t work, since ( and ) are blocked. The , separation is
+    important to not break the JavaScript.<br /> ◇ <strong><span style="color:#ff0000;">{x:&#39;</span></strong> →
+     completes the remaining JavaScript source code in the page <strong>&#39;}.finally</strong>... ensuring that our
+    injected payload does not break it, but allows it to execute
+    properly.<br /><br /><br /><br /><br /><br /><br /><br /><br /><strong>Bibliography:</strong><br /><a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-url-some-characters-blocked" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-url-some-characters-blocked</a><br /><a
+      href="https://security.stackexchange.com/questions/229055/reflected-xss-in-a-javascript-url-with-some-characters-blocked" target="_blank">https://security.stackexchange.com/questions/229055/reflected-xss-in-a-javascript-url-with-some-characters-blocked</a>
+  </div>
+</body>
+
+</html>

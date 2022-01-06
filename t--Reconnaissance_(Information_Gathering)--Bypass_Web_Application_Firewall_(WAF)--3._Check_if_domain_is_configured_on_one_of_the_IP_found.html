@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3. Check if domain is configured on one of the IP found</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>3. Check if domain is configured on one of the IP found</h1><br /><br />Once we have a list of web
+    server IP, the next step is to check if the protected domain(by a firewall) is configured on one of them as
+    a virtual host. <br />If the Target Ip address load the Webpage of the website we have found an entry point ( in the
+    example not because it is the same address of cloudflare)<br /><br /><strong>BurpSuite</strong><br /> <a
+      href=""><img src="images/2010-1.png" alt="images/2010-1.png" /></a><br /><br /><strong>Curl</strong><br />
+    <div class="codebox">
+      <div class="codebox">curl&nbsp;-k&nbsp;-H&nbsp;&quot;Host:nabcosmetic.com&quot;&nbsp;https://146.88.237.11</div>
+    </div><br /> <a href=""><img src="images/2010-2.png" alt="images/2010-2.png" /></a>
+  </div>
+</body>
+
+</html>

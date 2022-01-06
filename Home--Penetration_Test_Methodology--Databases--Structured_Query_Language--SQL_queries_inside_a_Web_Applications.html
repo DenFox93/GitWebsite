@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>SQL queries inside a Web Applications</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>SQL queries inside a Web Applications</h1><br/>The <a href="Home--Penetration_Test_Methodology--Databases--MySQL--Basic_Usage.html">SQL statements viewed before</a> are used when querying a database directly from its console.<br /><strong>When we are inside a Web Application we have to do these steps</strong>(example of a connection using PHP to a MySQL database):<br />• <strong>connect</strong> to the database<br />    <div class="codebox"><div class="codebox">$databaseHostname=&#39;192.101.23.4&#39;;<br />$databaseUser=&#39;username&#39;;<br />$databasePassword=&#39;password&#39;;<br />$databaseName=&#39;database&#39;;<br /><br />$connection&nbsp;=&nbsp;mysqli_connect($databaseHostname,&nbsp;$databaseUser,&nbsp;$databasePassword,&nbsp;$databaseName);</div></div><br />• <strong>submit</strong> a query( with the SQL statement) to the database<br />    <div class="codebox"><div class="codebox">$query=&quot;SELECT&nbsp;&lt;column1,&nbsp;column2,...&gt;&nbsp;FROM&nbsp;&lt;table_name&gt;&nbsp;WHERE&nbsp;&lt;condition&gt;;&quot;;<br />$results&nbsp;=&nbsp;mysqli_query($connection,&nbsp;$query);</div></div><br />• <strong>retrieve</strong> the results<br />    <div class="codebox"><div class="codebox">display_results($results);</div></div><br /><br /><strong><h2>Dynamic queries</h2></strong><br />The queries most of the the time are not static bu are <strong>dynamically built</strong> by using the <span style="text-decoration:underline;">parameters coming from the client side</span>(user input). <br /><strong>example:</strong><br />In a php code we can find<br /><div class="codebox"><div class="codebox">$id&nbsp;=&nbsp;$_GET[&#39;id&#39;];</div></div><br />This code assign to $id the &quot;id&quot; parameter of the GET request that we have sent to a site <br />this $_GET[&#39;id&#39;] method return 56 if the source url is<br /><div class="codebox"><div class="codebox">http://www.example.com/get.php?id=56</div></div><br />Then we can ask to the SQL database if has this id in one of its tables</div>
+</body>
+</html>

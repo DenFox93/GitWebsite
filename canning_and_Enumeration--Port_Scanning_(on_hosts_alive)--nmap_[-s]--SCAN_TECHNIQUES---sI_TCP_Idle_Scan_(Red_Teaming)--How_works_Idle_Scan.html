@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>How works Idle Scan</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>How works Idle Scan</h1><br /><strong>
+      <h3>Finding a Working Idle Scan Zombie Host</h3>
+    </strong><br />Before perform an Idle Scan(-sI) we have to find an appropriate zombie host<br />This host needs to
+    <span style="text-decoration:underline;">assign </span><span style="color:#ff0000;text-decoration:underline;">IP
+      ID</span><span style="text-decoration:underline;"> packets incrementally on a global basis</span> (rather than
+    per-host it communicates with) and <span style="text-decoration:underline;">idle</span> meaning that there should be
+    no other traffic on the zombie that will disturb the IP ID.<br />To do that we have to determine the <a
+      href="ration--Port_Scanning_(on_hosts_alive)--nmap_[-s]--SCAN_TECHNIQUES---sI_TCP_Idle_Scan_(Red_Teaming)--IP_ID_Sequence_Generation_algorithms.html">IP
+      ID Sequence Generation algorithm type</a>, by which the target OS is generating new <span
+      style="color:#ff0000;">IP IDs</span>. <br />Nmap determine the <span style="color:#ff8700;">type of this
+      algorithm</span> by collecting a series of IP headers and subtracting the value of each <span
+      style="color:#ff0000;">IP ID</span> field from the next one to get an array of differences.<br />If we find that
+    the IP ID Sequence Generation algorithm assigned by nmap is <span style="color:#ff8700;">incremental</span> we can
+    say also that this host is <span style="text-decoration:underline;">idle</span> because the <a
+      href="ration--Port_Scanning_(on_hosts_alive)--nmap_[-s]--SCAN_TECHNIQUES---sI_TCP_Idle_Scan_(Red_Teaming)--IP_ID_Sequence_Generation_algorithms.html">difference
+      between probes are less than 10 </a>and this meaning that the host is a good candidate to be a Zombie.<br />
+    <div class="codebox">
+      <div class="codebox">nmap&nbsp;-O&nbsp;-v&nbsp;<span
+          style="color:#000000;font-weight:400">&lt;</span>IP_ADDRESS<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div><br /> <a href=""><img src="images/620-1.png" alt="images/620-1.png" /></a><br /><br /><strong>Idle scan of an
+    </strong><strong><span style="color:#1e90ff;">open port</span></strong><br /><a href=""><img src="images/620-2.png"
+        alt="images/620-2.png" /></a><br />Step 1: <br /> ◇ The attacker send a SYN/ACK to the Zombie host <br /> ◇ The
+    zombie <span style="text-decoration:underline;">not expecting</span> a SYN/ACK sends to the attacker a RST,
+    disclosing in this way its IP ID(e.g:31337)<br />Step 2: <br /> ◇ The attacker forge a SYN packet(<span
+      style="text-decoration:underline;">IP spoofing</span>) with the zombie source IP address with the purpose of
+    impersonate the Zombie host and send the forged packet to the target <br /> ◇ The target sends a
+    SYN/ACK(<strong><span style="color:#1e90ff;">port open</span></strong>) to the Zombie host in response to the SYN
+    that appears to come from the zombie<br /> ◇ The zombie <span style="text-decoration:underline;">not
+      expecting</span> a SYN/ACK sends to the target a RST, incrementing its IP ID(e.g:31338)<br />Step 3:<br /> ◇ The
+    attacker send again a SYN/ACK to the Zombie host<br /> ◇ The zombie <span style="text-decoration:underline;">not
+      expecting</span> a SYN/ACK sends to the attacker a RST, disclosing in this way its IP ID(e.g:31339).<br /> The
+    attacker in this way sees that the IP ID is incremented by 2 (from the initial probe of the Step 1) in this way we
+    know that the <span style="color:#1e90ff;">port is open</span>, because otherwise in the Step 2 the Zombie would not
+    send a RST<br /><br /><strong>Idle scan of a </strong><strong><span style="color:#a020f0;">closed
+        port</span></strong><br /><a href=""><img src="images/620-3.png" alt="images/620-3.png" /></a><br />Step 1(same
+    of the open port): <br /> ◇ The attacker send a SYN/ACK to the Zombie host <br /> ◇ The zombie <span
+      style="text-decoration:underline;">not expecting</span> a SYN/ACK sends to the attacker a RST, disclosing in this
+    way its IP ID(e.g:31337)<br />Step 2:<br /> ◇ The attacker forge a SYN packet(<span
+      style="text-decoration:underline;">IP spoofing</span>) with the zombie source IP address with the purpose of
+    impersonate the Zombie host and send the forged packet to the target <br /> ◇ The target sends a RST(<strong><span
+        style="color:#a020f0;">port closed</span></strong>) to the Zombie host in response to the SYN that appears to
+    come from the zombie<br /> ◇ The Zombie host simply ignores the unsolicited packet RST leaving its IP ID
+    unchanged<br />Step 3:<br /> ◇ The attacker send again a SYN/ACK to the Zombie host<br /> ◇The zombie <span
+      style="text-decoration:underline;">not expecting</span> a SYN/ACK sends to the attacker a RST, disclosing in this
+    way its IP ID(e.g:31338).<br /> The attacker in this way sees that the IP ID is incremented only by 1 (from the
+    initial probe of the Step 1) in this way we know that the <span style="color:#a020f0;">port is closed</span>,
+    because in the Step 2 the Zombie have received an RST from the target and there was not need to response<br />
+    <br /> <br />Bibliography:<br /><a
+      href="https://en.wikipedia.org/wiki/IP_fragmentation" target="_blank">https://en.wikipedia.org/wiki/IP_fragmentation</a><br /><a
+      href="https://nmap.org/book/idlescan.html" target="_blank">https://nmap.org/book/idlescan.html</a><br />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Assembler a file</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Assembler a file</h1><br/>To verify that everything is configured properly we can try to assembly an <span style="text-decoration:underline;">assembly file</span> to an <span style="text-decoration:underline;">object file</span><br />    from command line navigate to: C:\nasmx-1.4\demos\win32\DEMO1 <br />    <a href=""><img src="images/490-1.png" alt="images/490-1.png" /></a><br />   ◇ <span style="color:#00ff2d;">demo1.asm</span> is the file containing the assembly code<br />   ◇ <span style="color:#1e90ff;">demo1.bat</span> is a script that will automatically assemble and link the <span style="color:#00ff2d;">demo1.asm</span> file to obtain the executable file<br />   ◇ <span style="color:#ff8700;">makefile</span> contains all the data and commands needed to transform the source code files to an executable program<br />   <br />    create object file from the .asm file<br />    <div class="codebox"><div class="codebox">nasm&nbsp;-f&nbsp;win32&nbsp;demo1.asm&nbsp;-o&nbsp;demo1.obj</div></div><br />    -f → <span style="text-decoration:underline;">format</span> of the output file; in this case Microsoft object file format for 32-bit OS<br />    -o → name of the <span style="text-decoration:underline;">output</span> file<br /></div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Validation of Referer depends on header being present</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Validation of Referer depends on header being present</h1><br /> Some applications validate the
+    Referer header when it is present in requests but skip the validation if the header is omitted.<br /><br />In this
+    situation, an attacker can craft their CSRF exploit in a way that causes the victim user&#39;s browser to drop the
+    Referer header in the resulting request. There are various ways to achieve this, but the easiest is using a META tag
+    within the HTML page that hosts the CSRF attack: <br /><br /><strong>
+      <h3>How to test the vulnerability</h3>
+    </strong><br />In this vulnerability<br /><a href=""><img src="images/1721-1.png"
+        alt="images/1721-1.png" /></a><br />1. if we edit something in the <span style="color:#1e90ff;">Referer</span>
+    in the request it will not be accepted as we can see from the Response<br /> <a href=""><img src="images/1721-2.png"
+        alt="images/1721-2.png" /></a><br />2. If delete entirely the header yes<br /> <a href=""><img
+        src="images/1721-3.png" alt="images/1721-3.png" /></a><br /> Response: accepted<br /> <a href=""><img
+        src="images/1721-4.png" alt="images/1721-4.png" /></a><br /><br /><strong>
+      <h3>How to exploit</h3>
+    </strong><br />To create a Poc on <a
+      href="p_Pentest--Exploitation--Client-Side--Cross-Site_Request_Forgery_(CSRF-XSRF)--How_to_construct_a_CSRF_attack--BurpSuite_Generate_CSRF_PoC.html">Burpsuite
+      Professional as seen HERE</a><br />1. right click on the request → Engagement Tools → create CSRF PoC<br />2.
+    Options → Include Auto-submit script → Regenerate<br />3. Include the following HTML to suppress the Referer
+    header:<br />
+    <div class="codebox">
+      <div class="codebox"><span
+          style="color:#000000;font-weight:400">&lt;</span>meta&nbsp;name=&quot;referrer&quot;&nbsp;content=&quot;no-referrer&quot;<span
+          style="color:#000000;font-weight:400">&gt;</span></div>
+    </div> <br /> <a href=""><img src="images/1721-5.png"
+        alt="images/1721-5.png" /></a><br /><br /><br /><strong>Bibliography:</strong><br /><a
+      href="https://portswigger.net/web-security/csrf#:~:text=Validation%20of%20Referer%20depends%20on%20header%20being%20present" target="_blank">https://portswigger.net/web-security/csrf#:~:text=Validation%20of%20Referer%20depends%20on%20header%20being%20present</a><br />LAB:
+    <a
+      href="https://portswigger.net/web-security/csrf/lab-referer-validation-depends-on-header-being-present" target="_blank">https://portswigger.net/web-security/csrf/lab-referer-validation-depends-on-header-being-present</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Kerberos Principals</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Kerberos Principals</h1><br /><br /><span style="text-decoration:underline;">In Kerberos
+      terminology, a user is called a principal</span>. A principal can be a nominative person, an application user or a
+    service user.<br /><br />A principal is divided into three parts: the primary, the instance, and the realm.<br />The
+    format of a typical Kerberos V5 principal is <code>primary/instance@REALM</code>.<br />• The
+    <strong>primary</strong> is the first part of the principal. In the case of a user, it&#39;s the same as your
+    username. For a host, the primary is the word <code>host</code>.<br />• The <strong>instance</strong>(OPTIONAL) is a
+    string that qualifies the primary. The instance is separated from the primary by a slash (<code>/</code>).<br /> In
+    the case of a user(<span style="color:#1e90ff;">Client</span>), the instance is usually null, but a user might also
+    have an additional principal, with an instance called admin, which he/she uses to administrate a database. <br />•
+    The <strong>realm</strong> is your Kerberos realm. In most cases, your Kerberos realm is your domain name, in
+    upper-case letters. For example, the machine <code>daniele.example.com</code> would be in the realm
+    <code>EXAMPLE.COM</code>.<br /><br /><strong>
+      <h3>Examine Principals in KRB_AS_REQ</h3>
+    </strong><br /><span style="color:#1e90ff;">Client Principal Name</span> is passed in cname field<br /><span
+      style="color:#ff8700;">Service Principal Name</span> is passed in sname field<br />Principal Names are assigned
+    with an integer that identify the type. For more <a
+      href="https://tools.ietf.org/html/rfc4120#section-6.2" target="_blank">https://tools.ietf.org/html/rfc4120#section-6.2</a><br /><a
+      href=""><img src="images/1123-1.png" alt="images/1123-1.png" /></a><br /><br /><br />Bibliography:<br />• <a
+      href="https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html" target="_blank">https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html</a><br />
+  </div>
+</body>
+
+</html>

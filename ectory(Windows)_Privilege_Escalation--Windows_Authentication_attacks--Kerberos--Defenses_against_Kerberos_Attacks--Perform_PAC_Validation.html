@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Perform PAC Validation</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Perform PAC Validation</h1><br /><br />To perform PAC validation with the KDC (not set by default
+    in Windows).<br />However, we have to consider that PAC validation can have a performance impact, as an extra step
+    of authentication is added.<br /><br />To enable PAC validation, we need to set to 1 the following registry
+    key:<br /> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters\ValidateKdcPacSignature<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;reg&nbsp;query&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters&nbsp;/v&nbsp;ValidateKdcPacSignature<br />PS&gt;&nbsp;reg&nbsp;add&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters&nbsp;/v&nbsp;ValidateKdcPacSignature&nbsp;/t&nbsp;REG_DWORD&nbsp;/d&nbsp;1&nbsp;/f&nbsp;<br />PS&gt;&nbsp;reg&nbsp;query&nbsp;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters&nbsp;/v&nbsp;ValidateKdcPacSignature
+      </div>
+    </div><br /><br /><strong>PAC validation problem: bottleneck</strong><br />Because PAC validation is managed by the
+    Netlogon service, the performance bottlenecks can happen in the Netlogon service of an Application Server and the
+    Domain Controller. <br /><span style="text-decoration:underline;">How avoid the bottleneck:</span><br /> ◇ increase
+    the MaxConcurrentApi setting which will devote additional threads on client and server. <br /><br /><br />For more
+    informations about PAC validation bottleneck:<br /><a
+      href="https://techcommunity.microsoft.com/t5/azure-active-directory-identity/why-won-t-pac-validation-turn-off/ba-p/243144" target="_blank">https://techcommunity.microsoft.com/t5/azure-active-directory-identity/why-won-t-pac-validation-turn-off/ba-p/243144</a><br /><br />
+  </div>
+</body>
+
+</html>

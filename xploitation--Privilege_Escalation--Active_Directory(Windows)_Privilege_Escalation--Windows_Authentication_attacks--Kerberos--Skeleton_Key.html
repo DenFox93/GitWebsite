@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Skeleton Key</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Skeleton Key</h1><br /><br />The <strong>Skeleton Key</strong> attack is been discovered by
+    &quot;Dell Secureworks&quot; while analyzing the malware “Skeleton Key
+    malware”<br /><br /><strong>Requirements:</strong><br />• Domain Admin rights, (and debug rights which admins have
+    by default) to “patch” LSASS on a Domain Controller<br /><br /><br /><strong>Key Points:</strong><br />• This attack
+    is only for <span style="color:#ff8700;">Domain Controllers</span><br />• Once the malware injects itself into LSASS
+    process, downgrade the encryption algorithm used by Kerberos, from AES to RC4-HMAC (<a
+      href="odology--System_Security_(Windows_&_Linux)--Cryptography_and_Password_Cracking--Authentication--Windows--Hashing_algorithms--NT_algorithm.html">NT
+      hash</a> of the user&#39;s password is used as <span style="color:#ff0000;">secret key</span>, <a
+      href="rivilege_Escalation--Active_Directory(Windows)_Privilege_Escalation--How_work_Authentification_in_a_Windows_Network--Kerberos--Encryption.html">for
+      more on the encryptions used in kerberos here </a>) and creates a master password, the <span
+      style="text-decoration:underline;">skeleton key</span>.<br /> The <span
+      style="text-decoration:underline;">Skeleton key</span> by default is “mimikatz” that converted to NT hash is
+    “60BA4FCADC466C7A033C178194C03DF6”(<a
+      href="on--Active_Directory(Windows)_Privilege_Escalation--Windows_Authentication_attacks--Kerberos--Skeleton_Key--BONUS_change_the_skeleton_key.html">to
+      change it see this chapter</a>). This password will work for any account in the domain. <br /> ◇ KRB_<span
+      style="color:#00ff00;">AS</span>_REQ: Pre-Authentication(Timestamp) is encrypted using <span
+      style="color:#1e90ff;">Client</span> <span style="color:#ff0000;">secret key</span>(NT hash of “mimikatz” is
+    “60BA4FCADC466C7A033C178194C03DF6”)<br /> ◇ KRB_<span style="color:#00ff00;">AS</span>_REP:
+    Pre-Authentication(Timestamp) is decrypted using <span style="color:#1e90ff;">Client</span> <span
+      style="color:#ff0000;">secret key</span>(NT hash of “mimikatz” is “60BA4FCADC466C7A033C178194C03DF6”), if it is
+    successful the requesting user is authenticated.<br />• Existing user account passwords will also continue to work,
+    so it is very difficult to know this attack has taken place unless you know what to look for.<br />• Rebooting the
+    <span style="color:#ff8700;">DC</span> refreshes the memory which removes the in-memory patch, this mean that
+    publicly known methods are not persistent across reboots.<br /> ◇ Note that <span style="color:#ff8700;">DCs</span>
+    in Production Environments are typically only rebooted every 1-2 months<br /> ◇ Note that is possible to install an
+    autorun entry for Mimikatz to run automatically the in-memory patch when the domain controller
+    boots<br /><br /><strong>Warning</strong><br />With this attack we are going to downgrade the security of our Target
+    organization, so before use this attack speak with the organization
+    itself<br /><br /><br /><strong>Detection</strong><br />• Logging of Mimikatz actions, or rather kernel calls<br />•
+    Logging of modified variables (protection) of LSASS in its EPROCESS structure<br />• Logging of modified UEFI
+    variables<br /><br /><br /><br /><br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://stealthbits.com/blog/unlocking-all-the-doors-to-active-directory-with-the-skeleton-key-attack/" target="_blank">https://stealthbits.com/blog/unlocking-all-the-doors-to-active-directory-with-the-skeleton-key-attack/</a><br />•
+    <a
+      href="https://posts.specterops.io/mimidrv-in-depth-4d273d19e148" target="_blank">https://posts.specterops.io/mimidrv-in-depth-4d273d19e148</a><br />•
+    <a href="https://www.scip.ch/en/?labs.20200116" target="_blank">https://www.scip.ch/en/?labs.20200116</a>
+  </div>
+</body>
+
+</html>

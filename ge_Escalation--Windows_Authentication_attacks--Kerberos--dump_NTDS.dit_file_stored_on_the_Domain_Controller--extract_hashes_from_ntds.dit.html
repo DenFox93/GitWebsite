@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>extract hashes from ntds.dit</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>extract hashes from ntds.dit</h1><br/><br />Once we have extracted the SYSTEM and ntds.dit files(SAM file for now not strict necessary) fro the target Domain Controller, we have to extract the hashes from ntds.dit.<br />To do that we can use <strong>impacket</strong> and its script secretdump.py<br /><div class="codebox"><div class="codebox">root@kali:/#&nbsp;python3&nbsp;/home/kali/bin/impacket/examples/secretsdump.py&nbsp;-ntds&nbsp;&lt;path-ntds.dit&gt;&nbsp;-system&nbsp;&lt;path-SYSTEM&gt;&nbsp;-hashes&nbsp;lmhash:nthash&nbsp;LOCAL&nbsp;-outputfile&nbsp;<span style="color:#000000;font-weight:400">&lt;</span>path-output-file<span style="color:#000000;font-weight:400">&gt;</span></div></div><br />    -ntds &lt;NTDS&gt; → NTDS.DIT file to parse<br />    -system &lt;SYSTEM&gt; → SYSTEM hive to parse<br />    -hashes LMHASH:NTHASH → NTLM hashes, format is LMHASH:NTHASH<br />    <a href=""><img src="images/1196-1.png" alt="images/1196-1.png" /></a></div>
+</body>
+</html>

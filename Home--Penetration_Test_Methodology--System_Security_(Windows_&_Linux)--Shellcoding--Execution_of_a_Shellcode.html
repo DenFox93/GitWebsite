@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Execution of a Shellcode</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Execution of a Shellcode</h1><br/><strong><h3>How to proceed:</h3></strong><br />1. Identify a vulnerable application<br />2. Inject shellcode in the application<br />3. adjust EIP(we have to input it in reverse order because written in the Stack) so that it to point to the shellcode<br /><br /><strong><h3>How the Shellcode is executed:</h3></strong><br /><strong>• Adjusting of the EIP and then:</strong><br />   ◇ send the shellcode through the network (remote buffer overflows)<br />   ◇ set the shellcode through the local environment.<br /><strong>• Overwrite the SEH (Structured Exception Handler) frame</strong><br />    The SEH frames store the address to jump to when there is an exception. If we overwrite the stored address of the SEH frame, the attacker can take control of the execution</div>
+</body>
+</html>

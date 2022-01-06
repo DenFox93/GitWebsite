@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Buffer Overflow</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Buffer Overflow</h1><br/>Buffer overflow works by taking control of the execution of a program, this means being able to force it to behave differently from its original behavior .<br />A buffer overflow attack can lead to:<br />• An application or operating system crash, causing a denial of service<br />• Privilege escalation<br />• Remote code execution<br />• Security features bypass<br /><br />A buffer <span style="text-decoration:underline;">is an area</span>, <strong>the stack</strong>, in the computer Random Access Memory (RAM) reserved for temporary data storage. This data can be:<br />• User input<br />• Parts of a video file in streaming<br />• Server banners received by a client application<br />• ...<br /><br />If the developer of an application does not enforce buffers&#39; limits, an attacker could find a way to write more data than the buffer can handle, thus actually writing arbitrary code in the computer RAM; this can be exploited to get control over the program execution flow<br /><br /><strong>Immunity Debugger</strong><br /> If we wont exploit the vulnerability we have to change the code that goes in the EIP in order to take control of the program flow<br /><a href=""><img src="images/397-1.png" alt="images/397-1.png" /></a></div>
+</body>
+</html>

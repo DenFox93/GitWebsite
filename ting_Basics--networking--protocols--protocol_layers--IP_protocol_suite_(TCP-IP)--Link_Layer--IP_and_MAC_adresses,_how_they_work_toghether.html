@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>IP and MAC adresses, how they work toghether</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>IP and MAC adresses, how they work toghether</h1><br/>Every host on a network has both <strong>MAC</strong> and <strong>IP</strong> address<br /><br /><strong><h3>How to send a packet from host A to host B?</h3></strong><br />if <strong><span style="color:#1e90ff;">host A</span></strong> is in <span style="color:#1e90ff;">network A</span> and  <strong><span style="color:#ffa500;">host B</span></strong> in the <span style="color:#ffa500;">network B</span>, <br />and these two networks are connected by a <strong><span style="color:#00ff00;">router</span></strong>?<br /><br /><strong><span style="color:#1e90ff;">host A</span></strong> have to create a packet with:<br />• <strong>IP header</strong> of the datagram: <br />      <span style="text-decoration:underline;">destination IP address</span> of <span style="color:#ffa500;">host B</span><br />      <span style="text-decoration:underline;">source IP address</span> of <span style="color:#1e90ff;">host A</span><br />• <strong>link layer header </strong>of the frame: <br />      <span style="text-decoration:underline;">destination MAC address</span> of the <span style="color:#00ff00;">router</span><br />      <span style="text-decoration:underline;">source MAC address</span> of <span style="color:#1e90ff;">host A</span><br /><br />When the <strong><span style="color:#00ff00;">router</span></strong> take the packet and have to forward it to <strong><span style="color:#ffa500;">host B</span></strong> have to rewrite the packet&#39;s <span style="text-decoration:underline;">MAC addresses</span> without touching <strong>IP header</strong>:<br />• <strong>NEW</strong> <strong>link layer header:</strong><br />      <span style="text-decoration:underline;">destination MAC address</span> of <span style="color:#ffa500;">host B</span><br />      <span style="text-decoration:underline;">source MAC address</span> of the <span style="color:#00ff00;">router</span><br />MAC addresses have to be changed so that locally the network knows always where to forward the packet(MAC address next-hop) and where it came from (MAC address last-hop)<br /><br /></div>
+</body>
+</html>

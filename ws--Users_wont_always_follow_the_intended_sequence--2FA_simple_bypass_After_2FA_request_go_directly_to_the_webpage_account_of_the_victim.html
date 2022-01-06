@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2FA simple bypass: After 2FA request go directly to the webpage account of the victim</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>2FA simple bypass: After 2FA request go directly to the webpage account of the victim</h1>
+    <br /><br />Many websites that implement two-factor authentication (2FA) require users to log in on one page before
+    entering a verification code on a separate page. Assuming that users will always follow this process through to
+    completion and, as a result, not verifying that they do, may allow attackers to bypass the 2FA step
+    entirely.<br /><br /><strong>
+      <h3>After 2FA request go directly to the webpage account of the victim</h3>
+    </strong><br />In this LAB once we have done the request to login with valid credentials, we try to bypass the
+    workflow of the 2FA code and go directly to the account page of the victim.<br /><br /><strong>Discover WebApp 2FA
+      Workflow</strong><br />Access with our account to check which pages are visited during the 2FA authentication
+    workflow<br />1. POST request to login with our credentials (username &amp; password)<br /> <a href=""><img
+        src="images/1894-1.png" alt="images/1894-1.png" /></a><br />2. GET request to get 2FA code on our email<br /> <a
+      href=""><img src="images/1894-2.png" alt="images/1894-2.png" /></a><br />3. POST request with our 2FA code
+    received in the email<br /> <a href=""><img src="images/1894-3.png" alt="images/1894-3.png" /></a><br />4. GET
+    request for the /my-account page<br /> <a href=""><img src="images/1894-4.png"
+        alt="images/1894-4.png" /></a><br /><br /><br /><strong>
+      <h3>Exploit</h3>
+    </strong><br />In the workflow above there is not anything that tie step 3 and 4. <br />What if when we have
+    inserted stolen credentials of our victim we can bypass 2FA code by going directly to step 4?<br />1.<br /> <a
+      href=""><img src="images/1894-5.png" alt="images/1894-5.png" /></a> <br />2.<br /> <a href=""><img
+        src="images/1894-6.png" alt="images/1894-6.png" /></a><br />3. Here, because we have not access to the email of
+    the victim with the 2FA code,<br /> <span style="color:#ff0000;">We try to change the URL to navigate
+      to /my-account</span>.<br /> <a href=""><img src="images/1894-7.png" alt="images/1894-7.png" /></a><br /> edited
+    request below<br /> <a href=""><img src="images/1894-8.png" alt="images/1894-8.png" /></a><br /> Yes we have got
+    access to the account of the victim!<br /><br /><br /><br /><strong>Bibliography:</strong><br /><a
+      href="https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-simple-bypass" target="_blank">https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-simple-bypass</a>
+  </div>
+</body>
+
+</html>

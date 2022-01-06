@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>NULL-free shellcode</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>NULL-free shellcode</h1><br/><br />If we try to use a Shellcode that use <span style="color:#ff0000;">NULL characters </span><strong><span style="color:#ff0000;">\x00</span></strong><span style="color:#ff0000;"> (zeroes)</span> against a vulnerability of type Buffer Overflow(BOF) that uses a string function (such as strcpy), the Shellcode will FAIL.<br />The function will stop copying the payload to the stack as soon as it encounters the first \x00 byte.<br /><br /><strong><h3>How make a shellcode NULL-free</h3></strong><br />• <strong>manual editing</strong> the shellcode so that it does not contain the string terminator. <br />    In other words, use different instructions that perform the same operations, but do not have a string terminator<br />• <strong>encode and decode</strong> the shellcode</div>
+</body>
+</html>

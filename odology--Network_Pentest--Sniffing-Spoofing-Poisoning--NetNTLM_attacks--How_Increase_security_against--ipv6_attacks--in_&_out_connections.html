@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>in & out connections</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>in & out connections</h1><br/><br />IPv6 poisoning abuses the fact that Windows queries for an IPv6 address even in IPv4 only environments. Because of disabling IPv6 entirely may have unwanted side effects;<br />     The safest way to prevent Man-in-the-Middle Attacks(with mitm6 for example) is to block in Windows Firewall via Group Policy.:<br />   ◇ DHCPv6 traffic (Incoming and Outgoing)<br />      ▪ Inbound Rules → Core Networking - Dynamic Host Configuration Protocol for IPv6(DHCPV6-In)<br />      ▪ Outbound Rules → Core Networking - Dynamic Host Configuration Protocol for IPv6(DHCPV6-Out)<br />   ◇ Incoming router advertisements  <br />      ▪ Inbound Rules → Core Networking - Router Advertisement (ICMPv6-In)<br />          <br />          <br />How to Configure Windows Firewall Rules using Group Policy<br />There are two ways to configure Windows Firewall rules using Group Policy:<br />• Using the legacy configuration<br />    The settings can be found under Computer Configuration &gt; Administrative Templates &gt; Network &gt; Network Connections &gt; Windows Firewall. The settings in this section was intended for Windows Version before the release of Windows Vista and Windows Server 2008 but still work for newer release of Windows. However, it is not recommended to be used unless we’re still managing outdated OS in the domain.<br />• Using the new configuration<br />    The settings can be found under Computer Configuration &gt; Windows Settings &gt; Security Settings &gt; Windows Firewall with Advanced Security. The settings in this section has been optimized for current Windows release, and it has the very same wizard GUI when creating the firewall rule directly on the client computer, making it easier for administrator.<br /><br /><a href=""><img src="images/1262-1.png" alt="images/1262-1.png" /></a><br /><br />Bibliography:<br />Practical Ethical Hacking, Heath Adams(Cyber Mentor)<br /></div>
+</body>
+</html>

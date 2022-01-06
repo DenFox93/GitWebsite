@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>connections tracked informations</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>connections tracked informations</h1><br />The file <strong>/proc/net/nf_conntrack</strong> is log
+    on connections tracking table from Linux kernel. The data from those records are used by kernel actually to make
+    some decisions.<br /><br /><a href=""><img src="images/37-1.png" alt="images/37-1.png" /></a><br /> <br /> <br />in
+    the file :<br />
+    <div class="codebox">
+      <div class="codebox">cat&nbsp;/proc/net/nf_conntrack</div>
+    </div> <br />we can see informations about established connections.<br />The output is formatted like this:<br />•
+    First column: The network layer protocol name (ex: ipv4).<br />• Second column: The network layer protocol
+    number.<br />• Third column: The transmission layer protocol name (ex: tcp).<br />• Fourth column: The transmission
+    layer protocol number.<br />• Fifth column: The seconds until the entry is invalidated.<br />• Sixth column (Not all
+    protocols): The connection state.<br /><br />If we want to see this data in a better format we can install the
+    conntrack-tools:<br /> CentOS:<br />
+    <div class="codebox">
+      <div class="codebox">yum&nbsp;install&nbsp;conntrack-tools</div>
+    </div><br /> Debian:<br />
+    <div class="codebox">
+      <div class="codebox">sudo&nbsp;apt-get&nbsp;install&nbsp;conntrack</div>
+    </div><br /> <br />We can use the <strong>conntrack</strong> tool that provides a full featured userspace interface
+    to the netfilter connection tracking system that is intended to replace the old<strong>
+      /proc/net/nf_conntrack</strong> interface. This tool can be used to search, list, inspect and maintain the
+    connection tracking subsystem of the Linux kernel <br /><a href=""><img src="images/37-2.png"
+        alt="images/37-2.png" /></a><br /><br /><a href=""><img src="images/37-3.png"
+        alt="images/37-3.png" /></a><br /><br />OPTIONS:<br /><strong>-L</strong>: list of all connection
+    tracked<br /><strong>-E:</strong> display realtime event connection log<br /><strong>-p</strong>: specify
+    protocol<br /><strong>--dport</strong>: destination port in his original direction<br /><br /><br /> <br /> <br />
+    <br /><br />
+  </div>
+</body>
+
+</html>

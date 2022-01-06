@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Cloud</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Cloud</h1><br /><br /><strong>
+      <h3>Cloud environments</h3>
+    </strong><br />Ask to the client if the target Cloud:<br />• is on a third party provided infrastructure<br /> ◇
+    Check the contract to see if the Cloud provider allows or explicitly forbids security assessments or penetration
+    tests<br /> ◇ Usually cloud providers explicitly forbid security assessments or penetration tests unless you
+    specifically ask for and receive written permission<br /> ◇ Some cloud providers will simply provide the results for
+    their most recent assessment to their customers upon request<br />• is a private cloud run only by the
+    organization<br /><br /><strong>
+      <h3>Cloud Service Models</h3>
+    </strong><br />• <strong>Infrastructure as a Service (IaaS)</strong> → The <span
+      style="text-decoration:underline;">provider</span> supplies hardware and network connectivity. The <span
+      style="text-decoration:underline;">tenant(customer)</span> is responsible for the virtual machine and everything
+    that runs within it<br /> ◇ Usually Cloud providers allow customers to perform application-level testing (such as
+    web application testing) but prohibit them from testing for underlying network and listening service flaws<br />
+    <span style="color:#a5452a;">examples</span>: DigitalOcean, AWS EC2, Cisco Metapod, Azure VM, Google Compute Engine
+    (GCE)<br />• <strong>Platform as a Service (PaaS)</strong> → The <span
+      style="text-decoration:underline;">provider</span> supplies a framework with all the main components , the <span
+      style="text-decoration:underline;">tenant(customer)</span> supplies the application they wish to deploy<br /> ◇
+    Usually Cloud providers allow customers to perform application-level testing (such as web application testing) but
+    prohibit them from testing for underlying network and listening service flaws<br /> <span
+      style="color:#a5452a;">examples</span>: Google Colab, AWS Elastic Beanstalk, Azure Cloud Services, Heroku,
+    Force.com, Google App Engine, Apache Stratos, OpenShift<br />• <strong>Software as a Service (SaaS)</strong> → The
+    <span style="text-decoration:underline;">provider</span> supplies the application and all the components required to
+    run it<br /> ◇ Usually Cloud providers prohibit customers from conducting their own tests, whether at the
+    network/service layer or the application layer<br /> <span style="color:#a5452a;">examples</span>: Google Workspace,
+    Dropbox, Salesforce, Cisco WebEx, Concur, GoToMeeting, Azure Websites<br /><br /><strong><br /></strong><strong>
+      <h3>The Cloud Stack</h3>
+    </strong><br />A cloud solution has different layers. The layers or components that go into building a cloud
+    solution are:<br />• <span style="text-decoration:underline;">Facility</span> → The actual physical building where
+    the cloud solution will be located.<br />• <span style="text-decoration:underline;">Network</span> → This can be a
+    physical or virtual network. It is responsible for carrying communications between systems and possibly the
+    Internet.<br />• <span style="text-decoration:underline;">Compute and Storage</span> → The physical hardware that
+    will supply CPU time as well as file storage.<br />• <span style="text-decoration:underline;">Hypervisor</span> →
+    This is an optional component. When virtualization is used to manage resources, the hypervisor is responsible for
+    allocating resources to each virtual machine. It may also be leveraged for implementing security.<br />• <span
+      style="text-decoration:underline;">Virtual Machine (VM) or Operating System (OS)</span> → In a virtualized
+    environment, the VM is the virtual container responsible for running the operating system. If no hypervisor is
+    present, the operating system runs directly on the compute and storage hardware.<br />• <span
+      style="text-decoration:underline;">Solution Stack</span> → This is the programming language used to build and
+    deploy applications. Good examples are .NET, Python, Ruby, Perl, etc.<br />• <span
+      style="text-decoration:underline;">Application</span> → The actual application being used by one or more tenants,
+    or their customers.<br />• <span style="text-decoration:underline;">Application Program Interface (API) or Graphical
+      User Interface (GUI)</span> → The interface used by the tenant or their customers to interact with the
+    application.<br /> The most common API is RESTful HTTP or HTTPS and the most common GUI is an HTTP or HTTPS based
+    Web site.<br />When we combine all of these layers, we get a cloud solution. As penetration testers, we need to be
+    able to identify which of these layers are in scope for our testing.<br /><br /><a href=""><img
+        src="images/987-1.png"
+        alt="images/987-1.png" /></a><br /><br /><br /><br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://www.sans.org/blog/pen-testing-in-the-cloud/" target="_blank">https://www.sans.org/blog/pen-testing-in-the-cloud/</a><br />•
+    <a
+      href="https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/" target="_blank">https://www.bmc.com/blogs/saas-vs-paas-vs-iaas-whats-the-difference-and-how-to-choose/</a>
+  </div>
+</body>
+
+</html>

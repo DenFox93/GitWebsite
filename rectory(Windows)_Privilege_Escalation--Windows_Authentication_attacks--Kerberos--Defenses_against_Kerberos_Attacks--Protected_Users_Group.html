@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Protected Users Group</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Protected Users Group</h1><br />Protected Users group in Active Directory gives its members
+    additional security features and protection. Because of that Privileged domain users should be placed in the
+    Protected Users group. <br />Windows 8.1 and Windows Server 2012 R2 have “Protected Users group” option by default.
+    <a href="https://docs.microsoft.com/en-us/security-updates/SecurityAdvisories/2016/2871997" target="_blank">Microsoft Security
+      Advisory 2871997</a> adds support to Windows 7, Windows Server 2008 R2 and Windows Server
+    2012<br /><br /><strong>Security precautions for Users of the Protected Users group</strong><br />• Credential
+    delegation(CredSSP) disabled <br /> ◇ plaintext credentials are NOT cached even when the <span
+      style="text-decoration:underline;">Allow delegating default credentials</span> policy is enabled<br />• Windows
+    Digest will not cache the user&#39;s:<br /> ◇ plaintext credentials even when Windows Digest is enabled<br />• NTLM
+    will not cache the user&#39;s:<br /> ◇ plaintext credentials <br /> ◇ NT one-way function (NTOWF)<br />• It is not
+    possible authenticate by using NTLM<br />• Kerberos <br /> ◇ will no longer create DES or RC4 keys for these
+    Protected Users<br /> ◇ Ticket-Granting Ticket (TGT) is acquired at logon and cannot be re-acquired
+    automatically.<br />• Sign-on offline disabled:<br /> ◇ this mean the Credentials are not cached
+    locally<br /><br /><strong>How add user to Protected Users group</strong><br />Server Manager → Tools → Active
+    Directory Users and Computers → Users → Protected Users → Properties(right click) → Members → Add<br /><a
+      href=""><img src="images/1188-1.png"
+        alt="images/1188-1.png" /></a><br /><br /><strong>Bibliography:</strong><br />• <a
+      href="https://docs.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group" target="_blank">https://docs.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group</a><br />•
+    <a
+      href="https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/manage/how-to-configure-protected-accounts#BKMK_AddtoProtectedUsers" target="_blank">https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/manage/how-to-configure-protected-accounts</a>
+  </div>
+</body>
+
+</html>

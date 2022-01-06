@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>angle brackets HTML encoded</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>angle brackets HTML encoded</h1><br /><br /><br />1. Submit a random alphanumeric string in the
+    search box (example: 204a2fb1)<br /> Use Burp Suite to intercept the search request and send it to Burp Repeater.
+    <br /> <a href=""><img src="images/1948-1.png" alt="images/1948-1.png" /></a><br /> <span
+      style="text-decoration:underline;">Observe that the random string has been reflected inside a JavaScript
+      string</span><br />2. Replace your input with the following payload to break out of the JavaScript string and
+    inject an alert:<br /> ◇  <strong>&#39;-alert(1)-&#39;</strong><br /> <a href=""><img src="images/1948-2.png"
+        alt="images/1948-2.png" /></a><br /> ◇ <strong>&#39;;alert(1);&#39;</strong> (ALTERNATIVE)<br /> <a href=""><img
+        src="images/1948-3.png" alt="images/1948-3.png" /></a><br />5. Vulnerable ;)<br /> <a href=""><img
+        src="images/1948-4.png" alt="images/1948-4.png" /></a> <br />
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />Bibliography:<br /><a
+      href="https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-html-encoded" target="_blank">https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-html-encoded</a>
+  </div>
+</body>
+
+</html>

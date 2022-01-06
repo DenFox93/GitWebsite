@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Test Environment</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Test Environment</h1><br/><br />Ideally a penetration test should be run against a Test Environment<br />While testing against the Test Environment is ideal, most of the penetration tests occur against Production Environments.<br /><br /><strong>What is a Test Environment</strong><br />Some organizations have a:<br />•  Test Environment in which changes and business functionality are evaluated before being applied in production. <br />•  Development Environment, in which new code is created before being moved into the Test Environment<br /><br /><strong>Why run a penetration test against a Test Environment</strong><br />Ideally a penetration test should be conducted against a Test Environment. After all, it was designed for testing and any system or service crash in a Test Environment should not impact production processing<br /><br /><strong>Why in the Real world run a penetration test against a Test Environment is not often possible</strong><br />• Most organizations do not have a Test Environment<br />• Even for the organizations that have a Test Environment:<br />   ◇ could be not accessible<br />   ◇ could have major or subtle differences with the Production Environment that might invalidate our findings<br /><br /><strong>What if the organization not have a Test Environment</strong><br />If we have to testing against a production environment, first we should test the exploit inside a VM.<br />The VM have to run the same version of software as your target. We need to monitor the attack carefully with a tool like Wireshark and explore the effects of your attack on the VM afterward.<br />If we are running the attack against the client’s Test environment, then wireshark may not be necessary. </div>
+</body>
+</html>

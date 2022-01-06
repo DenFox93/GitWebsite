@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>objdump (Dev-C++)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>objdump (Dev-C++)</h1><br/><br />Debugger like <strong>Immunity Debugger</strong> automatically decompile a program automatically<br /><br />In the same Dev-C++ folder of the <a href="Home--Penetration_Test_Methodology--System_Security_(Windows_&_Linux)--Assemblers,_Debuggers_and_Tools--Compiler--gcc-g++_(Dev-C++).html">gcc</a><a href="Home--Penetration_Test_Methodology--System_Security_(Windows_&_Linux)--Assemblers,_Debuggers_and_Tools--Compiler--gcc-g++_(Dev-C++).html">.exe compiler</a> we have also <strong><span style="text-decoration:underline;">objdump</span></strong><span style="text-decoration:underline;">.exe decompiler</span>, to work with it if we have not already done it we have to <a href="Home--Penetration_Test_Methodology--System_Security_(Windows_&_Linux)--Assemblers,_Debuggers_and_Tools--Compiler--gcc-g++_(Dev-C++).html">add MinGW64 bin folder to the environment variables</a><br /><code>C:\Program Files (x86)\Dev-Cpp\MinGW64\bin</code><br />With objdump we can disassemble executable programs to obtain a text file containing the assembly code of the program<br /><br /><div class="codebox"><div class="codebox">objdump&nbsp;-d&nbsp;-Mintel&nbsp;InputFile.exe&nbsp;&gt;&nbsp;OutputFile.txt</div></div><br />• <strong>-d </strong>→  tells the tool to disassemble the input file<br />• <strong>-Mintel </strong>→ is a disassembler option that allows us to select disassembly for the given architecture (Intel in our case)<br />• <strong>&gt;</strong> →  tells the command what the output file is to be called<br /><br />This is a part of what we have obtained (assembly code of the main())<br /><a href=""><img src="images/502-1.png" alt="images/502-1.png" /></a></div>
+</body>
+</html>

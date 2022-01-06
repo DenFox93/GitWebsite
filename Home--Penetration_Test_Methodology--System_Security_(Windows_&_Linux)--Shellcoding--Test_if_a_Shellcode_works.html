@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Test if a Shellcode works</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>Test if a Shellcode works</h1><br/><strong>Test and verify if a shellcode works</strong><br />We have to use this C program and replace <span style="color:#00ff00;">&quot;shellcode will go here!&quot;</span> with our shellcode<br /><div class="codebox"><div class="codebox">char&nbsp;code[]&nbsp;=&nbsp;&quot;shellcode&nbsp;will&nbsp;go&nbsp;here!!!!!!!!!!!!!!!!!!!!&quot;;<br /><br />int&nbsp;main(int&nbsp;argc,&nbsp;char&nbsp;**argv)<br /><span style="color:#000000;font-weight:400">{</span><br />int&nbsp;(*func)();<br />func&nbsp;=&nbsp;(int&nbsp;(*)())&nbsp;code;<br />(int)(*func)();<br /><span style="color:#000000;font-weight:400">}</span></div></div><br />Once modified it with our shellcode we have to compile and run the program, if it executes as we planned, it means that the shellcode works fine<br /><br /><span style="color:#a5452a;">Example: run the Windows Calculator</span> <br /><div class="codebox"><div class="codebox">#include&nbsp;&lt;windows.h&gt;<br />char&nbsp;code[]&nbsp;=&nbsp;<br />&quot;\x31\xdb\x64\x8b\x7b\x30\x8b\x7f&quot;<br />&quot;\x0c\x8b\x7f\x1c\x8b\x47\x08\x8b&quot;<br />&quot;\x77\x20\x8b\x3f\x80\x7e\x0c\x33&quot;<br />&quot;\x75\xf2\x89\xc7\x03\x78\x3c\x8b&quot;<br />&quot;\x57\x78\x01\xc2\x8b\x7a\x20\x01&quot;<br />&quot;\xc7\x89\xdd\x8b\x34\xaf\x01\xc6&quot;<br />&quot;\x45\x81\x3e\x43\x72\x65\x61\x75&quot;<br />&quot;\xf2\x81\x7e\x08\x6f\x63\x65\x73&quot;<br />&quot;\x75\xe9\x8b\x7a\x24\x01\xc7\x66&quot;<br />&quot;\x8b\x2c\x6f\x8b\x7a\x1c\x01\xc7&quot;<br />&quot;\x8b\x7c\xaf\xfc\x01\xc7\x89\xd9&quot;<br />&quot;\xb1\xff\x53\xe2\xfd\x68\x63\x61&quot;<br />&quot;\x6c\x63\x89\xe2\x52\x52\x53\x53&quot;<br />&quot;\x53\x53\x53\x53\x52\x53\xff\xd7&quot;;&nbsp;<br /><br />int&nbsp;main(int&nbsp;argc,&nbsp;char&nbsp;**argv)&nbsp;<br /><span style="color:#000000;font-weight:400">{</span>&nbsp;<br />&nbsp;&nbsp;int&nbsp;(*func)();&nbsp;<br />&nbsp;&nbsp;func&nbsp;=&nbsp;(int&nbsp;(*)())&nbsp;code;&nbsp;<br />&nbsp;&nbsp;(int)(*func)();&nbsp;<br /><span style="color:#000000;font-weight:400">}</span></div></div></div>
+</body>
+</html>

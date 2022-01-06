@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Privilege Attribute Certificate (PAC)</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>Privilege Attribute Certificate (PAC)</h1><br /><strong>
+      <h2>Privilege Attribute Certificate (PAC)</h2>
+    </strong><br />The PAC (Privilege Attribute Certificate) is a structure included in almost every ticket. <br />The
+    PAC is signed with the Target Service <span style="color:#ff0000;">secret Key</span><br /><br /><strong>The PAC
+      structure contains interesting informations:</strong> <br /> ◇ account name (Acct Name)<br /> ◇ account RID (User
+    RID)<br /> ◇ group RID (Group RID)<br /> ◇ group membership(GROUP_MEMBERSHIP_ARRAY): this mean that contain the
+    privileges of the user<br /> ◇ ...<br /><br /><br /><br /><br /><br /><strong>PAC Validation</strong><br />PAC
+    verification consists of checking only its signature, without inspecting if privileges inside of PAC are
+    correct.<br />For a <span style="color:#f6ff00;">Service</span> is possible to verify the PAC by sending to the
+    <span style="color:#ff8700;">KDC</span> a KERB_VERIFY_PAC_REQUEST<br />When the PAC are validated?<br />• For a
+    <span style="color:#0ee491;">TGT</span>:<br /> ◇ The PAC is validated only if the <span
+      style="color:#0ee491;">TGT</span> is old more than 20 minutes<br /> ◇ The PAC is NOT validated if the <span
+      style="color:#0ee491;">TGT</span> is younger than 20 minutes. <br /> This means that, if we have the <span
+      style="color:#ff8700;">KDC(krbtgt)</span> <span style="color:#ff0000;">secret key</span>, we can create <span
+      style="color:#0ee491;">TGT</span> fake tickets as an account of &quot;Domain Admins&quot; and request multiple
+    <span style="color:#ff00e0;">ServiceTickets</span>.<br />• For <span
+      style="color:#ff00e0;">ServiceTicket</span>:<br /> ◇ The PAC is validated only for processes that are not running
+    as services<br /> ◇ PAC of <span style="color:#ff00e0;">ServiceTickets</span> are NOT validated by default, but can
+    be enabled when the <span style="color:#f6ff00;">Application Server(AP)</span> is not running in the context
+    of:<br /> ▪ local system<br /> ▪ local service<br /> ▪ network service<br /><br />
+  </div>
+</body>
+
+</html>

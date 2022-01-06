@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>LANMAN Challenge/Response</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles3.css" type="text/css" />
+</head>
+
+<body>
+  <div class='page'>
+    <h1 class='title'>LANMAN Challenge/Response</h1><br /><br /><br />It&#39;s important to note that both the LANMAN
+    Challenge/Response and the NTLMv1 Challenge/Response use exactly the same padding, splitting, and encrypting steps.
+    The only difference is that the LANMAN Challenge/Response starts with the LANMAN hash, whereas the NTLMv1
+    challenge/response starts with the NT hash<br /><br />1. client indicates to a server (such as a domain controller
+    or an individual file server) that it wants to authenticate.<br />2. The server responds with a randomly generated
+    challenge.<br />3. The client formulates its response by using the account&#39;s LANMAN hash to transform
+    mathematically the challenge into a response by:<br /> 1) Padding LANMAN hash (which is 16 bytes long, not the
+    original LANMAN password, which is up to 14 characters long) to <span style="color:#ff8700;">21 bytes</span><br />
+    2) Splitting <span style="color:#ff8700;">LANMAN padded hash</span> into <span style="color:#900214;">three 7-byte
+      pieces</span><span style="color:#900214;"> +1 parity byte</span><br /> 3) Using <span style="color:#900214;">each
+      piece as a DES key</span> to <span style="color:#078756;">encrypt the challenge</span> , resulting in <span
+      style="color:#ff1b00;">Response parts 1, 2, and 3</span>. The <span style="color:#ff1b00;">Response parts</span>
+    are concatenated together and sent to the server.<br /><br /><br /><a
+      href="file://C:/CherryTree/screenshots2/PTP-elearnsecurity/Authentication/LANMAN.png"><img src="images/722-1.png"
+        alt="images/722-1.png" /></a><br /><br /><br /><br />Bibliography:<br />• <a
+      href="https://www.sans.org/blog/protecting-privileged-domain-accounts-network-authentication-in-depth/" target="_blank">https://www.sans.org/blog/protecting-privileged-domain-accounts-network-authentication-in-depth/</a><br />•
+    <a
+      href="https://www.sans.org/blog/protecting-privileged-domain-accounts-lm-hashes-the-good-the-bad-and-the-ugly/" target="_blank">https://www.sans.org/blog/protecting-privileged-domain-accounts-lm-hashes-the-good-the-bad-and-the-ugly/</a>
+  </div>
+</body>
+
+</html>
