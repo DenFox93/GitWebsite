@@ -77,6 +77,7 @@ function get_tree() {
  		changeFrame(show_page);
  	}
 
+
  	// Unwrap the header
  	let tree = get_tree()
  	let para = tree.children[0]
