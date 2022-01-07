@@ -72,7 +72,6 @@ function get_tree() {
 
 
  window.onload = function() {
- 	changeFrame('Home.html');
  	var show_page = window.location.hash.substr(1);
  	if (show_page !== '') {
  		changeFrame(show_page);
