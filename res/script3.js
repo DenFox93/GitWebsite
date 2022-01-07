@@ -4,7 +4,7 @@ left_arrow_heavy = '&#129088;'
 down_arrow = ' &#9654';
 up_arrow= '&#9660';
 
-// This Script for Iframe 
+// This Script for Iframe
 function changeFrame(file_path){
 	var iframe = document.getElementById("page_frame");
 	document.getElementById("page_frame").style.width = "72	%";
@@ -26,7 +26,7 @@ function toggleSubTree(element){
 
 // var color = ["#fff"];
 // var i = 0;
-// document.querySelector(".sub-btn").addEventListener("click", 
+// document.querySelector(".sub-btn").addEventListener("click",
 // function () {
 // 	i = i < color.length ? ++i : 0;
 // 	document.querySelector(".sub-btn").style.background = color[i]
@@ -72,6 +72,7 @@ function get_tree() {
 
 
  window.onload = function() {
+ 	changeFrame('Home.html');
  	var show_page = window.location.hash.substr(1);
  	if (show_page !== '') {
  		changeFrame(show_page);
