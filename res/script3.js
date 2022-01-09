@@ -9,8 +9,9 @@ function changeFrame(file_path){
 	var iframe = document.getElementById("page_frame");
 	document.getElementById("page_frame").style.width = "72	%";
 	document.getElementById("page_frame").style.height = "100%";
+	//iframe.src = file_path.split('.html')[0];
 	iframe.src = file_path;
-	
+
 }
 
 function toggleSubTree(element){
